@@ -31,23 +31,23 @@ class AppBar extends React.Component {
       <Navbar collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to="/">Online Bling</Link>
+            <Link to="/">Influencer Marketing</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          <Nav>
+          {/*<Nav>
             <Categories/>
             <NavItem eventKey={2} onClick={() => browserHistory.push("/about")}>ABOUT</NavItem>
             <NavItem eventKey={3} onClick={() => browserHistory.push("/press")}>PRESS</NavItem>
-          </Nav>
+          </Nav>*/}
           <Nav pullRight>
-            <NavItem eventKey={4} href="#">
+            {/*<NavItem eventKey={4} href="#">
               <i className="fa fa-search" aria-hidden="true"></i>
             </NavItem>
             <NavItem eventKey={5} onClick={(e)=>{browserHistory.push('/cart')}}>
               <i className="fa fa-shopping-cart" aria-hidden="true"></i>
-            </NavItem>
+            </NavItem>*/}
             { auth && auth.email && auth.password_digest ?
               ( <NavDropdown eventKey={6} title="USER" id="users">
               <MenuItem href="/profile"></MenuItem>

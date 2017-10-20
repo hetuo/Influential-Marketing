@@ -14,7 +14,7 @@ const Home = ({ products }) => {
 
       <Products products={products} />
 
-      <section className="container-fluid promo-wrapper">
+    {/*  <section className="container-fluid promo-wrapper">
         <div className="row">
           <div className="col-xs-12 col-lg-6 our-story">
             <Link href="/about"> <span>OUR STORY</span> </Link>
@@ -23,7 +23,8 @@ const Home = ({ products }) => {
             <Link href="/products/category/New%20Arrivals"> <span>SHOP ARRIVALS</span>	</Link>
           </div>
         </div>
-      </section>
+      </section> */ }
+      <p style={{padding: '40px'}} />
     </div>
   );
 };

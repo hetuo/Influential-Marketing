@@ -7,12 +7,12 @@ export default ({ products, category, location }) => (
       category && category.name ?
       (<ol className="breadcrumb">
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/products">Product</Link></li>
+        <li><Link to="/products">Restaurant</Link></li>
         <li className="active">{category.name}</li>
       </ol>) :
       (<ol className="breadcrumb">
         <li><Link to="/">Home</Link></li>
-        <li className="active">Product</li>
+        <li className="active">Restaurant</li>
       </ol>)
     }
 
@@ -26,8 +26,9 @@ export default ({ products, category, location }) => (
                   <img src={ product.image || 'http://placehold.it/350x150' } />
                 </div>
                 <div className="product-info">
-                  <span><strong>{ product.name } | $</strong></span>
-                  <span>{ product.price }</span>
+                  {/*<span><strong>{ product.name } | $</strong></span>
+                <span>{ product.price }</span>*/}
+                  <span><strong>{ product.name }</strong></span>
                 </div>
               </Link>
             </div>
