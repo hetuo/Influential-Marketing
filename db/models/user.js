@@ -21,7 +21,7 @@ const User = db.define('users', {
   },
   session_id: {
     type: Sequelize.STRING
-  },  
+  },
   password_digest: Sequelize.STRING,
   password: Sequelize.VIRTUAL,
   isAdmin: {
@@ -36,9 +36,9 @@ const User = db.define('users', {
     afterUpdate: (user, options)=>{
       return User.removeUserWithSessionId(user.session_id)
     },
-  },  
+  },
   classMethods:{
-    removeUserWithSessionId(sessionId){   
+    removeUserWithSessionId(sessionId){
       let member, guest;
       return User.findAll({
           where:{ session_id:sessionId }
@@ -64,7 +64,7 @@ const User = db.define('users', {
             })
         }).then(affectedRows=>{
           // console.log('affectedRows',affectedRows)
-        }) 
+        })
     },
     emptySessionId(userId){
       return this.update({
@@ -74,7 +74,7 @@ const User = db.define('users', {
         })
     },
   },
-  instanceMethods: {    
+  instanceMethods: {
     authenticate(plaintext) {
       return new Promise((resolve, reject) =>
         bcrypt.compare(plaintext, this.password_digest,
