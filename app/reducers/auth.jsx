@@ -1,26 +1,66 @@
 import axios from 'axios';
+import { Link, browserHistory } from 'react-router';
 
-const reducer = (state = null, action) => {
+const initialState = {
+  user: null,
+  alert: {}
+};
+
+const reducer = (state = initialState, action) => {
+  const newState = Object.assign({}, state);
   switch (action.type) {
-  case AUTHENTICATED:
-    return action.user;
+    case AUTHENTICATED:
+      newState.user = action.user;
+      newState.alert = action.alert;
+      break;
+    case UNAUTHENTICATED:
+      newState.user = action.user;
+      newState.alert = action.alert;
+      break;
+    default:
+      return state;
   }
-  return state;
+  return newState;
 };
 
 const AUTHENTICATED = 'AUTHENTICATED';
-export const authenticated = user => ({
-  type: AUTHENTICATED, user
+const UNAUTHENTICATED = 'UNAUTHENTICATED';
+
+export const authenticated = username => ({
+  type: AUTHENTICATED,
+  user: username,
+  alert: {
+    type: 'alert-success',
+    message: null}
 });
+
+export const unauthenticated = username => ({
+  type: UNAUTHENTICATED,
+  user: username,
+  alert: {
+    type: 'alert-danger',
+    message: 'Username or password is incorrect'}
+});
+
+export const invaildEmail = username =>({
+  type: INVAILDEMAIL,
+  user: username,
+  alert: {
+    type: 'alert-danger',
+    message: 'This email is already taken'
+  }
+});
+
 export const signup = credential => dispatch =>
   axios.put('/api/auth/signup', credential)
     .then(()=>dispatch(whoami()))
-    .catch(()=>dispatch(whoami()));
+    .catch(failed => dispatch(invaildEmail(null)));
 
 export const login = credential => dispatch =>
     axios.put('/api/auth/login', credential)
-      .then(() => dispatch(whoami()))
-      .catch(() => dispatch(whoami()));
+      .then(() => {dispatch(whoami());browserHistory.push('/');})
+      //.catch(() => dispatch(whoami()));
+      .catch(failed => dispatch(unauthenticated(null)));
 
 export const logout = () =>
   dispatch =>

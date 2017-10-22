@@ -27,6 +27,7 @@ class AppBar extends React.Component {
 
   render(){
     const { auth } = this.props;
+    //console.log("WTF...... %s %s", auth.email, auth.password_digest);
     return (
       <Navbar collapseOnSelect>
         <Navbar.Header>
@@ -48,8 +49,8 @@ class AppBar extends React.Component {
             <NavItem eventKey={5} onClick={(e)=>{browserHistory.push('/cart')}}>
               <i className="fa fa-shopping-cart" aria-hidden="true"></i>
             </NavItem>*/}
-            { auth && auth.email && auth.password_digest ?
-              ( <NavDropdown eventKey={6} title="USER" id="users">
+            { auth.user && auth.user.email && auth.user.password_digest ?
+              ( <NavDropdown eventKey={6} title={auth.user.name} id="users">
               <MenuItem href="/profile"></MenuItem>
               <MenuItem href="/address">Address Book</MenuItem>
               <MenuItem role="separator" className="divider"></MenuItem>

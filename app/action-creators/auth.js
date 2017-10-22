@@ -1,12 +1,12 @@
-import axios from 'axios';
+/*import axios from 'axios';
 import {SET, REMOVE} from '../action-types';
 
-/* ------------       ACTION-CREATORS    ------------------ */
+//       ACTION-CREATORS
 
 export const set     = user => ({ type: SET, user });
 export const remove  = () => ({ type: REMOVE });
 
-/* ------------       REDUCER     ------------------ */
+//       REDUCER
 
 export default function reducer (currentUser = null, action) {
   switch (action.type) {
@@ -22,12 +22,13 @@ export default function reducer (currentUser = null, action) {
   }
 }
 
-/* ------------       DISPATCHERS     ------------------ */
+//        DISPATCHERS
 
 export const login = credentials => dispatch => {
+  console.('hetuo test')
   axios.post('/auth/login', credentials)
        .then(res => dispatch(set(res.data)))
-       .catch(err => console.error('Login unsuccesful', err));
+       .catch(err => console.log('Login unsuccesful', err));
 };
 
 export const signup = credentials => dispatch => {
@@ -47,4 +48,4 @@ export const logout = () => dispatch => {
   dispatch(remove());
   axios.get('/auth/logout')
        .catch(err => console.error('logout unsuccesful', err));
-};
+};*/

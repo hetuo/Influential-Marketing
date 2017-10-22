@@ -26,6 +26,7 @@ class Signup extends React.Component {
   }
 
   render() {
+    const { user, alert } = this.props;
     return (
       <div className="login-wrapper">
         <ol className="breadcrumb">
@@ -35,6 +36,9 @@ class Signup extends React.Component {
         <section className="container-fluid">
           <div className="row">
             <div className="col-xs-12 col-md-6 col-md-offset-3">
+              {alert.message &&
+                <div className={`alert ${alert.type}`}>{alert.message}</div>
+              }
               <form
                 className="login-form"
                 onSubmit={this.onSignupSubmit}>
@@ -65,7 +69,10 @@ class Signup extends React.Component {
 
   }
 
-  const mapState = null;
+  const mapState = ({ auth }) => ({
+    user: auth.user,
+  	alert: auth.alert
+  });
   const mapDispatch = { signup };
 
   export default connect(mapState, mapDispatch)(Signup);

@@ -18,10 +18,12 @@ class Login extends React.Component {
     }
     console.log('credentials', credentials);
     this.props.login(credentials);
-    browserHistory.push('/');
+    //browserHistory.push('/');
   }
 
   render() {
+    const { user, alert } = this.props;
+    console.log('WTF           %s', user);
     return (
       <div className="login-wrapper">
         <ol className="breadcrumb">
@@ -31,29 +33,36 @@ class Login extends React.Component {
         <section className="container-fluid">
           <div className="row">
             <div className="col-xs-12 col-md-6 col-md-offset-3">
-              <form 
+              {alert.message &&
+                <div className={`alert ${alert.type}`}>{alert.message}</div>
+              }
+              <form
                 className="login-form"
                 onSubmit={this.onLoginSubmit}>
                 <div className="form-group">
                   <label>Email</label>
-                  <input className="form-control" name="email" type="email" />  
+                  <input className="form-control" name="email" type="email" />
                 </div>
                 <div className="form-group">
                   <label>Password</label>
-                  <input className="form-control" name="password" type="password" />  
+                  <input className="form-control" name="password" type="password" />
                 </div>
-                <button type="submit" name="submit">Login</button>      
-              </form> 
+                <button type="submit" name="submit">Login</button>
+              </form>
             </div>
-          </div>          
+          </div>
         </section>
       </div>
     )
   }
- 
+
 };
 
-const mapState = null;
+const mapState = ({ auth }) => ({
+  user: auth.user,
+	alert: auth.alert
+});
+
 const mapDispatch = {
   login
 }
