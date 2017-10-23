@@ -2,11 +2,16 @@ import React from 'react';
 import { signup } from 'APP/app/reducers/auth';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
+import classnames from 'classnames';
+import userproperty from '../data/userproperty';
+import map from 'lodash/map'; // TODO: replace with pure JS
 
 
 class Signup extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+    };
     this.onSignupSubmit = this.onSignupSubmit.bind(this);
   }
 
@@ -27,6 +32,9 @@ class Signup extends React.Component {
 
   render() {
     const { user, alert } = this.props;
+    const options = map(userproperty, (val, key) =>
+      <option key={ val } value={ val }>{ key }</option>
+    );
     return (
       <div className="login-wrapper">
         <ol className="breadcrumb">
@@ -42,6 +50,18 @@ class Signup extends React.Component {
               <form
                 className="login-form"
                 onSubmit={this.onSignupSubmit}>
+                <div className="form-group">
+                  <label className="control-label">User Selection</label>
+                  <select
+                    className="form-control"
+                    name="userproperty"
+                    onChange={ this.onChange }
+                    value={ this.state.userproperty}
+                  >
+                    <option value="" disabled>Choose Your User Account</option>
+                    {options}
+                  </select>
+                </div>
                 <div className="form-group">
                   <label>Email</label>
                   <input className="form-control" name="email" type="email" />

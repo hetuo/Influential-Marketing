@@ -32,6 +32,9 @@ class Login extends React.Component {
 
   render() {
     const { user, alert } = this.props;
+    const options = map(userproperty, (val, key) =>
+      <option key={ val } value={ val }>{ key }</option>
+    );
     console.log('WTF           %s', user);
     return (
       <div className="login-wrapper">
@@ -49,6 +52,18 @@ class Login extends React.Component {
                 className="login-form"
                 onSubmit={this.onLoginSubmit}>
                 <div className="form-group">
+                  <label className="control-label">User Selection</label>
+                  <select
+                    className="form-control"
+                    name="userproperty"
+                    onChange={ this.onChange }
+                    value={ this.state.userproperty}
+                  >
+                    <option value="" disabled>Choose Your User Account</option>
+                    {options}
+                  </select>
+                </div>
+                <div className="form-group">
                   <label>Email</label>
                   <input className="form-control" name="email" type="email" />
                 </div>
@@ -57,6 +72,7 @@ class Login extends React.Component {
                   <input className="form-control" name="password" type="password" />
                 </div>
                 <button type="submit" name="submit">Login</button>
+                <Link href="/address"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;forget password?</span></Link>
               </form>
             </div>
           </div>

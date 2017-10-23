@@ -53261,6 +53261,13 @@
 	          user = _props.user,
 	          alert = _props.alert;
 	
+	      var options = (0, _map2.default)(_userproperty2.default, function (val, key) {
+	        return _react2.default.createElement(
+	          'option',
+	          { key: val, value: val },
+	          key
+	        );
+	      });
 	      console.log('WTF           %s', user);
 	      return _react2.default.createElement(
 	        'div',
@@ -53307,6 +53314,30 @@
 	                  { className: 'form-group' },
 	                  _react2.default.createElement(
 	                    'label',
+	                    { className: 'control-label' },
+	                    'User Selection'
+	                  ),
+	                  _react2.default.createElement(
+	                    'select',
+	                    {
+	                      className: 'form-control',
+	                      name: 'userproperty',
+	                      onChange: this.onChange,
+	                      value: this.state.userproperty
+	                    },
+	                    _react2.default.createElement(
+	                      'option',
+	                      { value: '', disabled: true },
+	                      'Choose Your User Account'
+	                    ),
+	                    options
+	                  )
+	                ),
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'form-group' },
+	                  _react2.default.createElement(
+	                    'label',
 	                    null,
 	                    'Email'
 	                  ),
@@ -53326,6 +53357,15 @@
 	                  'button',
 	                  { type: 'submit', name: 'submit' },
 	                  'Login'
+	                ),
+	                _react2.default.createElement(
+	                  _reactRouter.Link,
+	                  { href: '/address' },
+	                  _react2.default.createElement(
+	                    'span',
+	                    null,
+	                    '\xA0\xA0\xA0\xA0\xA0\xA0forget password?'
+	                  )
 	                )
 	              )
 	            )
@@ -53376,6 +53416,18 @@
 	
 	var _reactRouter = __webpack_require__(244);
 	
+	var _classnames = __webpack_require__(405);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	var _userproperty = __webpack_require__(713);
+	
+	var _userproperty2 = _interopRequireDefault(_userproperty);
+	
+	var _map = __webpack_require__(600);
+	
+	var _map2 = _interopRequireDefault(_map);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -53383,6 +53435,9 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	// TODO: replace with pure JS
+	
 	
 	var Signup = function (_React$Component) {
 	  _inherits(Signup, _React$Component);
@@ -53392,6 +53447,7 @@
 	
 	    var _this = _possibleConstructorReturn(this, (Signup.__proto__ || Object.getPrototypeOf(Signup)).call(this, props));
 	
+	    _this.state = {};
 	    _this.onSignupSubmit = _this.onSignupSubmit.bind(_this);
 	    return _this;
 	  }
@@ -53418,6 +53474,13 @@
 	          user = _props.user,
 	          alert = _props.alert;
 	
+	      var options = (0, _map2.default)(_userproperty2.default, function (val, key) {
+	        return _react2.default.createElement(
+	          'option',
+	          { key: val, value: val },
+	          key
+	        );
+	      });
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'login-wrapper' },
@@ -53458,6 +53521,30 @@
 	                {
 	                  className: 'login-form',
 	                  onSubmit: this.onSignupSubmit },
+	                _react2.default.createElement(
+	                  'div',
+	                  { className: 'form-group' },
+	                  _react2.default.createElement(
+	                    'label',
+	                    { className: 'control-label' },
+	                    'User Selection'
+	                  ),
+	                  _react2.default.createElement(
+	                    'select',
+	                    {
+	                      className: 'form-control',
+	                      name: 'userproperty',
+	                      onChange: this.onChange,
+	                      value: this.state.userproperty
+	                    },
+	                    _react2.default.createElement(
+	                      'option',
+	                      { value: '', disabled: true },
+	                      'Choose Your User Account'
+	                    ),
+	                    options
+	                  )
+	                ),
 	                _react2.default.createElement(
 	                  'div',
 	                  { className: 'form-group' },
