@@ -1,4 +1,4 @@
-/*import axios from 'axios';
+import axios from 'axios';
 import {SET, REMOVE} from '../action-types';
 
 //       ACTION-CREATORS
@@ -48,4 +48,4 @@ export const logout = () => dispatch => {
   dispatch(remove());
   axios.get('/auth/logout')
        .catch(err => console.error('logout unsuccesful', err));
-};*/
+};

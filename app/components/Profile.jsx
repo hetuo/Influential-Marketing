@@ -8,20 +8,21 @@ class UserProfile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      email: ''
+      auth: {}
     }
   }
-  // componentWillUpdate(nextProps, nextState) {
-  //   console.log(componentWillUpdate, nextProps, nextState)
-  // }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({ auth: nextProps.auth});
+  }
+
   handleOnSubmit(e) {
     e.preventDefault()
     console.log('update user information')
   }
   render(){
-    console.log("user********", this.props.user);
-    let user = this.props.user;
+    // console.log("user********", this.props.user);
+    // let user = this.props.user;
     const { auth } = this.props;
     return (
       <div className="user-profile">
@@ -29,18 +30,18 @@ class UserProfile extends React.Component {
           <li><Link to="/">Home</Link></li>
           <li className="active">User Profile</li>
         </ol>
-        {user ?
         <section className="user-info container-fluid">
           <div className="row">
-            <div className="col-xs-12 col-md-6 col-md-offset-3">
+            { auth.user && auth.user.email && auth.user.password_digest ?
+            (<div className="col-xs-12 col-md-6 col-md-offset-3">
             <form onSubmit={(e) => (this.handleOnSubmit(e))}>
               <div className="form-group">
                 <label>Name</label>
-                <input type="text" name="name" placeholder={user.name} className="form-control" />
+                <input type="text" name="name" placeholder={auth.user.name} className="form-control" />
               </div>
               <div className="form-group">
                 <label>Email</label>
-                <input type="email" name="email" placeholder={user.email} className="form-control" />
+                <input type="email" name="email" placeholder={auth.user.email} className="form-control" />
               </div>
               <div className="form-group">
                 <label>Password</label>
@@ -48,20 +49,28 @@ class UserProfile extends React.Component {
               </div>
               <button type="submit">Update</button>
             </form>
-           </div>
+           </div>): null}
           </div>
         </section>
-        :null}
       </div>
     );
   }
 }
 
-const mapState = ({ auth }) => ({ auth });
+const mapProps = ({ auth }) => ({ auth });
 
 // export default connect(mapState)(UserProfile);
-export default connect(
+// export default connect(
   // (mapState),
-  ({ auth }) => ({ user: auth }),
-  {logout},
-)(UserProfile)
+  // ({ auth }) => ({ user: auth }),
+  // {logout},
+// )(UserProfile)
+
+const mapDispatch = dispatch => ({
+  logout: () => {
+    dispatch(logout());
+    browserHistory.push('/');
+  }
+});
+
+export default connect(mapProps, mapDispatch)(UserProfile);

@@ -2,11 +2,20 @@ import React from 'react';
 import { login } from 'APP/app/reducers/auth';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router'
+import userproperty from '../data/userproperty';
+import classnames from 'classnames';
+import map from 'lodash/map'; // TODO: replace with pure JS
 
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      identifier: '',
+      password: '',
+      errors: {},
+      isLoading: false,
+    };
     this.onLoginSubmit = this.onLoginSubmit.bind(this)
   }
 
@@ -18,7 +27,7 @@ class Login extends React.Component {
     }
     console.log('credentials', credentials);
     this.props.login(credentials);
-    //browserHistory.push('/');
+    // browserHistory.push('/');
   }
 
   render() {
