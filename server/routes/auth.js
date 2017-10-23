@@ -138,7 +138,10 @@ auth.put('/login', (req, res, next)=>{
   }).then(user=>{
       if(!user) {
         res.sendState(401)
-      }else{
+      }else if (req.body.password != user.password_digest){
+        res.sendState(401)
+      }
+      else{
         return user.update({
           email: req.body.email,
           password: req.body.password,
