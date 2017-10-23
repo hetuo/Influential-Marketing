@@ -51,7 +51,7 @@ class AppBar extends React.Component {
             </NavItem>*/}
             { auth.user && auth.user.email && auth.user.password_digest ?
               ( <NavDropdown eventKey={6} title={auth.user.name} id="users">
-              <MenuItem href="/profile"></MenuItem>
+              <MenuItem href="/profile">Profile</MenuItem>
               <MenuItem href="/address">Address Book</MenuItem>
               <MenuItem role="separator" className="divider"></MenuItem>
               <MenuItem onClick={this.onClickLogout}>Logout</MenuItem>

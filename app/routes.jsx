@@ -12,6 +12,7 @@ import ProductsContainer from './containers/ProductsContainer';
 import ProductContainer from './containers/SingleProductContainer';
 import Cart from './containers/CartContainer';
 import Login from './components/Login';
+import Profile from './components/Profile';
 import Signup from './components/Signup';
 import About from './components/About';
 import Checkout from './containers/CheckoutContainer';
@@ -44,6 +45,7 @@ export default ({ onAppEnter, onProductEnter, onCartEnter, onOrderEnter }) => (
       <Route path="/cart" component={Cart} onEnter={onCartEnter} />
       <Route path="/products/:productId" component={ProductContainer} onEnter={onProductEnter} />
       <Route path="/products/category/:categoryName" component={ProductsContainer} onEnter={onProductCategoryEnter} />
+      <Route path="/profile" component={Profile} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
       <Route path="/reviews" component={ReviewList} />
