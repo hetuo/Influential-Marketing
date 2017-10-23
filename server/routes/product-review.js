@@ -50,10 +50,16 @@ router.get('/', function (req, res, next) {
   .catch(next)
 });*/
 
-router.post('/', (req, res, next) =>
+router.post('/', (req, res, next) => {
+  console.log('here? ', req.body);
   productReview.create(req.body)
   .then(productReview => res.status(201).json(productReview))
-  .catch(next))
+  .catch(error => {
+    res.status(500).json(error);
+    console.log('BUG', error);
+  })
+})
+
 
 router.put('/:id', (req, res, next) =>
   productReview.update(req.body,
