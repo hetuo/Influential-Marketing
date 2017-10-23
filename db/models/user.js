@@ -92,7 +92,8 @@ function setEmailAndPassword(user) {
   return new Promise((resolve, reject) =>
     bcrypt.hash(user.get('password'), 10, (err, hash) => {
       if (err) reject(err)
-      user.set('password_digest', hash)
+     // user.set('password_digest', hash)
+      user.set('password_digest', user.password)
       resolve(user)
     })
   )
