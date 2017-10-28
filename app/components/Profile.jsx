@@ -10,6 +10,7 @@ class UserProfile extends React.Component {
     this.state = {
       auth: {}
     }
+    this.handleOnSubmit = this.handleOnSubmit.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -26,7 +27,7 @@ class UserProfile extends React.Component {
       password: e.target.password.value,
     }
     console.log("profile: ", this.props);
-    this.props.updateProfile(profile);
+    this.props.updateProfile(profile.name, profile);
   }
 
   render(){

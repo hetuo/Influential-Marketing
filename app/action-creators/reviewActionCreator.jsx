@@ -19,7 +19,6 @@ export const receiveReview = review => {
 	}
 }
 
-
 export const getReview = () => dispatch =>
 	  axios.get('/api/review/')
 	  .then(response => {
@@ -45,10 +44,3 @@ export const addReview = review => dispatch => {
 // 	.then(() => getReview())
 // 	.catch(err => console.error('Updating product review was UNSUCCESSFUL', error))
 // }
-
-
-
-
-
-
-

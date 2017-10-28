@@ -20,9 +20,11 @@ export default class SingleProduct extends React.Component {
     this.onChangeQty = this.onChangeQty.bind(this);
     this.onClickAddCart = this.onClickAddCart.bind(this);
   }
+
   onRemoveClick (id) {
     this.props.removeReview(id);
   }
+  
   onStarClick(nextValue, prevValue, name){
     console.log('function for updating the rating value should be dispatched from here');
   }

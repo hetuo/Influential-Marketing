@@ -57153,6 +57153,7 @@
 	    _this.state = {
 	      auth: {}
 	    };
+	    _this.handleOnSubmit = _this.handleOnSubmit.bind(_this);
 	    return _this;
 	  }
 	
@@ -57173,7 +57174,7 @@
 	        password: e.target.password.value
 	      };
 	      console.log("profile: ", this.props);
-	      this.props.updateProfile(profile);
+	      this.props.updateProfile(profile.name, profile);
 	    }
 	  }, {
 	    key: 'render',

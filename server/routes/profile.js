@@ -44,17 +44,17 @@ const Op = Sequelize.Op;
 //   .then(productReview => res.status(201).json(productReview))
 //   .catch(next))
 
-router.put('/:id', (req, res, next) =>
-  productReview.update(req.body,
+router.put('/:name', (req, res, next) =>
+    profile.update(req.body,
     {
       where: {
-        id: req.params.id
-      }
+        name: req.params.name}
     })
     .then((count, updated) =>
     res.status(201).json(updated[0])
   )
   .catch(next))
+
 //
 // router.delete('/:id', (req, res, next) =>
 //   productReview.destroy({
