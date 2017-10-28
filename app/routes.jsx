@@ -10,9 +10,10 @@ import store from './store';
 import Homepage from './components/Homepage';
 import ProductsContainer from './containers/ProductsContainer';
 import ProductContainer from './containers/SingleProductContainer';
+import ProfileContainer from './containers/ProfileContainer';
 import Cart from './containers/CartContainer';
 import Login from './components/Login';
-import Profile from './components/Profile';
+// import Profile from './components/Profile';
 import Signup from './components/Signup';
 import NewReview from './components/newReviewForm';
 import About from './components/About';
@@ -46,7 +47,7 @@ export default ({ onAppEnter, onProductEnter, onCartEnter, onOrderEnter }) => (
       <Route path="/cart" component={Cart} onEnter={onCartEnter} />
       <Route path="/products/:productId" component={ProductContainer} onEnter={onProductEnter} />
       <Route path="/products/category/:categoryName" component={ProductsContainer} onEnter={onProductCategoryEnter} />
-      <Route path="/profile" component={Profile} />
+      <Route path="/profile" component={ProfileContainer} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
       <Route path="/newreview" component={NewReview} />

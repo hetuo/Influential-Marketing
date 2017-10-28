@@ -31708,6 +31708,10 @@
 	
 	var _SingleProductContainer2 = _interopRequireDefault(_SingleProductContainer);
 	
+	var _ProfileContainer = __webpack_require__(714);
+	
+	var _ProfileContainer2 = _interopRequireDefault(_ProfileContainer);
+	
 	var _CartContainer = __webpack_require__(580);
 	
 	var _CartContainer2 = _interopRequireDefault(_CartContainer);
@@ -31715,10 +31719,6 @@
 	var _Login = __webpack_require__(583);
 	
 	var _Login2 = _interopRequireDefault(_Login);
-	
-	var _Profile = __webpack_require__(698);
-	
-	var _Profile2 = _interopRequireDefault(_Profile);
 	
 	var _Signup = __webpack_require__(699);
 	
@@ -31759,6 +31759,8 @@
 	  _store2.default.dispatch((0, _products.getProductsByCategoryId)(nextRouterState.params.categoryName));
 	  _store2.default.dispatch((0, _categories.loadSingleCategory)(nextRouterState.params.categoryName));
 	};
+	// import Profile from './components/Profile';
+	
 	
 	//import components and containers
 	
@@ -31787,7 +31789,7 @@
 	      _react2.default.createElement(_reactRouter.Route, { path: '/cart', component: _CartContainer2.default, onEnter: onCartEnter }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/products/:productId', component: _SingleProductContainer2.default, onEnter: onProductEnter }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/products/category/:categoryName', component: _ProductsContainer2.default, onEnter: onProductCategoryEnter }),
-	      _react2.default.createElement(_reactRouter.Route, { path: '/profile', component: _Profile2.default }),
+	      _react2.default.createElement(_reactRouter.Route, { path: '/profile', component: _ProfileContainer2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _Login2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/signup', component: _Signup2.default }),
 	      _react2.default.createElement(_reactRouter.Route, { path: '/newreview', component: _newReviewForm2.default }),
@@ -52171,7 +52173,7 @@
 	        product_id: this.props.product.id
 	        // user_id: this.props.auth.id
 	      };
-	      console.log('stars: %s', review.stars);
+	      console.log("review: ", this.props);
 	      this.props.addReview(review);
 	      e.target.stars.value = '';
 	      e.target.body.value = '';
@@ -57142,22 +57144,23 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var UserProfile = function (_React$Component) {
-	  _inherits(UserProfile, _React$Component);
+	var Profile = function (_React$Component) {
+	  _inherits(Profile, _React$Component);
 	
-	  function UserProfile(props) {
-	    _classCallCheck(this, UserProfile);
+	  function Profile(props) {
+	    _classCallCheck(this, Profile);
 	
-	    var _this = _possibleConstructorReturn(this, (UserProfile.__proto__ || Object.getPrototypeOf(UserProfile)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).call(this, props));
 	
 	    _this.state = {
-	      auth: {}
+	      auth: {},
+	      profiles: []
 	    };
 	    _this.handleOnSubmit = _this.handleOnSubmit.bind(_this);
 	    return _this;
 	  }
 	
-	  _createClass(UserProfile, [{
+	  _createClass(Profile, [{
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps) {
 	      this.setState({ auth: nextProps.auth });
@@ -57183,7 +57186,10 @@
 	
 	      // console.log("user********", this.props.user);
 	      // let user = this.props.user;
-	      var auth = this.props.auth;
+	      console.log("profile.jsx: ", this.props);
+	      var _props = this.props,
+	          user = _props.user,
+	          alert = _props.alert;
 	
 	      return _react2.default.createElement(
 	        'div',
@@ -57212,7 +57218,7 @@
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'row' },
-	            auth.user && auth.user.email && auth.user.password_digest ? _react2.default.createElement(
+	            user && user.email && user.password_digest ? _react2.default.createElement(
 	              'div',
 	              { className: 'col-xs-12 col-md-6 col-md-offset-3' },
 	              _react2.default.createElement(
@@ -57228,7 +57234,7 @@
 	                    null,
 	                    'Name'
 	                  ),
-	                  _react2.default.createElement('input', { type: 'text', name: 'name', placeholder: auth.user.name, className: 'form-control' })
+	                  _react2.default.createElement('input', { type: 'text', name: 'name', placeholder: user.name, className: 'form-control' })
 	                ),
 	                _react2.default.createElement(
 	                  'div',
@@ -57238,7 +57244,7 @@
 	                    null,
 	                    'Email'
 	                  ),
-	                  _react2.default.createElement('input', { type: 'email', name: 'email', placeholder: auth.user.email, className: 'form-control' })
+	                  _react2.default.createElement('input', { type: 'email', name: 'email', placeholder: user.email, className: 'form-control' })
 	                ),
 	                _react2.default.createElement(
 	                  'div',
@@ -57263,13 +57269,10 @@
 	    }
 	  }]);
 	
-	  return UserProfile;
+	  return Profile;
 	}(_react2.default.Component);
 	
-	var mapProps = function mapProps(_ref) {
-	  var auth = _ref.auth;
-	  return { auth: auth };
-	};
+	// const mapProps = ({ auth }) => ({ auth });
 	
 	// export default connect(mapState)(UserProfile);
 	// export default connect(
@@ -57278,16 +57281,17 @@
 	// {logout},
 	// )(UserProfile)
 	
-	var mapDispatch = function mapDispatch(dispatch) {
-	  return {
-	    logout: function logout() {
-	      dispatch((0, _auth.logout)());
-	      browserHistory.push('/');
-	    }
-	  };
-	};
+	// const mapDispatch = dispatch => ({
+	//   logout: () => {
+	//     dispatch(logout());
+	//     browserHistory.push('/');
+	//   }
+	// });
+	//
+	// export default connect(mapProps, mapDispatch)(Profile);
 	
-	exports.default = (0, _reactRedux.connect)(mapProps, mapDispatch)(UserProfile);
+	
+	exports.default = Profile;
 
 /***/ }),
 /* 699 */
@@ -75988,6 +75992,115 @@
 			URL.revokeObjectURL(oldSrc);
 	}
 
+
+/***/ }),
+/* 714 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _reactRedux = __webpack_require__(37);
+	
+	var _Profile = __webpack_require__(698);
+	
+	var _Profile2 = _interopRequireDefault(_Profile);
+	
+	var _profile = __webpack_require__(715);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var mapState = function mapState(_ref) {
+	  var profiles = _ref.profiles,
+	      auth = _ref.auth;
+	  return {
+	    user: auth.user,
+	    alert: auth.alert
+	    // profile: profiles.selectedProfile
+	  };
+	};
+	
+	var mapDispatch = { updateProfile: _profile.updateProfile, getProfile: _profile.getProfile };
+	// const mapDispatch = dispatch => ({
+	//   logout: () => {
+	//     dispatch(logout());
+	//     browserHistory.push('/');
+	//   }
+	// });
+	
+	exports.default = (0, _reactRedux.connect)(mapState, mapDispatch)(_Profile2.default);
+
+/***/ }),
+/* 715 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.updateProfile = exports.getProfile = exports.REMOVE_REVIEW = exports.RECEIVE_REVIEW = exports.RECEIVE_REVIEWS = undefined;
+	
+	var _axios = __webpack_require__(219);
+	
+	var _axios2 = _interopRequireDefault(_axios);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var RECEIVE_REVIEWS = exports.RECEIVE_REVIEWS = 'RECEIVE_REVIEWS';
+	var RECEIVE_REVIEW = exports.RECEIVE_REVIEW = 'RECEIVE_REVIEW';
+	var REMOVE_REVIEW = exports.REMOVE_REVIEW = 'REMOVE_REVIEW';
+	// export const ADD_REVIEW = 'ADD_REVIEW';
+	
+	// export const receiveReviews = reviews => {
+	// 	return {
+	// 		type: RECEIVE_REVIEWS,
+	// 		reviews
+	// 	}
+	// }
+	//
+	// export const receiveReview = review => {
+	// 	return {
+	// 		type: RECEIVE_REVIEW,
+	// 		review
+	// 	}
+	// }
+	
+	var getProfile = exports.getProfile = function getProfile() {
+		return function (dispatch) {
+			return _axios2.default.get('/api/profile/').then(function (response) {
+				console.log('RESPONSE', response);
+				//receiveReviews or receiveReview ??
+				dispatch(receiveReviews(response.data));
+			}).catch(function (error) {
+				return console.error("Could Not Retrieve Profile", error);
+			});
+		};
+	};
+	
+	// export const removeReview = id => dispatch => {
+	// 	axios.delete(`/api/review/${id}`)
+	// 		.catch(console.error);
+	// }
+	
+	var updateProfile = exports.updateProfile = function updateProfile(name, profile) {
+		return function (dispatch) {
+			_axios2.default.put('/api/profile/' + name, { profile: profile }).then(function () {
+				return getProfile();
+			}).catch(function (error) {
+				return console.error('Could not update profile, ' + profile, error);
+			});
+		};
+	};
+	
+	// export const editReview = (id, review) => dispatch => {
+	// 	axios.put(`api/review/${id}`, { review })
+	// 	.then(() => getReview())
+	// 	.catch(err => console.error('Updating product review was UNSUCCESSFUL', error))
+	// }
 
 /***/ })
 /******/ ]);

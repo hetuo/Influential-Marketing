@@ -24,7 +24,7 @@ export default class SingleProduct extends React.Component {
   onRemoveClick (id) {
     this.props.removeReview(id);
   }
-  
+
   onStarClick(nextValue, prevValue, name){
     console.log('function for updating the rating value should be dispatched from here');
   }
@@ -39,7 +39,7 @@ export default class SingleProduct extends React.Component {
       product_id: this.props.product.id,
       // user_id: this.props.auth.id
     };
-    console.log('stars: %s', review.stars);
+    console.log("review: ", this.props);
     this.props.addReview(review);
     e.target.stars.value = '';
     e.target.body.value = '';

@@ -1,15 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { removeItem, updateQuantity } from '../action-creators/cart';
+import { removeItem, updateQuantity } from '../action-creators/cart'
 import {logout} from 'APP/app/reducers/auth'
 
-class UserProfile extends React.Component {
+export default class Profile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      auth: {}
-    }
+      auth: {},
+      profiles: []
+    };
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
   }
 
@@ -33,7 +34,8 @@ class UserProfile extends React.Component {
   render(){
     // console.log("user********", this.props.user);
     // let user = this.props.user;
-    const { auth } = this.props;
+    console.log("profile.jsx: ", this.props);
+    const { user, alert } = this.props;
     return (
       <div className="user-profile">
         <ol className="breadcrumb">
@@ -42,16 +44,16 @@ class UserProfile extends React.Component {
         </ol>
         <section className="user-info container-fluid">
           <div className="row">
-            { auth.user && auth.user.email && auth.user.password_digest ?
+            { user && user.email && user.password_digest ?
             (<div className="col-xs-12 col-md-6 col-md-offset-3">
             <form onSubmit={(e) => (this.handleOnSubmit(e))}>
               <div className="form-group">
                 <label>Name</label>
-                <input type="text" name="name" placeholder={auth.user.name} className="form-control" />
+                <input type="text" name="name" placeholder={user.name} className="form-control" />
               </div>
               <div className="form-group">
                 <label>Email</label>
-                <input type="email" name="email" placeholder={auth.user.email} className="form-control" />
+                <input type="email" name="email" placeholder={user.email} className="form-control" />
               </div>
               <div className="form-group">
                 <label>Password</label>
@@ -67,7 +69,7 @@ class UserProfile extends React.Component {
   }
 }
 
-const mapProps = ({ auth }) => ({ auth });
+// const mapProps = ({ auth }) => ({ auth });
 
 // export default connect(mapState)(UserProfile);
 // export default connect(
@@ -76,11 +78,11 @@ const mapProps = ({ auth }) => ({ auth });
   // {logout},
 // )(UserProfile)
 
-const mapDispatch = dispatch => ({
-  logout: () => {
-    dispatch(logout());
-    browserHistory.push('/');
-  }
-});
-
-export default connect(mapProps, mapDispatch)(UserProfile);
+// const mapDispatch = dispatch => ({
+//   logout: () => {
+//     dispatch(logout());
+//     browserHistory.push('/');
+//   }
+// });
+//
+// export default connect(mapProps, mapDispatch)(Profile);
