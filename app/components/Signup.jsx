@@ -6,7 +6,6 @@ import classnames from 'classnames';
 import userproperty from '../data/userproperty';
 import map from 'lodash/map'; // TODO: replace with pure JS
 
-
 class Signup extends React.Component {
   constructor(props) {
     super(props);

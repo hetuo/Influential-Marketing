@@ -120,7 +120,7 @@ export default class SingleProduct extends React.Component {
               <input name="title" style={{width: '400px'}} type="text" placeholder="Subject" className="form-control" />
               <textarea name="body" style={{width: '400px'}} placeholder="Write a review"  className="form-control" />
               <StarRatingComponent name="stars" starCount={5} />
-              <button type="submit">Submit</button>
+              <button type="submit" className="btn btn-success">Add Review</button>
             </div>
           </form>
         </div>

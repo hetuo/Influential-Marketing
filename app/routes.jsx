@@ -14,6 +14,7 @@ import Cart from './containers/CartContainer';
 import Login from './components/Login';
 import Profile from './components/Profile';
 import Signup from './components/Signup';
+import NewReview from './components/newReviewForm';
 import About from './components/About';
 import Checkout from './containers/CheckoutContainer';
 import ReviewList from './components/ReviewList';
@@ -48,6 +49,7 @@ export default ({ onAppEnter, onProductEnter, onCartEnter, onOrderEnter }) => (
       <Route path="/profile" component={Profile} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
+      <Route path="/newreview" component={NewReview} />
       <Route path="/reviews" component={ReviewList} />
       <Route path="/reviews/:reviewId" component={SingleReview} />
       <Route path="/order" component={orderList} onEnter={onOrderEnter} />

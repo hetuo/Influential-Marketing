@@ -18,8 +18,17 @@ class UserProfile extends React.Component {
 
   handleOnSubmit(e) {
     e.preventDefault()
-    console.log('update user information')
+    console.log("update user information");
+
+    const profile = {
+      name: e.target.name.value,
+      email: e.target.email.value,
+      password: e.target.password.value,
+    }
+    console.log("profile: ", this.props);
+    this.props.updateProfile(profile);
   }
+
   render(){
     // console.log("user********", this.props.user);
     // let user = this.props.user;
