@@ -19,26 +19,27 @@ export const receiveReview = review => {
 	}
 }
 
-export const getReview = () => dispatch =>
-	  axios.get('/api/review/')
-	  .then(response => {
-	    console.log('RESPONSE', response);
-	    //receiveReviews or receiveReview ??
-	    dispatch(receiveReviews(response.data));
-	  })
-	  .catch(error => console.error("Could Not Retrieve Reviews", error))
-
 export const removeReview = id => dispatch => {
 	axios.delete(`/api/review/${id}`)
 		.catch(console.error);
 }
 
 export const addReview = review => dispatch => {
+	console.log('tring to add review');
 	axios.post(`/api/review/`, review)
-	.then(() => getReview())
+	.then(() => dispatch(getReview(review.product_id)))
 	.catch(error => console.error(`Could not add review, ${review}`, error))
 }
 
+export const getReview = productId => dispatch =>{
+		console.log("tring to get review");
+	  axios.get(`/api/review/product_id=${productId}`)
+	  .then(response => {
+	    console.log('RESPONSE', response);
+	    //receiveReviews or receiveReview ??
+	    dispatch(receiveReview(response.data));
+	  })
+	  .catch(error => console.error("Could Not Retrieve Reviews", error))}
 // export const editReview = (id, review) => dispatch => {
 // 	axios.put(`api/review/${id}`, { review })
 // 	.then(() => getReview())

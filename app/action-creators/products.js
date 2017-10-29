@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { RECEIVE_PRODUCTS, RECEIVE_PRODUCT, RECEIVE_PRODUCTS_BY_CATEGORY } from '../action-types';
+import { getReview } from './reviewActionCreator';
 
 export const receiveProducts = products => ({
     type: RECEIVE_PRODUCTS,
@@ -26,6 +27,7 @@ export const getProductById = productId => dispatch =>
   axios.get(`/api/product/${productId}`)
   .then(res => res.data )
   .then(product => dispatch(receiveProduct(product)))
+  .then(() => dispatch(getReview(productId)))
   .catch(error => console.error("Could Not Retrieve Product", error));
 
   export const getProductsByCategoryId = categoryName => dispatch =>
