@@ -5,7 +5,6 @@ const profile = require('APP/db/models/profile');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
-
 // router.get('/', (req, res, next) =>
 //   productReview.findAll()
 //   .then(productReviews => res.status(200).json(productReviews))
@@ -45,6 +44,7 @@ const Op = Sequelize.Op;
 //   .catch(next))
 
 router.put('/:name', (req, res, next) =>
+    // console.log("route.profile.js: ", req.body);
     profile.update(req.body,
     {
       where: {
@@ -55,7 +55,6 @@ router.put('/:name', (req, res, next) =>
   )
   .catch(next))
 
-//
 // router.delete('/:id', (req, res, next) =>
 //   productReview.destroy({
 //     where: {

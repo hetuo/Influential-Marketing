@@ -19,8 +19,8 @@ export const REMOVE_REVIEW = 'REMOVE_REVIEW';
 // 	}
 // }
 
-export const getProfile = () => dispatch =>
-	  axios.get('/api/profile/')
+export const getProfile = (name) => dispatch =>
+	  axios.get(`/api/profile/${name}`)
 	  .then(response => {
 	    console.log('RESPONSE', response);
 	    //receiveReviews or receiveReview ??
@@ -34,8 +34,9 @@ export const getProfile = () => dispatch =>
 // }
 
 export const updateProfile = (name, profile) => dispatch => {
+	console.log("profile.js ", name, profile);
 	axios.put(`/api/profile/${name}`, { profile })
-	.then(() => getProfile())
+	.then(() => getProfile(name))
 	.catch(error => console.error(`Could not update profile, ${profile}`, error))
 }
 

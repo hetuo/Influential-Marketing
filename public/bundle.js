@@ -57147,6 +57147,8 @@
 	var Profile = function (_React$Component) {
 	  _inherits(Profile, _React$Component);
 	
+	  // const { user, alert } = this.props;
+	
 	  function Profile(props) {
 	    _classCallCheck(this, Profile);
 	
@@ -57172,12 +57174,12 @@
 	      console.log("update user information");
 	
 	      var profile = {
-	        name: e.target.name.value,
+	        name: this.props.user.name,
 	        email: e.target.email.value,
 	        password: e.target.password.value
 	      };
 	      console.log("profile: ", this.props);
-	      this.props.updateProfile(profile.name, profile);
+	      this.props.updateProfile(this.props.user.name, profile);
 	    }
 	  }, {
 	    key: 'render',
@@ -57186,11 +57188,11 @@
 	
 	      // console.log("user********", this.props.user);
 	      // let user = this.props.user;
-	      console.log("profile.jsx: ", this.props);
 	      var _props = this.props,
 	          user = _props.user,
 	          alert = _props.alert;
 	
+	      console.log("profile.jsx: ", this.props);
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'user-profile' },
@@ -76069,9 +76071,9 @@
 	// 	}
 	// }
 	
-	var getProfile = exports.getProfile = function getProfile() {
+	var getProfile = exports.getProfile = function getProfile(name) {
 		return function (dispatch) {
-			return _axios2.default.get('/api/profile/').then(function (response) {
+			return _axios2.default.get('/api/profile/' + name).then(function (response) {
 				console.log('RESPONSE', response);
 				//receiveReviews or receiveReview ??
 				dispatch(receiveReviews(response.data));
@@ -76088,8 +76090,9 @@
 	
 	var updateProfile = exports.updateProfile = function updateProfile(name, profile) {
 		return function (dispatch) {
+			console.log("profile.js ", name, profile);
 			_axios2.default.put('/api/profile/' + name, { profile: profile }).then(function () {
-				return getProfile();
+				return getProfile(name);
 			}).catch(function (error) {
 				return console.error('Could not update profile, ' + profile, error);
 			});

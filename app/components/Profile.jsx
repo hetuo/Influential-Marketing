@@ -5,6 +5,8 @@ import { removeItem, updateQuantity } from '../action-creators/cart'
 import {logout} from 'APP/app/reducers/auth'
 
 export default class Profile extends React.Component {
+  // const { user, alert } = this.props;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -23,19 +25,19 @@ export default class Profile extends React.Component {
     console.log("update user information");
 
     const profile = {
-      name: e.target.name.value,
+      name: this.props.user.name,
       email: e.target.email.value,
       password: e.target.password.value,
     }
     console.log("profile: ", this.props);
-    this.props.updateProfile(profile.name, profile);
+    this.props.updateProfile(this.props.user.name, profile);
   }
 
-  render(){
+  render() {
     // console.log("user********", this.props.user);
     // let user = this.props.user;
-    console.log("profile.jsx: ", this.props);
     const { user, alert } = this.props;
+    console.log("profile.jsx: ", this.props);
     return (
       <div className="user-profile">
         <ol className="breadcrumb">
