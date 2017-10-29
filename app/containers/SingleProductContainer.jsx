@@ -5,8 +5,9 @@ import { removeReview, addReview, getReview }from 'APP/app/action-creators/revie
 
 const mapState = ({ products, reviews }) => ({
 	product: products.selectedProduct,
-	reviews: products.selectedProduct.product_reviews,
-	newreview: reviews.selectedReview
+	//reviews: products.selectedProduct.product_reviews,
+	//newreview: reviews.selectedReview
+	reviews: reviews.selectedReview
 });
 
 const mapDispatch = { removeReview, addReview, getReview, addToCart };

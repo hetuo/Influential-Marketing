@@ -27,13 +27,13 @@ export const removeReview = id => dispatch => {
 export const addReview = review => dispatch => {
 	console.log('tring to add review');
 	axios.post(`/api/review/`, review)
-	.then(() => dispatch(getReview(review)))
+	.then(() => dispatch(getReview(review.product_id)))
 	.catch(error => console.error(`Could not add review, ${review}`, error))
 }
 
-export const getReview = review => dispatch =>{
+export const getReview = productId => dispatch =>{
 		console.log("tring to get review");
-	  axios.get(`/api/review/product_id=${review.product_id}`)
+	  axios.get(`/api/review/product_id=${productId}`)
 	  .then(response => {
 	    console.log('RESPONSE', response);
 	    //receiveReviews or receiveReview ??

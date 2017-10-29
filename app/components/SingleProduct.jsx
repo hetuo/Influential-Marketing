@@ -59,7 +59,7 @@ export default class SingleProduct extends React.Component {
   }
 
   render() {
-    const { product, reviews, newreview } = this.props;
+    const { product, reviews } = this.props;
     return (
       <div id="ProductContainer">
         <ol className="breadcrumb">
@@ -116,30 +116,6 @@ export default class SingleProduct extends React.Component {
             })
           }
         </div>
-        <div className="container-fluid" style={{padding: '0 20px'}}>
-        {
-          newreview && newreview.map(review => {
-            return (
-              <form key={review.id} className="row review">
-                <div className="form-group">
-                  <div className="title">
-                    { review.title }
-                    <input type="text" name="title" className="form-control hide" defaultValue={ review.title } />
-                  </div>
-                  <StarRatingComponent
-                    name="starsr1"
-                    starCount={5}
-                    editing={false}
-                    value={ parseInt(review.stars) } />
-                  <div className="createdAt">{ new Date(review.created_at).toDateString() }</div>
-                  <div className="body"><p>{ review.body }</p></div>
-                  <textarea className="form-control hide" name="body" defaultValue={ review.body } disabled />
-                </div>
-              </form>
-            );
-          })
-        }
-      </div>
         <div className="container-fluid" style={{padding: '0 8px'}}>
           <form className="row" onSubmit={(e) => (this.onAddReviewSubmit(e))}>
             <div className="form-group col-xs-12 col-md-8" >
