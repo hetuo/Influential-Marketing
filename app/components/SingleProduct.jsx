@@ -106,7 +106,7 @@ export default class SingleProduct extends React.Component {
                       name="starsr"
                       starCount={5}
                       editing={false}
-                      defaultValue={parseInt(review.stars)} />
+                      value={parseInt(review.stars)} />
                     <div className="createdAt">{ new Date(review.created_at).toDateString() }</div>
                     <div className="body"><p>{ review.body }</p></div>
                     <textarea className="form-control hide" name="body" defaultValue={ review.body } disabled />
@@ -127,10 +127,10 @@ export default class SingleProduct extends React.Component {
                     <input type="text" name="title" className="form-control hide" defaultValue={ review.title } />
                   </div>
                   <StarRatingComponent
-                    name="starsr"
+                    name="starsr1"
                     starCount={5}
                     editing={false}
-                    defaultValue={parseInt(review.stars)} />
+                    value={ parseInt(review.stars) } />
                   <div className="createdAt">{ new Date(review.created_at).toDateString() }</div>
                   <div className="body"><p>{ review.body }</p></div>
                   <textarea className="form-control hide" name="body" defaultValue={ review.body } disabled />
