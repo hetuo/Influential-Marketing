@@ -3,9 +3,10 @@ import SingleProduct from '../components/SingleProduct';
 import { addToCart } from '../action-creators/cart';
 import { removeReview, addReview, getReview }from 'APP/app/action-creators/reviewActionCreator';
 
-const mapState = ({ products }) => ({
+const mapState = ({ products, reviews }) => ({
 	product: products.selectedProduct,
-	reviews: products.selectedProduct.product_reviews
+	reviews: products.selectedProduct.product_reviews,
+	newreview: reviews.selectedReview
 });
 
 const mapDispatch = { removeReview, addReview, getReview, addToCart };
