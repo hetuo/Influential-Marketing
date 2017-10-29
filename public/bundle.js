@@ -52304,7 +52304,7 @@
 	                    name: 'starsr',
 	                    starCount: 5,
 	                    editing: false,
-	                    defaultValue: parseInt(review.stars) }),
+	                    value: parseInt(review.stars) }),
 	                  _react2.default.createElement(
 	                    'div',
 	                    { className: 'createdAt' },
@@ -76091,7 +76091,7 @@
 	var updateProfile = exports.updateProfile = function updateProfile(name, profile) {
 		return function (dispatch) {
 			console.log("profile.js ", name, profile);
-			_axios2.default.put('/api/profile/' + name, { profile: profile }).then(function () {
+			_axios2.default.put('/api/profile/' + name, profile).then(function () {
 				return getProfile(name);
 			}).catch(function (error) {
 				return console.error('Could not update profile, ' + profile, error);

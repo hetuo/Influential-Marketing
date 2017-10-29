@@ -42,9 +42,8 @@ const Op = Sequelize.Op;
 //   productReview.create(req.body)
 //   .then(productReview => res.status(201).json(productReview))
 //   .catch(next))
-
-router.put('/:name', (req, res, next) =>
-    // console.log("route.profile.js: ", req.body);
+router.put('/:name', (req, res, next) => {
+    console.log("route.profile.js: ", req.body);
     profile.update(req.body,
     {
       where: {
@@ -53,7 +52,9 @@ router.put('/:name', (req, res, next) =>
     .then((count, updated) =>
     res.status(201).json(updated[0])
   )
-  .catch(next))
+  .catch(next)
+});
+
 
 // router.delete('/:id', (req, res, next) =>
 //   productReview.destroy({

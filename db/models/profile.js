@@ -1,31 +1,15 @@
 const Sequelize = require('sequelize');
 const db = require('APP/db');
 
-const User_Profile = db.define('profile', {
+const User_Profile = db.define('users', {
   email: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
     validate: {
-      notEmpty: true,
-      isLongEnough: function(val) {
-        if(val.length < 5) {
-          throw new Error('Please input more descriptive review for the product.')
-        }
-      }
+      isEmail: true,
     }
   },
-  password: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-        isLongEnough: function(val) {
-          if(val.length < 5) {
-            throw new Error('Please input more descriptive review for the product.')
-          }
-        }
-      }
-    },
+  password: Sequelize.VIRTUAL,
 });
 
 module.exports = User_Profile;

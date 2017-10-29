@@ -39,10 +39,12 @@ router.get('/title=:title&body=:body', function (req, res, next) {
     .catch(next)
 });
 
-router.post('/', (req, res, next) =>
+router.post('/', (req, res, next) => {
+  console.log("review: req.body", req.body);
   productReview.create(req.body)
   .then(productReview => res.status(201).json(productReview))
-  .catch(next))
+  .catch(next)
+});
 
 router.put('/:id', (req, res, next) =>
   productReview.update(req.body,
