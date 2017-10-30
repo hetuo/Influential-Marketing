@@ -35,8 +35,11 @@ export const getProfile = (name) => dispatch =>
 
 export const updateProfile = (name, profile) => dispatch => {
 	console.log("profile.js ", name, profile);
-	axios.put(`/api/profile/${name}`, profile)
-	.then(() => getProfile(name))
+	axios.put(`/api/profile/${name}`, { profile })
+	.then((response) => {
+		console.log('response ', response);
+		return getProfile(name)
+	})
 	.catch(error => console.error(`Could not update profile, ${profile}`, error))
 }
 

@@ -44,15 +44,24 @@ const Op = Sequelize.Op;
 //   .catch(next))
 router.put('/:name', (req, res, next) => {
     console.log("route.profile.js: ", req.body);
-    profile.update(req.body,
+    console.log("route. ", req.params);
+    return profile.update(req.body.profile,
     {
       where: {
         name: req.params.name}
     })
-    .then((count, updated) =>
-    res.status(201).json(updated[0])
-  )
-  .catch(next)
+    // .then(updatedProfile => {
+    //   console.log('updatedProfile', updatedProfile);
+    //
+    //   res.status(201)
+    // }
+   .then((count) => {
+     console.log('success ', count);
+     res.status(201);
+   })
+   .catch(next => {
+    console.log('error ', next);
+  })
 });
 
 
