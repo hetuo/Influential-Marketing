@@ -35,7 +35,63 @@ const Product_Review = db.define('product_review', {
     validate: {
       notEmpty: true
     }
-  }
+  },
+
+  keyword1: {
+    type: Sequelize.STRING
+  },
+
+  keyword2: {
+    type: Sequelize.STRING
+  },
+
+  keyword3: {
+    type: Sequelize.STRING
+  },
+
+  category: {
+    type: Sequelize.STRING
+  },
+
+  venue_type: {
+    type: Sequelize.STRING
+  },
+
+  customer_group: {
+    type: Sequelize.STRING
+  },
+
+  cuisine_type: {
+    type: Sequelize.STRING
+  },
+
+  price: {
+    type: Sequelize.STRING
+  },
+
+  image1: {
+    type: Sequelize.STRING
+  },
+
+  image2: {
+    type: Sequelize.STRING
+  },
+
+  image3: {
+    type: Sequelize.STRING
+  },
+
+  Remark1: {
+    type: Sequelize.STRING
+  },
+
+  Remark2: {
+    type: Sequelize.STRING
+  },
+
+  Remark3: {
+    type: Sequelize.STRING
+  },
 });
 
 module.exports = Product_Review;

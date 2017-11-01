@@ -5,7 +5,6 @@
 // to get access to the User model.
 
 const User = require('APP/db/models/user');
-const Influencer = require('APP/db/models/influencer');
 const Product = require('APP/db/models/product');
 const Address = require('APP/db/models/address');
 const Order = require('APP/db/models/order');
@@ -37,7 +36,6 @@ OrderProduct.belongsTo(Product)
 
 module.exports = {
 	User,
-	Influencer,
 	Product,
 	Address,
 	Category,

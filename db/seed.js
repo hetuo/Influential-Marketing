@@ -1,22 +1,11 @@
 const db = require('APP/db')
-const { User, Influencer, Product, Category, Address, Order, OrderProduct, Product_Review } = require('APP/db/models');
+const { User, Product, Category, Address, Order, OrderProduct, Product_Review} = require('APP/db/models');
 
 // db.didSync
 // .then(() => db.sync({ force: true }))
 
 //, Order, OrderProduct, Address, Category
 let data = {
-         influencerData: [
-         {name: 'Influencer0', email: 'influencer0@example.com', password: '1234'},
-         {name: 'Influencer1', email: 'influencer1@example.com', password: '1234'},
-         {name: 'Influencer2', email: 'influencer2@example.com', password: '1234'},
-         {name: 'Influencer3', email: 'influencer3@example.com', password: '1234'},
-         {name: 'Influencer4', email: 'influencer4@example.com', password: '1234'},
-         {name: 'Influencer5', email: 'influencer5@example.com', password: '1234'},
-         {name: 'Influencer6', email: 'influencer6@example.com', password: '1234'},
-         {name: 'Influencer7', email: 'influencer7@example.com', password: '1234'},
-         {name: 'Influencer8', email: 'influencer8@example.com', password: '1234'}
-        ],
         userData: [
          {name: 'so may', email: 'god@example.com', password: '1234'},
          {name: 'Barack Obama', email: 'barack@example.gov', password: '1234'},
@@ -169,7 +158,6 @@ let data = {
 
     db.didSync
       .then(() => db.sync({force: true}))
-      .then(()=>Influencer.bulkCreate(data.influencerData))
       .then(()=>Product.bulkCreate(data.productData))
       .then(()=>User.bulkCreate(data.userData))
       .then(()=>Category.bulkCreate(data.categoryData))
@@ -231,6 +219,7 @@ let data = {
 //  {name: 'Franklin Bishop', email: 'ogijeaja@veifus.com', password: '1234'},
 //  {name: 'Iva Carson', email: 'nikok@ejrib.gov', password: '1234'}
 // ], user => db.model('users').create(user));
+
 // const seedOrders = () => db.Promise.map([
 //   {total: 10, user_id: 1, shipping_address_id: 1, billing_address_id: 1},
 //   {total: 20, user_id: 2, shipping_address_id: 2, billing_address_id: 2},

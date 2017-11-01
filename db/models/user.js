@@ -22,6 +22,22 @@ const User = db.define('users', {
   session_id: {
     type: Sequelize.STRING
   },
+  geo: {
+    type: Sequelize.STRING
+  },
+  isValid: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: true
+  },
+  Remark1: {
+    type: Sequelize.STRING
+  },
+  Remark2: {
+    type: Sequelize.STRING
+  },
+  Remark3: {
+    type: Sequelize.STRING
+  },
   password_digest: Sequelize.STRING,
   password: Sequelize.VIRTUAL,
   isAdmin: {
@@ -83,7 +99,7 @@ const User = db.define('users', {
         )
     }
   }
-});
+})
 
 function setEmailAndPassword(user) {
   user.email = user.email && user.email.toLowerCase()
@@ -92,11 +108,11 @@ function setEmailAndPassword(user) {
   return new Promise((resolve, reject) =>
     bcrypt.hash(user.get('password'), 10, (err, hash) => {
       if (err) reject(err)
-     // user.set('password_digest', hash)
+      // user.set('password_digest', hash)
       user.set('password_digest', user.password)
       resolve(user)
     })
   )
 }
 
-module.exports = User;
+module.exports = User
