@@ -13,7 +13,6 @@ import ProductContainer from './containers/SingleProductContainer';
 import ProfileContainer from './containers/ProfileContainer';
 import Cart from './containers/CartContainer';
 import Login from './components/Login';
-// import Profile from './components/Profile';
 import Signup from './components/Signup';
 import NewReview from './components/newReviewForm';
 import About from './components/About';

@@ -6,7 +6,6 @@ import userproperty from '../data/userproperty';
 import classnames from 'classnames';
 import map from 'lodash/map'; // TODO: replace with pure JS
 
-
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -35,7 +34,6 @@ class Login extends React.Component {
     const options = map(userproperty, (val, key) =>
       <option key={ val } value={ val }>{ key }</option>
     );
-    console.log('WTF           %s', user);
     return (
       <div className="login-wrapper">
         <ol className="breadcrumb">

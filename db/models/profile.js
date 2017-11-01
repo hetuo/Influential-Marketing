@@ -12,7 +12,8 @@ const User_Profile = db.define('users', {
   },
   session_id: {
     type: Sequelize.STRING
-  }, password_digest: Sequelize.STRING, password: Sequelize.VIRTUAL, isAdmin: { type: Sequelize.BOOLEAN,
+  },
+  password_digest: Sequelize.STRING, password: Sequelize.VIRTUAL, isAdmin: { type: Sequelize.BOOLEAN,
     defaultValue: false
   }
 });

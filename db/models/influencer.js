@@ -9,42 +9,41 @@ const Address = require('APP/db/models/address');
 const Cart_Line_Item = require('APP/db/models/cart_line_item');
 
 
-const User = db.define('users', {
-  name: Sequelize.STRING,
-  email: {
-    type: Sequelize.STRING,
-    allowNull: true,
-    validate: {
-      isEmail: true,
-      //notEmpty: true,
+const Influencer = db.define('influencers', {
+    name: Sequelize.STRING,
+    email: {
+      type: Sequelize.STRING,
+      allowNull: true,
+      validate: {
+        isEmail: true,
+      }
+    },
+    session_id: {
+      type: Sequelize.STRING
+    },
+    password_digest: Sequelize.STRING,
+    password: Sequelize.VIRTUAL,
+    isAdmin: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false
     }
-  },
-  session_id: {
-    type: Sequelize.STRING
-  },
-  password_digest: Sequelize.STRING,
-  password: Sequelize.VIRTUAL,
-  isAdmin: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false
-  }
-}, {
-  indexes: [{fields: ['email'], unique: true,}],
-  hooks: {
+  }, {
+    indexes: [{fields: ['email'], unique: true,}],
+    hooks: {
     beforeCreate: setEmailAndPassword,
     beforeUpdate: setEmailAndPassword,
-    afterUpdate: (user, options)=>{
-      return User.removeUserWithSessionId(user.session_id)
+    afterUpdate: (influencer, options)=>{
+      return Influencer.removeUserWithSessionId(influencer.session_id)
     },
   },
   classMethods:{
     removeUserWithSessionId(sessionId){
       let member, guest;
-      return User.findAll({
+      return Influencer.findAll({
           where:{ session_id:sessionId }
-        }).then(users=>{
-          member = _.find(users, (user)=>(user.email !== null))
-          guest = _.find(users, (user)=>(user.email === null))
+        }).then(influencers=>{
+          member = _.find(influencers, (influencer)=>(influencer.email !== null))
+          guest = _.find(influencers, (influencer)=>(influencer.email === null))
           console.log('##### MEMBER & GUEST ####',member, guest)
           if(member && guest) {
             // if duplicate session_id exist in database
@@ -59,18 +58,18 @@ const User = db.define('users', {
               return Cart_Line_Item.reassignUser(guest.id, member.id)
             }
         }).then(()=>{
-            return User.destroy({
+            return Influencer.destroy({
               where:{ session_id:sessionId, $and: {email: {$eq: null}}}
             })
         }).then(affectedRows=>{
           // console.log('affectedRows',affectedRows)
         })
     },
-    emptySessionId(userId){
+    emptySessionId(influencerId){
       return this.update({
           session_id: null
         },{
-          where: { id: userId }
+          where: { id: influencerId }
         })
     },
   },
@@ -85,18 +84,18 @@ const User = db.define('users', {
   }
 });
 
-function setEmailAndPassword(user) {
-  user.email = user.email && user.email.toLowerCase()
-  if (!user.password) return Promise.resolve(user)
+function setEmailAndPassword(influencer) {
+  influencer.email = influencer.email && influencer.email.toLowerCase()
+  if (!influencer.password) return Promise.resolve(influencer)
 
   return new Promise((resolve, reject) =>
-    bcrypt.hash(user.get('password'), 10, (err, hash) => {
+    bcrypt.hash(influencer.get('password'), 10, (err, hash) => {
       if (err) reject(err)
      // user.set('password_digest', hash)
-      user.set('password_digest', user.password)
-      resolve(user)
+      influencer.set('password_digest', influencer.password)
+      resolve(influencer)
     })
   )
 }
 
-module.exports = User;
+module.exports = Influencer

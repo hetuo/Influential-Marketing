@@ -31760,8 +31760,6 @@
 	  _store2.default.dispatch((0, _products.getProductsByCategoryId)(nextRouterState.params.categoryName));
 	  _store2.default.dispatch((0, _categories.loadSingleCategory)(nextRouterState.params.categoryName));
 	};
-	// import Profile from './components/Profile';
-	
 	
 	//import components and containers
 	
@@ -53528,7 +53526,6 @@
 	
 	// TODO: replace with pure JS
 	
-	
 	var Login = function (_React$Component) {
 	  _inherits(Login, _React$Component);
 	
@@ -53573,7 +53570,6 @@
 	          key
 	        );
 	      });
-	      console.log('WTF           %s', user);
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'login-wrapper' },
@@ -53711,7 +53707,6 @@
 	exports.default = {
 	  "Regular User": "regular_user",
 	  "Influencer": "influencer",
-	  "Director": "director",
 	  "Brand Account": "brand_account"
 	};
 
