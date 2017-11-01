@@ -16,7 +16,7 @@ const User = db.define('users', {
     allowNull: true,
     validate: {
       isEmail: true,
-      //notEmpty: true,
+      //notEmpty: true ,
     }
   },
   session_id: {
