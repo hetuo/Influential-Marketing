@@ -2,30 +2,31 @@ const db = require('APP/db');
 const express = require('express');
 const router = module.exports = express.Router()
 const productReview = require('APP/db/models/product_review');
+const comment = require('APP/db/models/comment');
 const user = require('APP/db/models/user');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
-
+/*
 router.get('/', (req, res, next) =>
-  productReview.findAll()
+  productReview.findAll({include: [user]})
   .then(productReviews => res.status(200).json(productReviews))
   .catch(next))
 
 router.get('/id=:id', (req, res, next) =>
-  productReview.findById(req.params.id)
+  productReview.findById(req.params.id, {include: [user]})
   .then(productReview => res.json(productReview))
-  .catch(next))
+  .catch(next))*/
 
-  router.get('/product_id=:product_id', function (req, res, next) {
-        var product_id = req.params.product_id;
+router.get('/review_id=:review_id', function (req, res, next) {
+      var review_id = req.params.review_id;
 
-        productReview.findAll({ where: {product_id: product_id}, include: [user] })
-        .then(productReview => res.status(200).json(productReview))
-        .catch(next)
-  });
+      comment.findAll({ where: {product_review_id: review_id}, include: [user] })
+      .then(comment => res.status(200).json(comment))
+      .catch(next)
+});
 
-router.get('/title=:title&body=:body', function (req, res, next) {
+/*router.get('/title=:title&body=:body', function (req, res, next) {
     var title = req.params.title;
     var body = req.params.body;
 
@@ -34,20 +35,18 @@ router.get('/title=:title&body=:body', function (req, res, next) {
         Sequelize.or (
           {title: {$ilike: '%' + title + '%'}},
           {body: {$ilike: '%' + body + '%'}}
-        )
+        ), include: [user]
       })
     .then(productReview => res.status(200).json(productReview))
     .catch(next)
-});
+});*/
 
-router.post('/', (req, res, next) => {
-  console.log("review: req.body", req.body);
-  productReview.create(req.body)
-  .then(productReview => res.status(201).json(productReview))
-  .catch(next)
-});
+router.post('/', (req, res, next) =>
+  comment.create(req.body)
+  .then(comment => res.status(201).json(comment))
+  .catch(next))
 
-router.put('/:id', (req, res, next) =>
+/*router.put('/:id', (req, res, next) =>
   productReview.update(req.body,
     {
       where: {
@@ -66,6 +65,6 @@ router.delete('/:id', (req, res, next) =>
     }
   })
   .then(deleted => res.sendStatus(204).end())
-  .catch(next));
+  .catch(next));*/
 
 module.exports = router;

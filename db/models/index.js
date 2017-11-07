@@ -10,6 +10,7 @@ const Address = require('APP/db/models/address');
 const Order = require('APP/db/models/order');
 const OrderProduct = require('APP/db/models/order_product');
 const Category = require('APP/db/models/category');
+const Comment = require('APP/db/models/comment');
 const Product_Review = require('APP/db/models/product_review')
 const Cart_Line_Item = require('APP/db/models/cart_line_item')
 
@@ -23,6 +24,8 @@ Product_Review.belongsTo(User)
 Product_Review.belongsTo(Product)
 Product.hasMany(Product_Review)
 
+Comment.belongsTo(Product_Review)
+Comment.belongsTo(User)
 
 Cart_Line_Item.belongsTo(User)
 Cart_Line_Item.belongsTo(Product)
@@ -42,5 +45,6 @@ module.exports = {
 	Product_Review,
 	Cart_Line_Item,
 	Order,
-	OrderProduct
+	OrderProduct,
+	Comment
 };
