@@ -1,11 +1,12 @@
 const db = require('APP/db')
-const { User, Product, Category, Address, Order, OrderProduct, Product_Review} = require('APP/db/models');
+const { User, Brand, Product, Category, Address, Order, OrderProduct, Product_Review} = require('APP/db/models');
 
 // db.didSync
 // .then(() => db.sync({ force: true }))
 
 //, Order, OrderProduct, Address, Category
 let data = {
+
         userData: [
          {name: 'so may', email: 'god@example.com', password: '1234'},
          {name: 'Barack Obama', email: 'barack@example.gov', password: '1234'},
@@ -20,6 +21,19 @@ let data = {
          {name: 'Franklin Bishop', email: 'ogijeaja@veifus.com', password: '1234'},
          {name: 'Iva Carson', email: 'nikok@ejrib.gov', password: '1234'}
         ],
+
+        brandData: [
+           {name: 'brand1', email: 'brand1@brand.com', zipcode: '10001', password: '1234'},
+           {name: 'brand2', email: 'brand2@brand.com', zipcode: '10001', password: '1234'},
+           {name: 'brand3', email: 'brand3@brand.com', zipcode: '10001', password: '1234'},
+           {name: 'brand4', email: 'brand4@brand.com', zipcode: '90017', password: '1234'},
+           {name: 'brand5', email: 'brand5@brand.com', zipcode: '90017', password: '1234'},
+           {name: 'brand6', email: 'brand6@brand.com', zipcode: '90017', password: '1234'},
+           {name: 'brand7', email: 'brand7@brand.com', zipcode: '15106', password: '1234'},
+           {name: 'brand8', email: 'brand8@brand.com', zipcode: '15106', password: '1234'},
+           {name: 'brand9', email: 'brand9@brand.com', zipcode: '15106', password: '1234'}
+        ],
+
         productData: [
 
          {name: 'St Louis', sku: 'GR1', description: {Warranty: 'Lifetime',
@@ -160,6 +174,7 @@ let data = {
       .then(() => db.sync({force: true}))
       .then(()=>Product.bulkCreate(data.productData))
       .then(()=>User.bulkCreate(data.userData))
+      .then(()=>Brand.bulkCreate(data.brandData))
       .then(()=>Category.bulkCreate(data.categoryData))
       .then(()=>Address.bulkCreate(data.addressData))
       .then(()=>Order.bulkCreate(data.orderData))
