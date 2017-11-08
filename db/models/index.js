@@ -5,6 +5,7 @@
 // to get access to the User model.
 
 const User = require('APP/db/models/user');
+const Brand = require('APP/db/models/brand');
 const Product = require('APP/db/models/product');
 const Address = require('APP/db/models/address');
 const Order = require('APP/db/models/order');
@@ -16,6 +17,7 @@ const Cart_Line_Item = require('APP/db/models/cart_line_item')
 
 
 Address.belongsTo(User)
+Address.belongsTo(Brand)
 //hasMany / belongsToMany
 Product.belongsToMany(Category, {through: 'product_category'});
 Category.belongsToMany(Product, {through: 'product_category'});
@@ -29,16 +31,21 @@ Comment.belongsTo(User)
 
 Cart_Line_Item.belongsTo(User)
 Cart_Line_Item.belongsTo(Product)
+Cart_Line_Item.belongsTo(Brand)
 
 Order.belongsTo(User)
+Order.belongsTo(Brand)
 Order.belongsTo(Address, {as: 'shipping_address'})
 Order.belongsTo(Address, {as: 'billing_address'})
 
 OrderProduct.belongsTo(Order)
 OrderProduct.belongsTo(Product)
 
+// Campaign.belongsTo(Brand)
+
 module.exports = {
 	User,
+	Brand,
 	Product,
 	Address,
 	Category,
