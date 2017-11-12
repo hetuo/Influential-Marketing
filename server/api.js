@@ -18,7 +18,7 @@ api
   .use('/review', require('./routes/product-review'))
   .use('/orderProduct', require('./routes/order-product'))
   .use('/comment', require('./routes/comment'))
-  ///.use('/campaigns', require('./routes/campaigns'))
+  .use('/campaigns', require('./routes/campaigns'))
 
 // Send along any errors
 api.use((err, req, res, next) => {

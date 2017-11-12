@@ -1,5 +1,5 @@
 const db = require('APP/db')
-const { User, Brand, Product, Category, Address, Order, OrderProduct, Product_Review} = require('APP/db/models');
+const { User, Brand, Product, Category, Address, Order, OrderProduct, Product_Review, Campaign} = require('APP/db/models');
 
 // db.didSync
 // .then(() => db.sync({ force: true }))
@@ -33,6 +33,19 @@ let data = {
            {name: 'brand8', email: 'brand8@brand.com', zipcode: '15106', password: '1234'},
            {name: 'brand9', email: 'brand9@brand.com', zipcode: '15106', password: '1234'}
         ],
+
+
+      //   influencerData: [
+      //     {name: 'influencer1', email: 'influencer1@influencer.com', zipcode: '10001', password: '1234'},
+      //     {name: 'influencer2', email: 'influencer2@influencer.com', zipcode: '10001', password: '1234'},
+      //     {name: 'influencer3', email: 'influencer3@influencer.com', zipcode: '10001', password: '1234'},
+      //     {name: 'influencer4', email: 'influencer4@influencer.com', zipcode: '90017', password: '1234'},
+      //     {name: 'influencer5', email: 'influencer5@influencer.com', zipcode: '90017', password: '1234'},
+      //     {name: 'influencer6', email: 'influencer6@influencer.com', zipcode: '90017', password: '1234'},
+      //     {name: 'influencer7', email: 'influencer7@influencer.com', zipcode: '15106', password: '1234'},
+      //     {name: 'influencer8', email: 'influencer8@influencer.com', zipcode: '15106', password: '1234'},
+      //     {name: 'influencer9', email: 'influencer9@influencer.com', zipcode: '15106', password: '1234'}
+      //  ],
 
         productData: [
 
@@ -144,8 +157,16 @@ let data = {
         { order_id: 1, product_id: 3, quantity: 1, line_total: 1 * 280.00 },
         { order_id: 1, product_id: 4, quantity: 2, line_total: 2 * 200 },
         { order_id: 1, product_id: 5, quantity: 1, line_total: 1 * 100.00 }
+      ],
+      campaignData: [
+        {camptitle: 'Campaign11', campdetails: 'new feautures of our product are so good and how you like it', campstarttime:'2017-12-01 00:00:00' , campendtime:'2017-12-31 23:59:59' , campzipcode: '10001', campcreater: 'brand1', numinfluencers: 3, payout: 3000.00},
+        {camptitle: 'Campaign12', campdetails: 'new feautures of our service are so good and how you like it', campstarttime:'2017-12-01 00:00:00' , campendtime:'2017-12-31 23:59:59' , campzipcode: '10001', campcreater: 'brand1', numinfluencers: 5, payout: 5000.00}
+
       ]
+
     }
+
+
 
     const seedCartLineItem = () => db.Promise.map([
       { quantity: 3, product_id: 1, user_id: 1 }
@@ -174,12 +195,14 @@ let data = {
       .then(() => db.sync({force: true}))
       .then(()=>Product.bulkCreate(data.productData))
       .then(()=>User.bulkCreate(data.userData))
+      //.then(()=>Influencer.bulkCreate(data.influencerData))
       .then(()=>Brand.bulkCreate(data.brandData))
       .then(()=>Category.bulkCreate(data.categoryData))
       .then(()=>Address.bulkCreate(data.addressData))
       .then(()=>Order.bulkCreate(data.orderData))
       .then(()=>OrderProduct.bulkCreate(data.orderProductData))
       .then(()=>Product_Review.bulkCreate(data.productReviewData))
+      .then(()=>Campaign.bulkCreate(data.campaignData))
       .then(seedProductCategories)
       .then(productCategories => console.log(`Seeded ${productCategories.length} productCategory OK`))
       .then(seedCartLineItem)

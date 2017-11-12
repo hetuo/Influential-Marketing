@@ -15,6 +15,7 @@ const Comment = require('APP/db/models/comment');
 const Product_Review = require('APP/db/models/product_review')
 const Cart_Line_Item = require('APP/db/models/cart_line_item')
 
+const Campaign = require('APP/db/models/campaign');
 
 Address.belongsTo(User)
 Address.belongsTo(Brand)
@@ -41,7 +42,8 @@ Order.belongsTo(Address, {as: 'billing_address'})
 OrderProduct.belongsTo(Order)
 OrderProduct.belongsTo(Product)
 
-// Campaign.belongsTo(Brand)
+Campaign.belongsTo(Brand)
+Brand.hasMany(Campaign)
 
 module.exports = {
 	User,
@@ -53,5 +55,6 @@ module.exports = {
 	Cart_Line_Item,
 	Order,
 	OrderProduct,
-	Comment
+	Comment,
+	Campaign
 };
