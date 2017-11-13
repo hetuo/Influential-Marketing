@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Profile from '../components/Profile';
-import { updateProfile, getProfile }from 'APP/app/action-creators/profile';
+import { updateProfile, getProfile }from '../action-creators/profile';
 
 const mapState = ({ profiles, auth }) => ({
   user: auth.user,

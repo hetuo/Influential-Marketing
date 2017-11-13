@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { removeItem, updateQuantity } from '../action-creators/cart'
-import {logout} from 'APP/app/reducers/auth'
+import {logout} from '../reducers/auth'
 
 export default class Profile extends React.Component {
   // const { user, alert } = this.props;

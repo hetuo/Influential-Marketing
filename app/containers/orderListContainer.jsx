@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import OrderList from 'APP/app/components/orderList';
+import OrderList from '../components/orderList';
 import store from '../store';
 import {fetchAllOrders} from '../action-creators/orderActionCreator'
 

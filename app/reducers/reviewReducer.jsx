@@ -1,4 +1,4 @@
-import { RECEIVE_REVIEWS, RECEIVE_REVIEW, REMOVE_REVIEW, receiveReviews, receiveReview, removeReview, getReview, addReview} from 'APP/app/action-creators/reviewActionCreator';
+import { RECEIVE_REVIEWS, RECEIVE_REVIEW, REMOVE_REVIEW, receiveReviews, receiveReview, removeReview, getReview, addReview} from '../action-creators/reviewActionCreator';
 
 const reviewsInitialState = {
 	selectedReview: '',

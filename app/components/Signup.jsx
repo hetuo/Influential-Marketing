@@ -1,5 +1,5 @@
 import React from 'react';
-import { signup } from 'APP/app/reducers/auth';
+import { signup } from '../reducers/auth';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import classnames from 'classnames';
