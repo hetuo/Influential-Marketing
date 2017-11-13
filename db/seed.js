@@ -140,10 +140,10 @@ let data = {
         {product_id: 6, category_id: 2}
       ],
       productReviewData: [
-        {title: 'This product is awesome', body: 'super dope product!!! something something something', stars: '5', product_id: 2, user_id: 2},
-        {title: 'This product is awesome', body: 'Beautiful Ring!! something something somethingsomething something ', stars: '4', product_id: 4, user_id: 4},
-        {title: 'This product is awesome', body: 'aweful worst product ever something something somethingsomething', stars: '1', product_id: 3, user_id: 12},
-        {title: 'This product is awesome', body: 'Amazing! something somethingsomethingsomething something something something something something ', stars: '5', product_id: 5, user_id: 8}
+        {title: 'This product is awesome', body: 'super dope product!!! something something something', stars: '5', product_id: 2, user_id: 2, image1: '/images/products/StLouis-MatteBlack-Website-Front_large.png'},
+        {title: 'This product is awesome', body: 'Beautiful Ring!! something something somethingsomething something ', stars: '4', product_id: 4, user_id: 4, image1: '/images/products/CL-10-OysterBlack-Front_285a8f7d-6c3a-4981-a556-942442bfffe6_large.png'},
+        {title: 'This product is awesome', body: 'aweful worst product ever something something somethingsomething', stars: '1', product_id: 3, user_id: 12, image1: '/images/products/Orleans-24KTitaniumCarnevale-Website-Front_1024x1024.png'},
+        {title: 'This product is awesome', body: 'Amazing! something somethingsomethingsomething something something something something something ', stars: '5', product_id: 5, user_id: 8, image1: '/images/products/Franklin-Champagne24K-Front-Website_large.png'}
       ],
       addressData: [
         {address1: '150 main street', city: 'Buffalo', state: 'NY', country: 'USA', zipcode: '12345', user_id: 1},

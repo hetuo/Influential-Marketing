@@ -9,7 +9,7 @@ const Comment = db.define('comment', {
       notEmpty: true,
       isLongEnough: function(val) {
         if(val.length < 5) {
-          throw new Error('Please input more descriptive comment for the review.')
+          throw new Error('Please input more descriptive review for the product.')
         }
       }
     }
