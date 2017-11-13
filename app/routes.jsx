@@ -20,6 +20,9 @@ import Checkout from './containers/CheckoutContainer';
 import ReviewList from './components/ReviewList';
 import SingleReview from './components/SingleReview';
 import orderList from './containers/orderListContainer';
+import DashBoardContainer from './containers/DashBoardContainer'
+import CommentContainer from './containers/CommentContainer'
+import CampaignContainer from './containers/CampaignContainer'
 
 import { getProducts, getProductsByCategoryId } from './action-creators/products';
 import {loadSingleCategory} from './action-creators/categories';
@@ -36,7 +39,7 @@ const onProductsEnter = function (nextRouterState){
   store.dispatch(loadSingleCategory(nextRouterState.params.categoryName));
 };
 
-export default ({ onAppEnter, onProductEnter, onCartEnter, onOrderEnter }) => (
+export default ({ onAppEnter, onProductEnter, onCartEnter, onOrderEnter, onCampaignEnter, onCommentsEnter }) => (
   <Router history={browserHistory}>
     <Route path="/" component={Root} onEnter={onAppEnter}>
     <IndexRoute component={Homepage} onEnter={onAppEnter} />
@@ -49,9 +52,12 @@ export default ({ onAppEnter, onProductEnter, onCartEnter, onOrderEnter }) => (
       <Route path="/profile" component={ProfileContainer} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
+      <Route path="/dashboard" component={DashBoardContainer} />
+      <Route path="/campaign" component={CampaignContainer} onEnter={onCampaignEnter} />
       <Route path="/newreview" component={NewReview} />
       <Route path="/reviews" component={ReviewList} />
       <Route path="/reviews/:reviewId" component={SingleReview} />
+      <Route path="/comments/:reviewId" component={CommentContainer} onEnter={onCommentsEnter} />
       <Route path="/order" component={orderList} onEnter={onOrderEnter} />
       <Route path="*" component={Homepage} />
     </Route>

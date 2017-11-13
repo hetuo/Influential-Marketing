@@ -1,20 +1,21 @@
 import React from 'react';
 import SingleReview from './SingleReview';
-import { Link } from 'react-router';
+
 
 const ReviewList = ({ reviews }) => {
   return (
-    <div>
-      { reviews && reviews.map(review => {
+    <div className="container-fluid" style={{padding: '0 20px'}}>
+    {
+      reviews && reviews.map((review, index) => {
         return (
-          <Link key={review.id} to={`/reviews/${review.id}`}>
-            <SingleReview rating={reviews.rating} content={reviews.content} />
-          </Link>
+          <div key={index} className="row review">
+            <SingleReview review={ review } index={ index }/>
+          </div>
         );
       })
     }
   </div>
-);
+  );
 };
 
 export default ReviewList;

@@ -19,18 +19,20 @@ export const receiveProductsByCategory = products => ({
 
 
 export const getProducts = () => dispatch =>
-  axios.get('/api/product')
+  axios.get('/api/review')
   .then(response => dispatch(receiveProducts(response.data)))
+  //.then(response => console.log(response.data))
   .catch(error => console.error("Could Not Retrieve Products", error));
 
 export const getProductById = productId => dispatch =>
-  axios.get(`/api/product/${productId}`)
-  .then(res => res.data )
-  .then(product => dispatch(receiveProduct(product)))
+  axios.get(`/api/review/id=${productId}`)
+  //.then(res => res.data )
+  .then(res => dispatch(receiveProduct(res.data)))
+  //.then(res => console.log("hetuo test...", res.data))
   .then(() => dispatch(getReview(productId)))
   .catch(error => console.error("Could Not Retrieve Product", error));
 
-  export const getProductsByCategoryId = categoryName => dispatch =>
+/*  export const getProductsByCategoryId = categoryName => dispatch =>
     axios.get(`/api/product/category/${categoryName}`)
     .then(response => dispatch(receiveProductsByCategory(response.data)))
-    .catch(error => console.error("Could Not Retrieve Product by Category", error));
+    .catch(error => console.error("Could Not Retrieve Product by Category", error));*/

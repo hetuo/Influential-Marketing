@@ -20,20 +20,20 @@ export const receiveReview = review => {
 }
 
 export const removeReview = id => dispatch => {
-	axios.delete(`/api/review/${id}`)
+	axios.delete(`/api/comment/${id}`)
 		.catch(console.error);
 }
 
 export const addReview = review => dispatch => {
-	console.log('tring to add review');
-	axios.post(`/api/review/`, review)
-	.then(() => dispatch(getReview(review.product_id)))
+	console.log(`tring to add reviewxxx xxxx , ${review}`);
+	axios.post(`/api/comment/`, review)
+	.then(() => dispatch(getReview(review.product_review_id)))
 	.catch(error => console.error(`Could not add review, ${review}`, error))
 }
 
 export const getReview = productId => dispatch =>{
 		console.log("tring to get review");
-	  axios.get(`/api/review/product_id=${productId}`)
+	  axios.get(`/api/comment/review_id=${productId}`)
 	  .then(response => {
 	    console.log('RESPONSE', response);
 	    //receiveReviews or receiveReview ??

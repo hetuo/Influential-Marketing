@@ -59,6 +59,7 @@ class AppBar extends React.Component {
             ( <NavDropdown eventKey={6} title="USER" id="users">
             <MenuItem href="/signup">Register</MenuItem>
             <MenuItem href="/login">Login</MenuItem>
+            <MenuItem href="/dashboard">DashBoard</MenuItem>
             </NavDropdown> )
             }
           </Nav>
