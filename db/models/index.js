@@ -5,6 +5,7 @@
 // to get access to the User model.
 
 const User = require('APP/db/models/user');
+const Influencer = require('APP/db/models/influencer');
 const Brand = require('APP/db/models/brand');
 const Product = require('APP/db/models/product');
 const Address = require('APP/db/models/address');
@@ -23,7 +24,7 @@ Address.belongsTo(Brand)
 Product.belongsToMany(Category, {through: 'product_category'});
 Category.belongsToMany(Product, {through: 'product_category'});
 
-Product_Review.belongsTo(User)
+Product_Review.belongsTo(Influencer)
 Product_Review.belongsTo(Product)
 Product.hasMany(Product_Review)
 
@@ -47,6 +48,7 @@ Brand.hasMany(Campaign)
 
 module.exports = {
 	User,
+	Influencer,
 	Brand,
 	Product,
 	Address,

@@ -2,7 +2,7 @@ const db = require('APP/db');
 const express = require('express');
 const router = module.exports = express.Router()
 const productReview = require('APP/db/models/product_review');
-const user = require('APP/db/models/user');
+const influencer = require('APP/db/models/influencer');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
@@ -20,7 +20,7 @@ router.get('/id=:id', (req, res, next) =>
   router.get('/product_id=:product_id', function (req, res, next) {
         var product_id = req.params.product_id;
 
-        productReview.findAll({ where: {product_id: product_id}, include: [user] })
+        productReview.findAll({ where: {product_id: product_id}, include: [influencer] })
         .then(productReview => res.status(200).json(productReview))
         .catch(next)
   });

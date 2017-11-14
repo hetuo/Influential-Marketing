@@ -1,5 +1,5 @@
 const db = require('APP/db')
-const { User, Brand, Product, Category, Address, Order, OrderProduct, Product_Review, Campaign} = require('APP/db/models');
+const { User, Influencer, Brand, Product, Category, Address, Order, OrderProduct, Product_Review, Campaign} = require('APP/db/models');
 
 // db.didSync
 // .then(() => db.sync({ force: true }))
@@ -20,6 +20,13 @@ let data = {
          {name: 'Frank Russell', email: 'seja@licgolul.org', password: '1234'},
          {name: 'Franklin Bishop', email: 'ogijeaja@veifus.com', password: '1234'},
          {name: 'Iva Carson', email: 'nikok@ejrib.gov', password: '1234'}
+        ],
+
+        influencerData: [
+         {name: 'influencer1', email: 'influencer1@example.com', password: '1234'},
+         {name: 'influencer2', email: 'influencer2@example.com', password: '1234'},
+         {name: 'influencer3', email: 'influencer3@example.com', password: '1234'},
+         {name: 'influencer4', email: 'influencer4@example.com', password: '1234'}
         ],
 
         brandData: [
@@ -140,10 +147,10 @@ let data = {
         {product_id: 6, category_id: 2}
       ],
       productReviewData: [
-        {title: 'This product is awesome', body: 'super dope product!!! something something something', stars: '5', product_id: 2, user_id: 2, image1: '/images/products/StLouis-MatteBlack-Website-Front_large.png'},
-        {title: 'This product is awesome', body: 'Beautiful Ring!! something something somethingsomething something ', stars: '4', product_id: 4, user_id: 4, image1: '/images/products/CL-10-OysterBlack-Front_285a8f7d-6c3a-4981-a556-942442bfffe6_large.png'},
-        {title: 'This product is awesome', body: 'aweful worst product ever something something somethingsomething', stars: '1', product_id: 3, user_id: 12, image1: '/images/products/Orleans-24KTitaniumCarnevale-Website-Front_1024x1024.png'},
-        {title: 'This product is awesome', body: 'Amazing! something somethingsomethingsomething something something something something something ', stars: '5', product_id: 5, user_id: 8, image1: '/images/products/Franklin-Champagne24K-Front-Website_large.png'}
+        {title: 'This product is awesome', body: 'super dope product!!! something something something', stars: '5', product_id: 2, influencer_id: 2, image1: '/images/products/StLouis-MatteBlack-Website-Front_large.png'},
+        {title: 'This product is awesome', body: 'Beautiful Ring!! something something somethingsomething something ', stars: '4', product_id: 4, influencer_id: 4, image1: '/images/products/CL-10-OysterBlack-Front_285a8f7d-6c3a-4981-a556-942442bfffe6_large.png'},
+        {title: 'This product is awesome', body: 'aweful worst product ever something something somethingsomething', stars: '1', product_id: 3, influencer_id: 1, image1: '/images/products/Orleans-24KTitaniumCarnevale-Website-Front_1024x1024.png'},
+        {title: 'This product is awesome', body: 'Amazing! something somethingsomethingsomething something something something something something ', stars: '5', product_id: 5, influencer_id: 3, image1: '/images/products/Franklin-Champagne24K-Front-Website_large.png'}
       ],
       addressData: [
         {address1: '150 main street', city: 'Buffalo', state: 'NY', country: 'USA', zipcode: '12345', user_id: 1},
@@ -195,7 +202,7 @@ let data = {
       .then(() => db.sync({force: true}))
       .then(()=>Product.bulkCreate(data.productData))
       .then(()=>User.bulkCreate(data.userData))
-      //.then(()=>Influencer.bulkCreate(data.influencerData))
+      .then(()=>Influencer.bulkCreate(data.influencerData))
       .then(()=>Brand.bulkCreate(data.brandData))
       .then(()=>Category.bulkCreate(data.categoryData))
       .then(()=>Address.bulkCreate(data.addressData))

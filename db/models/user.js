@@ -22,7 +22,13 @@ const User = db.define('users', {
   session_id: {
     type: Sequelize.STRING
   },
+  gender: {
+    type: Sequelize.STRING
+  },
   geo: {
+    type: Sequelize.STRING
+  },
+  zipcode: {
     type: Sequelize.STRING
   },
   isValid: {

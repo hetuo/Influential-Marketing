@@ -8,7 +8,7 @@ api
   .use('/auth', require('./routes/auth'))
   .use('/users', require('./routes/users'))
   .use('/brands', require('./routes/brands'))
-  ///.use('/influencers', require('./routes/influencers'))
+  .use('/influencers', require('./routes/influencers'))
   .use('/profile', require('./routes/profile'))
   .use('/address', require('./routes/address'))
   .use('/cart', require('./routes/cart-line-item'))

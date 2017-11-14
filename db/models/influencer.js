@@ -21,6 +21,32 @@ const Influencer = db.define('influencers', {
     session_id: {
       type: Sequelize.STRING
     },
+    gender: {
+      type: Sequelize.STRING
+    },
+    geo: {
+      type: Sequelize.STRING
+    },
+    zipcode: {
+      type: Sequelize.STRING
+    },
+    isValid: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: true
+    },
+    isDirector: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false
+    },
+    Remark1: {
+      type: Sequelize.STRING
+    },
+    Remark2: {
+      type: Sequelize.STRING
+    },
+    Remark3: {
+      type: Sequelize.STRING
+    },
     password_digest: Sequelize.STRING,
     password: Sequelize.VIRTUAL,
     isAdmin: {
@@ -44,7 +70,7 @@ const Influencer = db.define('influencers', {
         }).then(influencers=>{
           member = _.find(influencers, (influencer)=>(influencer.email !== null))
           guest = _.find(influencers, (influencer)=>(influencer.email === null))
-          console.log('##### MEMBER & GUEST ####',member, guest)
+          // console.log('##### MEMBER & GUEST ####',member, guest)
           if(member && guest) {
             // if duplicate session_id exist in database
             // we will reassign associated user id from 'Address' & 'Cart'
@@ -91,7 +117,7 @@ function setEmailAndPassword(influencer) {
   return new Promise((resolve, reject) =>
     bcrypt.hash(influencer.get('password'), 10, (err, hash) => {
       if (err) reject(err)
-     // user.set('password_digest', hash)
+      // user.set('password_digest', hash)
       influencer.set('password_digest', influencer.password)
       resolve(influencer)
     })
