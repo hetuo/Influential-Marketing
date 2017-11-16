@@ -1,5 +1,5 @@
 const db = require('APP/db')
-const { User, Influencer, Brand, Product, Category, Address, Order, OrderProduct, Product_Review, Campaign} = require('APP/db/models');
+const { User, Influencer, Brand, Product, Category, Address, Order, OrderProduct, Product_Review, Campaign, HireInfluencer} = require('APP/db/models');
 
 // db.didSync
 // .then(() => db.sync({ force: true }))
@@ -22,12 +22,12 @@ let data = {
          {name: 'Iva Carson', email: 'nikok@ejrib.gov', password: '1234'}
         ],
 
-        influencerData: [
-         {name: 'influencer1', email: 'influencer1@example.com', password: '1234'},
-         {name: 'influencer2', email: 'influencer2@example.com', password: '1234'},
-         {name: 'influencer3', email: 'influencer3@example.com', password: '1234'},
-         {name: 'influencer4', email: 'influencer4@example.com', password: '1234'}
-        ],
+        // influencerData: [
+        //  {name: 'influencer1', email: 'influencer1@example.com', password: '1234'},
+        //  {name: 'influencer2', email: 'influencer2@example.com', password: '1234'},
+        //  {name: 'influencer3', email: 'influencer3@example.com', password: '1234'},
+        //  {name: 'influencer4', email: 'influencer4@example.com', password: '1234'}
+        // ],
 
         brandData: [
            {name: 'brand1', email: 'brand1@brand.com', zipcode: '10001', password: '1234'},
@@ -42,17 +42,18 @@ let data = {
         ],
 
 
-      //   influencerData: [
-      //     {name: 'influencer1', email: 'influencer1@influencer.com', zipcode: '10001', password: '1234'},
-      //     {name: 'influencer2', email: 'influencer2@influencer.com', zipcode: '10001', password: '1234'},
-      //     {name: 'influencer3', email: 'influencer3@influencer.com', zipcode: '10001', password: '1234'},
-      //     {name: 'influencer4', email: 'influencer4@influencer.com', zipcode: '90017', password: '1234'},
-      //     {name: 'influencer5', email: 'influencer5@influencer.com', zipcode: '90017', password: '1234'},
-      //     {name: 'influencer6', email: 'influencer6@influencer.com', zipcode: '90017', password: '1234'},
-      //     {name: 'influencer7', email: 'influencer7@influencer.com', zipcode: '15106', password: '1234'},
-      //     {name: 'influencer8', email: 'influencer8@influencer.com', zipcode: '15106', password: '1234'},
-      //     {name: 'influencer9', email: 'influencer9@influencer.com', zipcode: '15106', password: '1234'}
-      //  ],
+        influencerData: [
+          {name: 'influencer1', email: 'influencer1@influencer.com', zipcode: '10001', gender: 'male', password: '1234'},
+          {name: 'influencer2', email: 'influencer2@influencer.com', zipcode: '10001', gender: 'female', password: '1234'},
+          {name: 'influencer3', email: 'influencer3@influencer.com', zipcode: '10001', gender: 'male', password: '1234'},
+          {name: 'influencer4', email: 'influencer4@influencer.com', zipcode: '90017', gender: 'female',password: '1234'},
+          {name: 'influencer5', email: 'influencer5@influencer.com', zipcode: '90017', gender: 'male', password: '1234'},
+          {name: 'influencer6', email: 'influencer6@influencer.com', zipcode: '90017', gender: 'female',password: '1234'},
+          {name: 'influencer7', email: 'influencer7@influencer.com', zipcode: '90017', gender: 'male', password: '1234'},
+          {name: 'influencer8', email: 'influencer8@influencer.com', zipcode: '15106', gender: 'female',password: '1234'},
+          {name: 'influencer9', email: 'influencer9@influencer.com', zipcode: '15106', gender: 'male', password: '1234'},
+          {name: 'influencer10', email: 'influencer10@influencer.com', zipcode: '15106', gender: 'female', password: '1234'}
+       ],
 
         productData: [
 
@@ -166,10 +167,20 @@ let data = {
         { order_id: 1, product_id: 5, quantity: 1, line_total: 1 * 100.00 }
       ],
       campaignData: [
-        {camptitle: 'Campaign11', campdetails: 'new feautures of our product are so good and how you like it', campstarttime:'2017-12-01 00:00:00' , campendtime:'2017-12-31 23:59:59' , campzipcode: '10001', campcreater: 'brand1', numinfluencers: 3, payout: 3000.00},
-        {camptitle: 'Campaign12', campdetails: 'new feautures of our service are so good and how you like it', campstarttime:'2017-12-01 00:00:00' , campendtime:'2017-12-31 23:59:59' , campzipcode: '10001', campcreater: 'brand1', numinfluencers: 5, payout: 5000.00}
-
-      ]
+        {camptitle: 'Campaign11', campdetails: 'new feautures of our product are so good and how you like it', campstarttime:'2017-12-01 00:00:00' , campendtime:'2017-12-14 23:59:59' , campzipcode: '10001', campcreater: 'brand1', numinfluencers: 1, campbudget: 1000.00, payment_currency: 'usd', brand_id: 1},
+        {camptitle: 'Campaign12', campdetails: 'new feautures of our service are so good and how you like it', campstarttime:'2017-12-15 00:00:00' , campendtime:'2017-12-31 23:59:59' , campzipcode: '10001', campcreater: 'brand1', numinfluencers: 2, campbudget: 2000.00, payment_currency: 'usd', brand_id: 1},
+        {camptitle: 'Campaign21', campdetails: 'new feautures of our service are so good and how you like it', campstarttime:'2017-12-01 00:00:00' , campendtime:'2017-12-31 23:59:59' , campzipcode: '10001', campcreater: 'brand2', numinfluencers: 3, campbudget: 3000.00, payment_currency: 'usd', brand_id: 2},
+        {camptitle: 'Campaign31', campdetails: 'new feautures of our service are so good and how you like it', campstarttime:'2018-01-01 00:00:00' , campendtime:'2018-01-31 23:59:59' , campzipcode: '10001', campcreater: 'brand3', numinfluencers: 5, campbudget: 5000.00, payment_currency: 'usd', brand_id: 3},
+        {camptitle: 'Campaign32', campdetails: 'new feautures of our service are so good and how you like it', campstarttime:'2018-02-01 00:00:00' , campendtime:'2018-02-28 23:59:59' , campzipcode: '10001', campcreater: 'brand3', numinfluencers: 8, campbudget: 8000.00, payment_currency: 'usd', brand_id: 3},
+      ],
+      hireInfluencerData: [
+        { hirestage: 0, payment_amount: 1000, campaign_id: 1, influencer_id: 1, brand_id: 1 },
+        { hirestage: 0, payment_amount: 1000, campaign_id: 2, influencer_id: 1, brand_id: 1 },
+        { hirestage: 0, payment_amount: 1000, campaign_id: 2, influencer_id: 2, brand_id: 1 },
+        { hirestage: 0, payment_amount: 1000, campaign_id: 3, influencer_id: 3, brand_id: 2 },
+        { hirestage: 0, payment_amount: 1000, campaign_id: 3, influencer_id: 4, brand_id: 2 },
+        { hirestage: 0, payment_amount: 1000, campaign_id: 3, influencer_id: 5, brand_id: 2  },
+      ],
 
     }
 
@@ -210,6 +221,7 @@ let data = {
       .then(()=>OrderProduct.bulkCreate(data.orderProductData))
       .then(()=>Product_Review.bulkCreate(data.productReviewData))
       .then(()=>Campaign.bulkCreate(data.campaignData))
+      .then(()=>HireInfluencer.bulkCreate(data.hireInfluencerData))
       .then(seedProductCategories)
       .then(productCategories => console.log(`Seeded ${productCategories.length} productCategory OK`))
       .then(seedCartLineItem)

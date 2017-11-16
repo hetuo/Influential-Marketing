@@ -19,6 +19,7 @@ api
   .use('/orderProduct', require('./routes/order-product'))
   .use('/comment', require('./routes/comment'))
   .use('/campaigns', require('./routes/campaigns'))
+  .use('/hireInfluencer', require('./routes/hire_influencer'))
 
 // Send along any errors
 api.use((err, req, res, next) => {

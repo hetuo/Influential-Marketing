@@ -17,6 +17,7 @@ const Product_Review = require('APP/db/models/product_review')
 const Cart_Line_Item = require('APP/db/models/cart_line_item')
 
 const Campaign = require('APP/db/models/campaign');
+const HireInfluencer = require('APP/db/models/hire_influencer');
 
 Address.belongsTo(User)
 Address.belongsTo(Brand)
@@ -45,6 +46,12 @@ OrderProduct.belongsTo(Product)
 
 Campaign.belongsTo(Brand)
 Brand.hasMany(Campaign)
+HireInfluencer.belongsTo(Campaign)
+Campaign.hasMany(HireInfluencer)
+HireInfluencer.belongsTo(Influencer)
+Influencer.hasMany(HireInfluencer)
+HireInfluencer.belongsTo(Brand)
+Brand.hasMany(HireInfluencer)
 
 module.exports = {
 	User,
@@ -58,5 +65,6 @@ module.exports = {
 	Order,
 	OrderProduct,
 	Comment,
-	Campaign
+	Campaign,
+	HireInfluencer
 };

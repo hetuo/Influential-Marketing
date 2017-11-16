@@ -60,13 +60,16 @@ const Campaign = db.define('campaigns', {
     defaultValue: 1
   },
 
-  payout: {
+  campbudget: {  //total budget for the campaign
     type: Sequelize.FLOAT,
     allowNull: false,
     validate: { notEmpty: true }
   },
 
-
+   payment_currency: {
+     type: Sequelize.STRING,
+     defaultValue: 'usd'
+   },
 
   image1: {
     type: Sequelize.STRING
