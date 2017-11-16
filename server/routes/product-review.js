@@ -17,13 +17,21 @@ router.get('/id=:id', (req, res, next) =>
   .then(productReview => res.json(productReview))
   .catch(next))
 
-  router.get('/product_id=:product_id', function (req, res, next) {
+router.get('/product_id=:product_id', function (req, res, next) {
         var product_id = req.params.product_id;
 
         productReview.findAll({ where: {product_id: product_id}, include: [influencer] })
         .then(productReview => res.status(200).json(productReview))
         .catch(next)
-  });
+});
+
+router.get('/influencer_id=:influencer_id', function (req, res, next) {
+        var influencer_id = req.params.influencer_id;
+
+        productReview.findAll({ where: {influencer_id: influencer_id}, include: [influencer] })
+        .then(productReview => res.status(200).json(productReview))
+        .catch(next)
+});
 
 router.get('/title=:title&body=:body', function (req, res, next) {
     var title = req.params.title;
