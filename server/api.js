@@ -9,6 +9,7 @@ api
   .use('/users', require('./routes/users'))
   .use('/brands', require('./routes/brands'))
   .use('/influencers', require('./routes/influencers'))
+  .use('/message', require('./routes/message'))
   .use('/profile', require('./routes/profile'))
   .use('/address', require('./routes/address'))
   .use('/cart', require('./routes/cart-line-item'))

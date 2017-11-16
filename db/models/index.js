@@ -6,6 +6,7 @@
 
 const User = require('APP/db/models/user');
 const Influencer = require('APP/db/models/influencer');
+const Message = require('APP/db/models/message')
 const Brand = require('APP/db/models/brand');
 const Product = require('APP/db/models/product');
 const Address = require('APP/db/models/address');
@@ -56,6 +57,7 @@ Brand.hasMany(HireInfluencer)
 module.exports = {
 	User,
 	Influencer,
+	Message,
 	Brand,
 	Product,
 	Address,
