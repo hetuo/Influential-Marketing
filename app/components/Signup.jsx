@@ -10,8 +10,19 @@ class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      gender: 'male',
+      usertype: 'regular_user',
     };
     this.onSignupSubmit = this.onSignupSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    this.state.usertype = event.target.value;
+    this.setState({usertype: event.target.value});
+    this.setState({gender: event.target.value});
+    console.log("usertype:", this.state.usertype, event.target);
+    // console.log("usertype:", this.state.usertype);
   }
 
   onSignupSubmit(e){
@@ -21,7 +32,10 @@ class Signup extends React.Component {
       const credentials = {
         email: e.target.email.value,
         password: e.target.password.value,
-        name: e.target.name.value
+        name: e.target.name.value,
+        gender: e.target.gender.value,
+        geo: e.target.geo.value,
+        zipcode: e.target.zipcode.value,
       }
       console.log('credentials', credentials);
       this.props.signup(credentials);
@@ -31,9 +45,6 @@ class Signup extends React.Component {
 
   render() {
     const { user, alert } = this.props;
-    const options = map(userproperty, (val, key) =>
-      <option key={ val } value={ val }>{ key }</option>
-    );
     return (
       <div className="login-wrapper">
         <ol className="breadcrumb">
@@ -46,20 +57,14 @@ class Signup extends React.Component {
               {alert.message &&
                 <div className={`alert ${alert.type}`}>{alert.message}</div>
               }
-              <form
-                className="login-form"
-                onSubmit={this.onSignupSubmit}>
+              <form className="login-form" onSubmit={this.onSignupSubmit}>
                 <div className="form-group">
-                  <label className="control-label">User Selection</label>
-                  <select
-                    className="form-control"
-                    name="userproperty"
-                    onChange={ this.onChange }
-                    value={ this.state.userproperty}
-                  >
-                    <option value="" disabled>Choose Your User Account</option>
-                    {options}
-                  </select>
+                  <label className="control-label">Choose your account type:</label>
+                    <select className="form-control" name="usertype" value={ this.state.usertype } onChange={ this.handleChange }>
+                      <option value="regular_user">Regular User</option>
+                      <option value="influencer">Influencer</option>
+                      <option value="brand_account">Brand Account</option>
+                    </select>
                 </div>
                 <div className="form-group">
                   <label>Email</label>
@@ -68,6 +73,21 @@ class Signup extends React.Component {
                 <div className="form-group">
                   <label>Name</label>
                   <input className="form-control" name="name" type="text" />
+                </div>
+                <div className="form-group">
+                  <label>Gender</label>
+                  <select className="form-control" name="gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
+                </div>
+                <div className="form-group">
+                  <label>State</label>
+                  <input className="form-control" name="geo" type="text" />
+                </div>
+                <div className="form-group">
+                  <label>ZipCode</label>
+                  <input className="form-control" name="zipcode" type="text" />
                 </div>
                 <div className="form-group">
                   <label>Password</label>

@@ -1,4 +1,4 @@
-import { RECEIVE_INFLUENCERS, receiveInfluencers } from 'APP/app/action-creators/InfluencerActionCreator';
+import { RECEIVE_INFLUENCERS, receiveInfluencers } from '../action-creators/InfluencerActionCreator';
 
 const influencersInitialState = {
 	selectedComment: '',

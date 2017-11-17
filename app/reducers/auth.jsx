@@ -25,6 +25,7 @@ const reducer = (state = initialState, action) => {
 
 const AUTHENTICATED = 'AUTHENTICATED';
 const UNAUTHENTICATED = 'UNAUTHENTICATED';
+const INVAILDEMAIL = 'INVAILDEMAIL';
 
 export const authenticated = username => ({
   type: AUTHENTICATED,
@@ -56,6 +57,13 @@ export const signup = credential => dispatch =>
     .then(()=>dispatch(whoami()))
     .catch(failed => dispatch(invaildEmail(null)));
 
+export const socialLogin = credential => dispatch => {
+  axios.put('/api/auth/sociallogin', credential)
+    .then(() => {dispatch(whoami())})
+    //.catch(() => dispatch(whoami()));
+    .catch(failed => dispatch(invaildEmail(null)));
+}
+
 export const login = credential => dispatch =>
     axios.put('/api/auth/login', credential)
       .then(() => {dispatch(whoami());browserHistory.push('/');})
@@ -68,13 +76,14 @@ export const logout = () =>
       .then(() => dispatch(whoami()))
       .catch(() => dispatch(whoami()));
 
-export const whoami = () =>
-  dispatch =>
+export const whoami = () => dispatch => {
     axios.get('/api/auth/whoami')
       .then(response => {
-        const user = response.data;;
+        const user = response.data;
+        console.log('whoami: ', user);
         dispatch(authenticated(user));
       })
       .catch(failed => dispatch(authenticated(null)));
+}
 
 export default reducer;

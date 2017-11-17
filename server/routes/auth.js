@@ -120,7 +120,6 @@ passport.deserializeUser(
 // ))
 
 auth.get('/whoami', (req, res) => {
-  console.log(env.GOOGLE_CONSUMER_KEY)
   console.log(req.user)
   User.findOrCreate({
     where:{ session_id : req.sessionID}
@@ -157,16 +156,53 @@ auth.put('/login', (req, res, next)=>{
     .catch(next)
 })
 
+auth.put('/sociallogin', (req, res, next)=>{
+  User.findOne({
+    where:{
+      email: req.body.email
+    }
+  }).then(user=>{
+    if (!user) {
+      User.findOrCreate({
+        where: {
+          session_id: req.sessionID
+        }
+      }).spread((user, created)=>{
+        console.log('user: ', user);
+        return user.update(req.body)
+      }).then(updated=>{
+        req.logIn(updated, err=>{
+          if(err) {
+            console.log('update error');
+            return next(err);
+          }
+          res.json(updated)
+        })
+      })
+    } else {
+      return user.update({
+        email: req.body.email,
+        session_id: req.sessionID
+      })
+    }
+  }).then(updated=>{
+    req.logIn(updated, err=>{
+        if(err) return next(err);
+        res.json(updated)
+      })
+  })
+  .catch(next)
+
+})
 
 auth.put('/signup', (req, res, next)=>{
-  console.log('sessionID',req.sessionID)
-  console.log('body',req.body)
+  console.log('body',req.body);
   User.findOrCreate({
     where: {
       session_id: req.sessionID
     }
   }).spread((user, created)=>{
-    console.log(user)
+    console.log('user: ', user)
     return user.update(req.body)
   }).then(updated=>{
     req.logIn(updated, err=>{

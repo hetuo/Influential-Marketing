@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import SingleProduct from '../components/SingleProduct';
 import { addToCart } from '../action-creators/cart';
-import { removeReview, addReview, getReview }from 'APP/app/action-creators/reviewActionCreator';
+import { removeReview, addReview, getReview }from '../action-creators/reviewActionCreator';
 
 const mapState = ({ products, reviews, auth }) => ({
 	product: products.selectedProduct,

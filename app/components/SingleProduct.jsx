@@ -4,8 +4,10 @@ import StarRatingComponent from 'react-star-rating-component';
 import ReviewList from './ReviewList';
 import ProductHeader from './ProductHeader';
 import newReviewForm from './newReviewForm';
+import { FacebookButton, FacebookCount } from "react-social";
 //import reviewAction from 'APP/app/action-creators/reviewActionCreator';
 import { Link } from 'react-router';
+var FontAwesome = require('react-fontawesome');
 
 export default class SingleProduct extends React.Component {
   constructor(props){
@@ -64,6 +66,8 @@ export default class SingleProduct extends React.Component {
   }
 
   render() {
+    let url = "https://github.com";
+    let msg = "hello world";
     const { product, reviews } = this.props;
     const { title, body, submitted } = this.state;
     console.log(product);
@@ -86,6 +90,10 @@ export default class SingleProduct extends React.Component {
               <textarea name="body" style={{width: '400px'}} placeholder="Write a review"  className="form-control" />
               <StarRatingComponent name="stars" starCount={5} />
               <button type="submit" className="btn btn-success">Add Review</button>
+                <FacebookButton  className="btn btn-primary" url={ url } appId="193858637827812">
+                  <FontAwesome  className="cs-fb-icon" name='facebook' />
+                  &nbsp;shares
+                </FacebookButton>
             </div>
           </form>
         </div>

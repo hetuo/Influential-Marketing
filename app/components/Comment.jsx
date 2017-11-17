@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addComment }from 'APP/app/action-creators/CommentActionCreator';
-import { getReview }from 'APP/app/action-creators/reviewActionCreator';
+import { addComment }from '../action-creators/CommentActionCreator';
+import { getReview }from '../action-creators/reviewActionCreator';
 
 class Comment extends React.Component {
   constructor(props){
