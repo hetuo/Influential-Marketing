@@ -2,6 +2,8 @@
 import React from 'react';
 import {Router, Route, IndexRoute, IndexRedirect, browserHistory} from 'react-router';
 import Root from './components/Root';
+
+//import store
 import store from './store';
 
 //import components and containers
@@ -19,21 +21,33 @@ import Checkout from './containers/CheckoutContainer';
 import ReviewList from './components/ReviewList';
 import SingleReview from './components/SingleReview';
 import orderList from './containers/orderListContainer';
-import DashBoardContainer from './containers/DashBoardContainer'
+import CreateCampaignContainer from './containers/CreateCampaignContainer'
 import CommentContainer from './containers/CommentContainer'
 import CampaignContainer from './containers/CampaignContainer'
-
+import createReviewContainer from './containers/createReviewContainer'
+import manageCampaignContainer from './containers/ManageCampaignContainer'
+import { getProductsByInfluencerId } from './action-creators/products'
+import { getCampaignsByUserId } from './action-creators/CampaignActionCreator'
 import { getProducts, getProductsByCategoryId } from './action-creators/products';
 import {loadSingleCategory} from './action-creators/categories';
 
+const onReviewEnter = function (nextRouterState){
+  store.dispatch(getProductsByInfluencerId(nextRouterState.params.userId));
+};
+
+const onManageCampaign = function (nextRouterState){
+  store.dispatch(getCampaignsByUserId(nextRouterState.params.userId));
+}
 
 const onProductCategoryEnter = function (nextRouterState){
+
+  console.log("yunxianzhang", store.getState());
   store.dispatch(getProductsByCategoryId(nextRouterState.params.categoryName));
   store.dispatch(loadSingleCategory(nextRouterState.params.categoryName));
 };
 
 const onProductsEnter = function (nextRouterState){
-  // console.log('onProductCategoryEnter')
+  console.log("yunxianzhang", store.getState());
   store.dispatch(getProducts());
   store.dispatch(loadSingleCategory(nextRouterState.params.categoryName));
 };
@@ -52,13 +66,15 @@ export default ({ onAppEnter, onProductEnter, onCartEnter, onOrderEnter, onCampa
       <Route path="/director" component={DirectorContainer} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
-      <Route path="/dashboard" component={DashBoardContainer} />
+      <Route path="/createcampaign" component={CreateCampaignContainer} />
       <Route path="/campaign" component={CampaignContainer} onEnter={onCampaignEnter} />
       <Route path="/newreview" component={NewReview} />
       <Route path="/reviews" component={ReviewList} />
       <Route path="/reviews/:reviewId" component={SingleReview} />
       <Route path="/comments/:reviewId" component={CommentContainer} onEnter={onCommentsEnter} />
       <Route path="/order" component={orderList} onEnter={onOrderEnter} />
+      <Route path="/review/:userId" component={createReviewContainer} onEnter={onReviewEnter} />
+      <Route path="/managecampaign/:userId" component={manageCampaignContainer} onEnter={onManageCampaign} />
       <Route path="*" component={Homepage} />
     </Route>
   </Router>

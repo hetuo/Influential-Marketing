@@ -1,32 +1,25 @@
 import React from 'react';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import Avatar from 'material-ui/Avatar';
+
 
 //render a single header for a product
 const ProductHeader = ({ product }) => {
   return (
-    <div className="row">
-      <div className="product-image col-xs-12 col-lg-8 pull-right">
-        <div className="image-slide" style ={ { backgroundImage: `url('${product.image1}')` } }>
-        </div>
-      </div>
-      <div className="product-info col-xs-12 col-lg-4 pull-right">
-        <div className="container-fluid">
-          <div className="name row">{ product.title }</div>
-          <div className="row">
-            <div className="col-xs-12 pull-left">
-              <div className="tab-content">
-                <ul>
-                  {/*
-                      product.description && Object.keys(product.description).map(key =>
-                        <li key={key}>{ product.description[key] }</li>)
-                  */}
-                  { product.body }
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div>
+    <Card>
+      <CardHeader
+        title={ product.title }
+        avatar={<Avatar backgroundColor='#00bcd4' size='40' style={{ top: "8px" }}>T</Avatar>}
+      />
+      <CardMedia>
+        <img src={ product.image1 } alt="" />
+      </CardMedia>
+      <CardText style={{maxlength: '15'}}>
+        { product.body }
+      </CardText>
+    </Card>
+  </div>
   );
 };
 

@@ -1,7 +1,17 @@
 import React from 'react';
 import StarRatingComponent from 'react-star-rating-component';
 import { Link, browserHistory } from 'react-router';
-import Comment from './Comment'
+import Comment from './Comment';
+import {List, ListItem} from 'material-ui/List';
+import Divider from 'material-ui/Divider';
+import Subheader from 'material-ui/Subheader';
+import Avatar from 'material-ui/Avatar';
+import {grey400, darkBlack, lightBlack} from 'material-ui/styles/colors';
+import IconButton from 'material-ui/IconButton';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+
 
 export default class SingleReview extends React.Component{
 
@@ -22,21 +32,52 @@ export default class SingleReview extends React.Component{
   }
 
   renderUsername(){
-    if (this.props.review.user == null){
+    //let {name} = this.props.review.user;
+    if (this.props.review.user){
+      const user = {
+        name: this.props.review.user
+      };
       return (
-        <div className="title">
-          { this.props.review.title }
-          <input type="text" name="title" className="form-control hide" defaultValue={ this.props.review.title } />
-        </div>
+        <div>
+        <ListItem
+          leftAvatar={<Avatar backgroundColor='#000000' size='40' style={{ top: "8px" }}>user.name.slice(0,1)</Avatar>}
+          primaryText={ this.props.review.title }
+          secondaryText={
+            <p>
+              { this.props.review.body }
+            </p>
+          }
+          secondaryTextLines={2}
+        />
+        <StarRatingComponent
+          name="starsr"
+          starCount={5}
+          editing={false}
+          value={parseInt(this.props.review.stars)} />
+        <hr width="100%" color='#00bcd4' SIZE='10' />
+    </div>
       );
     } else {
       return (
-        <div className="title">
-          { this.props.review.user.name + ':  '}
-          <input type="text" name="title" className="form-control hide" defaultValue={ this.props.review.user.name + ': '} />
-          { this.props.review.title }
-          <input type="text" name="title" className="form-control hide" defaultValue={ this.props.review.title } />
-        </div>
+        <div>
+        <ListItem
+          leftAvatar={<Avatar backgroundColor='#000000' size='40' style={{ top: "8px" }}>'A'</Avatar>}
+          primaryText={ this.props.review.title }
+          secondaryText={
+            <p>
+              { this.props.review.body }
+            </p>
+          }
+          secondaryTextLines={2}
+        />
+        <StarRatingComponent
+          name="starsr"
+          starCount={5}
+          editing={false}
+          value={parseInt(this.props.review.stars)} />
+        <hr width="100%" color='#00bcd4' SIZE='10' />
+    </div>
+
       );
     }
   }
@@ -45,18 +86,8 @@ export default class SingleReview extends React.Component{
   render() {
     //const { reivew, index } = this.props;
     return (
-      <div className="form-group">
-          { this.renderUsername() }
-        <div className="createdAt">{ new Date(this.props.review.created_at).toDateString() }</div>
-        <div className="body">{ this.props.review.body }</div>
-        <textarea className="form-control hide" name="body" defaultValue={ this.props.review.body } disabled />
-        <StarRatingComponent
-          name="starsr"
-          starCount={5}
-          editing={false}
-          value={parseInt(this.props.review.stars)} />
-        {/*<button className="btn btn-default btn-xs" onClick={this.handleOpenComments}>reply</button>*/}
-        {/*<Comment open={this.state.openComments} index={this.props.index}/>*/}
+      <div>
+        { this.renderUsername() }
       </div>
     );
   };

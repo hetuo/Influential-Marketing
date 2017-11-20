@@ -36,7 +36,7 @@ export default class SingleProduct extends React.Component {
     console.log('function for updating the rating value should be dispatched from here');
   }
 
-  onAddReviewSubmit(e) {
+  onAddReviewSubmit (e) {
     e.preventDefault()
     this.setState({ submitted: true });
     const review = {
@@ -53,7 +53,7 @@ export default class SingleProduct extends React.Component {
     e.target.title.value = '';
   }
 
-  onChangeQty(e) {
+  onChangeQty(e){
     this.setState({orderQty: e.target.value});
   }
 
@@ -68,7 +68,7 @@ export default class SingleProduct extends React.Component {
   render() {
     let url = "https://github.com";
     let msg = "hello world";
-    const { product, reviews } = this.props;
+    const { product, reviews, auth } = this.props;
     const { title, body, submitted } = this.state;
     console.log(product);
     return (
@@ -78,12 +78,17 @@ export default class SingleProduct extends React.Component {
           <li><Link to="/products">products</Link></li>
           <li className="active">{ product.id }</li>
         </ol>
-        <section className="product-detail container-fluid">
-          <ProductHeader product={ product } />
-        </section>
+        <div className='grid grid__gutters grid__1of2 grid__space-around animate-top'>
+          <div className='grid-cell animate-top'  style={{maxWidth: '530px', minWidth: '280px', maxlength: '15'}}>
+            <ProductHeader product={ product } />
+          </div>
+        </div>
+
         <section className="container-fluid">
           <ReviewList reviews={ reviews } />
-        <div className="container-fluid" style={{padding: '0 8px'}}>
+        <div className='grid grid__gutters grid__1of2 grid__space-around animate-top'>
+          <div className='grid-cell animate-top'  style={{maxWidth: '530px', minWidth: '280px'}}>
+          {auth.user ? (
           <form className="row" onSubmit={(e) => (this.onAddReviewSubmit(e))}>
             <div className="form-group col-xs-12 col-md-8" >
               <input name="title" style={{width: '400px'}} type="text" placeholder="Subject" className="form-control" />
@@ -95,8 +100,9 @@ export default class SingleProduct extends React.Component {
                   &nbsp;shares
                 </FacebookButton>
             </div>
-          </form>
+          </form>) : ''}
         </div>
+      </div>
         </section>
       </div>
     );

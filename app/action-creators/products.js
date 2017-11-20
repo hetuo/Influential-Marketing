@@ -2,8 +2,15 @@ import axios from 'axios';
 import { RECEIVE_PRODUCTS, RECEIVE_PRODUCT, RECEIVE_PRODUCTS_BY_CATEGORY } from '../action-types';
 import { getReview } from './reviewActionCreator';
 
+export const RECEIVE_SELECTED_PRODUCTS = 'RECEIVE_SELECTED_PRODUCTS';
+
 export const receiveProducts = products => ({
     type: RECEIVE_PRODUCTS,
+    products
+});
+
+export const receiveProductsByInfluencerId = products => ({
+    type: RECEIVE_SELECTED_PRODUCTS,
     products
 });
 
@@ -17,6 +24,16 @@ export const receiveProductsByCategory = products => ({
     products
 });
 
+export const getProductsByInfluencerId = user_id => dispatch =>
+  axios.get(`/api/review/influencer_id=${user_id}`)
+  .then(response => dispatch(receiveProductsByInfluencerId(response.data)))
+  .catch(error => console.error("can not get prodcuts", error))
+
+
+export const addProduct = (product, user_id) => dispatch =>
+  axios.post(`/api/review`, product)
+  .then(() => dispatch(getProductsByInfluencerId(user_id)))
+  .catch(error => console.error("Can not add product", error))
 
 export const getProducts = () => dispatch =>
   axios.get('/api/review')

@@ -14,6 +14,7 @@ class AppBar extends React.Component {
       auth: {}
     };
     this.onClickLogout = this.onClickLogout.bind(this);
+    this.renderUsertype = this.renderUsertype.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -24,6 +25,39 @@ class AppBar extends React.Component {
     this.props.logout();
     browserHistory.push('/');
   }
+
+  renderUsertype(auth){
+    if (auth.user && auth.user.email && auth.user.password_digest){
+      if (auth.user.usertype === 'influencer'){
+        return (
+          <NavDropdown eventKey={6} title={auth.user.name} id="users">
+            <MenuItem href="/profile">Profile</MenuItem>
+            <MenuItem href="/address">Address Book</MenuItem>
+            <MenuItem href={"/review/" + auth.user.id}>Write Review</MenuItem>
+            <MenuItem role="separator" className="divider"></MenuItem>
+            <MenuItem onClick={this.onClickLogout}>Logout</MenuItem>
+          </NavDropdown>
+        );
+      } else {
+        <NavDropdown eventKey={6} title={auth.user.name} id="users">
+          <MenuItem href="/profile">Profile</MenuItem>
+          <MenuItem href="/createcampaign">Create Campaign</MenuItem>
+          <MenuItem href={"/managecampaign/" + auth.user.id}>Manage Campaign</MenuItem>
+          <MenuItem role="separator" className="divider"></MenuItem>
+          <MenuItem onClick={this.onClickLogout}>Logout</MenuItem>
+        </NavDropdown>
+      }
+    } else {
+      return (
+        <NavDropdown eventKey={6} title="USER" id="users">
+          <MenuItem href="/signup">Register</MenuItem>
+          <MenuItem href="/login">Login</MenuItem>
+        </NavDropdown>
+      );
+    }
+  }
+
+
 
   render(){
     const { auth } = this.props;
@@ -49,19 +83,7 @@ class AppBar extends React.Component {
             <NavItem eventKey={5} onClick={(e)=>{browserHistory.push('/cart')}}>
               <i className="fa fa-shopping-cart" aria-hidden="true"></i>
             </NavItem>*/}
-            { auth.user && auth.user.email && auth.user.password_digest ?
-              ( <NavDropdown eventKey={6} title={auth.user.name} id="users">
-              <MenuItem href="/profile">Profile</MenuItem>
-              <MenuItem href="/address">Address Book</MenuItem>
-              <MenuItem role="separator" className="divider"></MenuItem>
-              <MenuItem onClick={this.onClickLogout}>Logout</MenuItem>
-            </NavDropdown> ) :
-            ( <NavDropdown eventKey={6} title="USER" id="users">
-            <MenuItem href="/signup">Register</MenuItem>
-            <MenuItem href="/login">Login</MenuItem>
-            <MenuItem href="/dashboard">DashBoard</MenuItem>
-            </NavDropdown> )
-            }
+            { this.renderUsertype(auth) }
           </Nav>
         </Navbar.Collapse>
       </Navbar>

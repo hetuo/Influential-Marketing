@@ -31,7 +31,8 @@ module.exports = {
         test: /\.scss$/,
         exclude: /(node_modules|bower_components)/,
         loaders: ['style', 'css', 'sass']
-      }
+      },
+      { test: /\.css$/, loaders: ["style", "css"] },
     ]
   }
 };

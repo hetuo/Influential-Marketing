@@ -8,6 +8,8 @@ import { fetchAllOrders } from '../action-creators/orderActionCreator';
 import { getCommentsById } from '../action-creators/CommentActionCreator';
 import { getInfluencers } from '../action-creators/InfluencerActionCreator';
 // import { retrieveLoggedInUser } from '../action-creators/auth';
+import store from '../store';
+import { getProductsByInfluencerId } from '../action-creators/products';
 
 const mapState = null;
 
@@ -22,7 +24,9 @@ const mapDispatch = (dispatch, ownProps) => ({
   onCartEnter: (nextRouterState) => dispatch(getCart()),
   onOrderEnter: (nextRouterState) => dispatch(fetchAllOrders()),
   onCampaignEnter: (nextRouterState) => dispatch(getInfluencers()),
+  //onCampaignEnter: (nextRouterState) => dispatch(),
   onCommentsEnter: (nextRouterState) => dispatch(getCommentsById(nextRouterState.params.reviewId))
+
 });
 
 export default connect(mapState, mapDispatch)(Routes);

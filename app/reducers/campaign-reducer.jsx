@@ -1,4 +1,4 @@
-import { CREATE_CAMPAIGN, createCampaign } from '../action-creators/CampaignActionCreator';
+import { CREATE_CAMPAIGN, create } from '../action-creators/CampaignActionCreator';
 
 const campaignInitialState = {
 	campaign: ''

@@ -1,8 +1,8 @@
-import { RECEIVE_INFLUENCERS, receiveInfluencers } from '../action-creators/InfluencerActionCreator';
+import { RECEIVE_INFLUENCERS, receiveInfluencers, RECEIVE_INFLUENCER, receiveInfluencer } from '../action-creators/InfluencerActionCreator';
 
 const influencersInitialState = {
-	selectedComment: '',
-  	list: []
+	selectedInfluencer: {},
+  list: []
 }
 
 export default (state = influencersInitialState, action) => {
@@ -11,11 +11,10 @@ export default (state = influencersInitialState, action) => {
 	switch(action.type) {
 		case RECEIVE_INFLUENCERS:
 			newState.list = action.influencers;
-    //  newState.
 			break;
-		//case RECEIVE_REVIEWS:
-		//	newState.list = action.reviews;
-		//	break;
+		case RECEIVE_INFLUENCER:
+			newState.selectedInfluencer = action.reviews;
+			break;
 
 
 		default:
