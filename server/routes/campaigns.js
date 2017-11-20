@@ -3,6 +3,7 @@ const express = require('express');
 const router = module.exports = express.Router();
 const Brand = require('APP/db/models/brand');
 const Campaign = require('APP/db/models/campaign');
+const HireInfluencer = require('APP/db/models/hire_influencer');
 
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
@@ -24,16 +25,28 @@ router.get('/', (req, res, next) =>
 
 
 
+// router.get('/:campaignId', function (req, res, next) {
+//   console.log("campaignId's req.body", req.body);
+//   Campaign.findOne({
+//    where: {id: req.params.campaignId},
+//    include: [ {
+//      model: Brand,
+//      attributes: {
+//        include: ['name', 'email', 'zipcode', 'hqaddress', 'category'],
+//        exclude: ['session_id', 'password_digest']}
+//      }]
+//    })
+//   .then(campaign => {
+//    res.json(campaign)
+//   })
+//   .catch(next)
+// });
+
 router.get('/:campaignId', function (req, res, next) {
   console.log("campaignId's req.body", req.body);
   Campaign.findOne({
    where: {id: req.params.campaignId},
-   include: [ {
-     model: Brand,
-     attributes: {
-       include: ['name', 'email', 'zipcode', 'hqaddress', 'category'],
-       exclude: ['session_id', 'password_digest']}
-     }]
+   include: [HireInfluencer]
    })
   .then(campaign => {
    res.json(campaign)
@@ -41,15 +54,27 @@ router.get('/:campaignId', function (req, res, next) {
   .catch(next)
 });
 
+// router.get('/brandid/:brand_id', (req, res, next) => {
+//   Campaign.findAll({
+//     where:{ brand_id: req.params.brand_id  },
+//     include: [ {
+//       model: Brand,
+//       attributes: {
+//           include: ['name', 'email', 'zipcode', 'hqaddress', 'category'],
+//           exclude: ['session_id', 'password_digest']}
+//         }]
+//   })
+//   .then(function(campaigns) {
+//     console.log(campaigns)
+//     res.json(campaigns)
+//   })
+//   .catch(next)
+// });
+
 router.get('/brandid/:brand_id', (req, res, next) => {
   Campaign.findAll({
     where:{ brand_id: req.params.brand_id  },
-    include: [ {
-      model: Brand,
-      attributes: {
-          include: ['name', 'email', 'zipcode', 'hqaddress', 'category'],
-          exclude: ['session_id', 'password_digest']}
-        }]
+    include: [ HireInfluencer]
   })
   .then(function(campaigns) {
     console.log(campaigns)

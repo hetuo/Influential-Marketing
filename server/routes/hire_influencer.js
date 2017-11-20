@@ -54,12 +54,33 @@ module.exports = express.Router()
   })
 
   .post('/', (req, res, next)=>{
+    console.log("hire_influencer's req.body", req.body)
+
     HireInfluencer.create(req.body)
     .then(createdHireInfluencer => {
       res.status(201).json(createdHireInfluencer)
     })
     .catch(next)
   })
+
+  // .post('/', (req, res, next)=>{
+  //   console.log("hire_influencer's req.body", req.body)
+  //
+  //   for (var influener_id in req.params.influencerids){
+  //
+  //   HireInfluencer.create{
+  //     brand_id: brand_id
+  //     campaign_id: campaign_id
+  //     influener_id: influener_id
+  //     hirestage: hirestage
+  //     payment_amount: payment_amount
+  //     payment_currency: payment_currency
+  //   }
+  //   .then(createdHireInfluencer => {
+  //     res.status(201).json(createdHireInfluencer)
+  //   })}
+  //   .catch(next)
+  // })
 
   .put('/:id', (req, res, next)=>{
     HireInfluencer.findById(req.params.id)
