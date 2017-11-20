@@ -36,7 +36,7 @@ export default class SingleProduct extends React.Component {
     console.log('function for updating the rating value should be dispatched from here');
   }
 
-  onAddReviewSubmit (e) {
+  onAddReviewSubmit(e) {
     e.preventDefault()
     this.setState({ submitted: true });
     const review = {
@@ -53,7 +53,7 @@ export default class SingleProduct extends React.Component {
     e.target.title.value = '';
   }
 
-  onChangeQty(e){
+  onChangeQty(e) {
     this.setState({orderQty: e.target.value});
   }
 

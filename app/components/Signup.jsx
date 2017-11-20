@@ -1,5 +1,5 @@
 import React from 'react';
-import { signup } from '../reducers/auth';
+import { regularsignup, influencersignup, brandsignup } from '../reducers/auth';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import classnames from 'classnames';
@@ -31,14 +31,22 @@ class Signup extends React.Component {
     else {
       const credentials = {
         email: e.target.email.value,
+        usertype: this.state.usertype,
         password: e.target.password.value,
         name: e.target.name.value,
         gender: e.target.gender.value,
         geo: e.target.geo.value,
         zipcode: e.target.zipcode.value,
       }
+      if (this.state.usertype == 'regular_user') {
+        this.props.regularsignup(credentials);
+      } else if (this.state.usertype == 'influencer') {
+        this.props.influencersignup(credentials);
+      } else if (this.state.usertype == 'brand_account') {
+        this.props.brandsignup(credentials);
+      }
+
       console.log('credentials', credentials);
-      this.props.signup(credentials);
       browserHistory.push('/');
     }
   }
@@ -112,6 +120,6 @@ class Signup extends React.Component {
     user: auth.user,
   	alert: auth.alert
   });
-  const mapDispatch = { signup };
+  const mapDispatch = { regularsignup, influencersignup, brandsignup };
 
   export default connect(mapState, mapDispatch)(Signup);

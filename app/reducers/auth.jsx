@@ -52,8 +52,18 @@ export const invaildEmail = username =>({
   }
 });
 
-export const signup = credential => dispatch =>
-  axios.put('/api/auth/signup', credential)
+export const regularsignup = credential => dispatch =>
+  axios.put('/api/auth/regularsignup', credential)
+    .then(()=>dispatch(whoami()))
+    .catch(failed => dispatch(invaildEmail(null)));
+
+export const influencersignup = credential => dispatch =>
+  axios.put('/api/auth/influencersignup', credential)
+    .then(()=>dispatch(whoami()))
+    .catch(failed => dispatch(invaildEmail(null)));
+
+export const brandsignup = credential => dispatch =>
+  axios.put('/api/auth/brandsignup', credential)
     .then(()=>dispatch(whoami()))
     .catch(failed => dispatch(invaildEmail(null)));
 
@@ -64,11 +74,29 @@ export const socialLogin = credential => dispatch => {
     .catch(failed => dispatch(invaildEmail(null)));
 }
 
-export const login = credential => dispatch =>
-    axios.put('/api/auth/login', credential)
-      .then(() => {dispatch(whoami());browserHistory.push('/');})
-      //.catch(() => dispatch(whoami()));
-      .catch(failed => dispatch(unauthenticated(null)));
+export const regularlogin = credential => dispatch => {
+  console.log("login: ", credential);
+  axios.put('/api/auth/regularlogin', credential)
+    .then(() => {dispatch(whoami(credential));browserHistory.push('/');})
+    //.catch(() => dispatch(whoami()));
+    .catch(failed => dispatch(unauthenticated(null)));
+}
+
+export const influencerlogin = credential => dispatch => {
+  console.log("login: ", credential);
+  axios.put('/api/auth/influencerlogin', credential)
+    .then(() => {dispatch(whoami());browserHistory.push('/');})
+    //.catch(() => dispatch(whoami()));
+    .catch(failed => dispatch(unauthenticated(null)));
+}
+
+export const brandlogin = credential => dispatch => {
+  console.log("login: ", credential);
+  axios.put('/api/auth/brandlogin', credential)
+    .then(() => {dispatch(whoami());browserHistory.push('/');})
+    //.catch(() => dispatch(whoami()));
+    .catch(failed => dispatch(unauthenticated(null)));
+}
 
 export const logout = () =>
   dispatch =>
@@ -76,11 +104,12 @@ export const logout = () =>
       .then(() => dispatch(whoami()))
       .catch(() => dispatch(whoami()));
 
-export const whoami = () => dispatch => {
-    axios.get('/api/auth/whoami')
+export const whoami = credential => dispatch => {
+    console.log("whoami credential", credential);
+    axios.get('/api/auth/whoami', credential)
       .then(response => {
         const user = response.data;
-        console.log('whoami: ', user);
+        console.log('whoamiuser: ', user);
         dispatch(authenticated(user));
       })
       .catch(failed => dispatch(authenticated(null)));

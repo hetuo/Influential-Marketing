@@ -11,6 +11,7 @@ const Cart_Line_Item = require('APP/db/models/cart_line_item');
 
 const Influencer = db.define('influencers', {
     name: Sequelize.STRING,
+    usertype: Sequelize.STRING,
     email: {
       type: Sequelize.STRING,
       allowNull: true,

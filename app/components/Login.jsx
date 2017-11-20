@@ -1,5 +1,5 @@
 import React from 'react';
-import { login, socialLogin } from '../reducers/auth';
+import { regularlogin, influencerlogin, brandlogin, socialLogin } from '../reducers/auth';
 import { FacebookLogin } from 'react-facebook-login-component';
 import { GoogleLogin } from 'react-google-login-component';
 import { FacebookButton, FacebookCount } from "react-social";
@@ -33,11 +33,17 @@ class Login extends React.Component {
     const credentials = {
       email: e.target.email.value,
       password: e.target.password.value,
-      usertypes: 'regular_user'
+      usertypes: this.state.usertype,
     }
     console.log('credentials', credentials);
-    this.props.login(credentials);
-    // browserHistory.push('/');
+
+    if (this.state.usertype == 'regular_user') {
+      this.props.regularlogin(credentials);
+    } else if (this.state.usertype == 'influencer') {
+      this.props.influencerlogin(credentials);
+    } else if (this.state.usertype == 'brand_account') {
+      this.props.brandlogin(credentials);
+    }
   }
 
   responseGoogle (response) {
@@ -127,7 +133,7 @@ class Login extends React.Component {
                                xfbml={true}
                                fields="id,email,name"
                                version="v2.5"
-                               className="btn btn-primary"
+                             className="btn btn-primary"
                                icon="fa-facebook"
                                buttonText="Login With Facebook"
                  />
@@ -154,7 +160,9 @@ const mapState = ({ auth }) => ({
 });
 
 const mapDispatch = {
-  login,
+  regularlogin,
+  influencerlogin,
+  brandlogin,
   socialLogin,
 }
 

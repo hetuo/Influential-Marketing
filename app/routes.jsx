@@ -2,8 +2,6 @@
 import React from 'react';
 import {Router, Route, IndexRoute, IndexRedirect, browserHistory} from 'react-router';
 import Root from './components/Root';
-
-//import store
 import store from './store';
 
 //import components and containers
@@ -11,6 +9,7 @@ import Homepage from './components/Homepage';
 import ProductsContainer from './containers/ProductsContainer';
 import ProductContainer from './containers/SingleProductContainer';
 import ProfileContainer from './containers/ProfileContainer';
+import DirectorContainer from './containers/DirectorContainer';
 import Cart from './containers/CartContainer';
 import Login from './components/Login';
 import Signup from './components/Signup';
@@ -50,6 +49,7 @@ export default ({ onAppEnter, onProductEnter, onCartEnter, onOrderEnter, onCampa
       <Route path="/products/:productId" component={ProductContainer} onEnter={onProductEnter} />
       <Route path="/products/category/:categoryName" component={ProductsContainer} onEnter={onProductCategoryEnter} />
       <Route path="/profile" component={ProfileContainer} />
+      <Route path="/director" component={DirectorContainer} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
       <Route path="/dashboard" component={DashBoardContainer} />

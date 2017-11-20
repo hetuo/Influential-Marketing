@@ -15,7 +15,7 @@ const Brand = db.define('brands', {
     // allowNull: false,
     // validate: { notEmpty: true }
   },
-
+  usertype: Sequelize.STRING,
   email: {
     type: Sequelize.STRING,
     allowNull: true,
