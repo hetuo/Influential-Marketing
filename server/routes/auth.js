@@ -77,7 +77,7 @@ OAuth.setupStrategy({
 // Other passport configuration:
 
 passport.serializeUser((user, done) => {
-  console.log('will serialize user.id=%d', user)
+  console.log('will serialize user', user)
   done(null, user)
 });
 
@@ -249,6 +249,7 @@ auth.put('/brandlogin', (req, res, next)=>{
 })
 
 auth.put('/sociallogin', (req, res, next)=>{
+  console.log("sociallogin auth:", req.body);
   User.findOne({
     where:{
       email: req.body.email
@@ -273,6 +274,7 @@ auth.put('/sociallogin', (req, res, next)=>{
       })
     } else {
       return user.update({
+        usertype: req.body.usertype,
         email: req.body.email,
         session_id: req.sessionID
       })

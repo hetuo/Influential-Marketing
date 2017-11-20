@@ -69,7 +69,7 @@ export const brandsignup = credential => dispatch =>
 
 export const socialLogin = credential => dispatch => {
   axios.put('/api/auth/sociallogin', credential)
-    .then(() => {dispatch(whoami())})
+    .then(() => {dispatch(whoami(credential));browserHistory.push('/');})
     //.catch(() => dispatch(whoami()));
     .catch(failed => dispatch(invaildEmail(null)));
 }

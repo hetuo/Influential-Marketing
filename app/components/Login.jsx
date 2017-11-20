@@ -33,7 +33,7 @@ class Login extends React.Component {
     const credentials = {
       email: e.target.email.value,
       password: e.target.password.value,
-      usertypes: this.state.usertype,
+      usertype: this.state.usertype,
     }
     console.log('credentials', credentials);
 
@@ -53,7 +53,7 @@ class Login extends React.Component {
     const credentials = {
       email: response.w3.U3,
       name: response.w3.ig,
-      usertypes: this.state.usertype,
+      usertype: this.state.usertype,
       socialtype: 'google',
     }
     console.log('usertype:', this.state.usertype);
@@ -65,7 +65,7 @@ class Login extends React.Component {
     const credentials = {
       email: response.email,
       name: response.name,
-      usertypes: this.state.usertype,
+      usertype: this.state.usertype,
       socialtype: 'facebook',
     }
     console.log('usertype:', this.state.usertype);
