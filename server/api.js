@@ -22,6 +22,8 @@ api
   .use('/campaigns', require('./routes/campaigns'))
   .use('/hireInfluencer', require('./routes/hire_influencer'))
 
+  .use('https://api.stripe.com', require('./routes/stripe'))
+
 // Send along any errors
 api.use((err, req, res, next) => {
   res.status(500).send(err);
