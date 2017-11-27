@@ -83,8 +83,9 @@ module.exports = express.Router()
   // })
 
   .put('/:id', (req, res, next)=>{
+    console.log("put hireInfluencerId req.body",req.body)
     HireInfluencer.findById(req.params.id)
-    .then(hireInfluencer => HireInfluencer.update(req.body))
+    .then(hireInfluencer => hireInfluencer.update(req.body))
     .then(updatedHireInfluencer => {
       res.status(202).send(updatedHireInfluencer)
     })
@@ -93,7 +94,7 @@ module.exports = express.Router()
 
   .delete('/:id', (req, res, next)=>{
     HireInfluencer.findById(req.params.id)
-    .then(hireInfluencer => HireInfluencer.destroy())
+    .then(hireInfluencer => hireInfluencer.destroy())
     .then( () => res.status(204).end())
     .catch(next)
   })
