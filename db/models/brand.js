@@ -1,13 +1,9 @@
 'use strict'
 
 const Sequelize = require('sequelize');
-const db = require('APP/db');
+const db = require('..');
 const bcrypt = require('bcrypt')
 const _ = require('lodash');
-
-const Address = require('APP/db/models/address');
-const Cart_Line_Item = require('APP/db/models/cart_line_item');
-
 
 const Brand = db.define('brands', {
   name: {

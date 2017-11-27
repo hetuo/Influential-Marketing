@@ -1,17 +1,17 @@
 const Sequelize = require('sequelize');
-const db = require('APP/db');
+const db = require('..');
 
 const Address = db.define('address', {
 	address1: {
 		type: Sequelize.STRING,
 		allowNull: false,
-		validate: {			
+		validate: {
 			notEmpty: true
 		}
 	},
 	address2: {
 		type: Sequelize.STRING,
-		allowNull: true		
+		allowNull: true
 	},
 	city: {
 		type: Sequelize.STRING,
@@ -58,7 +58,7 @@ const Address = db.define('address', {
 /* potential improvements
  * ========================
  * address validation
- * 
+ *
  */
 
 module.exports = Address;

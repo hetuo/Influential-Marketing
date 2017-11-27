@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const db = require('APP/db');
+const db = require('..');
 
 const Campaign = db.define('campaigns', {
   camptitle: {

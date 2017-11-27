@@ -2,12 +2,8 @@
 
 const bcrypt = require('bcrypt')
 const Sequelize = require('sequelize')
-const db = require('APP/db')
+const db = require('..')
 const _ = require('lodash');
-
-const Address = require('APP/db/models/address');
-const Cart_Line_Item = require('APP/db/models/cart_line_item');
-
 
 const Influencer = db.define('influencers', {
     name: Sequelize.STRING,

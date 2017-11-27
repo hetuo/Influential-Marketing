@@ -3,7 +3,6 @@ import { regularsignup, influencersignup, brandsignup } from '../reducers/auth';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import classnames from 'classnames';
-import userproperty from '../data/userproperty';
 import map from 'lodash/map'; // TODO: replace with pure JS
 
 class Signup extends React.Component {
@@ -27,8 +26,9 @@ class Signup extends React.Component {
 
   onSignupSubmit(e){
     e.preventDefault();
-    if(e.target.password.value !== e.target.passwordConfirm.value) window.alert('password not match');
-    else {
+    if(e.target.password.value !== e.target.passwordConfirm.value) {
+      window.alert('password not match');
+    } else {
       const credentials = {
         email: e.target.email.value,
         usertype: this.state.usertype,

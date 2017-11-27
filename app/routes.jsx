@@ -2,8 +2,6 @@
 import React from 'react';
 import {Router, Route, IndexRoute, IndexRedirect, browserHistory} from 'react-router';
 import Root from './components/Root';
-
-//import store
 import store from './store';
 
 //import components and containers
@@ -16,6 +14,7 @@ import Cart from './containers/CartContainer';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import NewReview from './components/newReviewForm';
+import Messager from './components/Messager';
 import About from './components/About';
 import Checkout from './containers/CheckoutContainer';
 import ReviewList from './components/ReviewList';
@@ -66,6 +65,7 @@ export default ({ onAppEnter, onProductEnter, onCartEnter, onOrderEnter, onCampa
       <Route path="/director" component={DirectorContainer} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
+      <Route path="/messager" component={Messager} />
       <Route path="/createcampaign" component={CreateCampaignContainer} />
       <Route path="/campaign" component={CampaignContainer} onEnter={onCampaignEnter} />
       <Route path="/newreview" component={NewReview} />

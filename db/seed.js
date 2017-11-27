@@ -1,5 +1,5 @@
-const db = require('APP/db')
-const { User, Influencer, Brand, Product, Category, Address, Order, OrderProduct, Product_Review, Campaign, HireInfluencer} = require('APP/db/models');
+const db = require('.')
+const { User, Influencer, Brand, Product, Category, Address, Order, OrderProduct, Product_Review, Campaign, HireInfluencer} = require('./models');
 
 // db.didSync
 // .then(() => db.sync({ force: true }))

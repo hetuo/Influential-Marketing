@@ -1,13 +1,11 @@
 const app = require('APP'), {env} = app
 const debug = require('debug')(`${app.name}:auth`)
 const passport = require('passport')
-
 const User = require('APP/db/models/user')
 const Influencer = require('APP/db/models/influencer')
 const Brand = require('APP/db/models/brand')
 const OAuth = require('APP/db/models/oauth')
 const auth = require('express').Router()
-
 
 /*************************
  * Auth strategies
@@ -77,25 +75,13 @@ OAuth.setupStrategy({
 // Other passport configuration:
 
 passport.serializeUser((user, done) => {
-  console.log('will serialize user', user)
   done(null, user)
 });
 
-passport.deserializeUser(
-  (user, done) => {
-    console.log("de--------:", user);
-    if (user.usertype == 'regular_user') {
-      User.findById(user.id)
-      .then(user => {
-        console.log('deserialize did ok user.id=%d', user.id)
-        done(null, user)
-      })
-      .catch(err => {
-        console.log('deserialize did fail err=%s', err)
-        done(err)
-      })
-    } else if (user.usertype == 'influencer') {
-      Influencer.findById(user.id)
+passport.deserializeUser((user, done) => {
+    if (user != null) {
+      if (user.usertype == 'regular_user') {
+        User.findById(user.id)
         .then(user => {
           console.log('deserialize did ok user.id=%d', user.id)
           done(null, user)
@@ -104,16 +90,27 @@ passport.deserializeUser(
           console.log('deserialize did fail err=%s', err)
           done(err)
         })
-    } else if (user.usertype == 'brand_account') {
-      Brand.findById(user.id)
-        .then(user => {
-          console.log('deserialize did ok user.id=%d', user.id)
-          done(null, user)
-        })
-        .catch(err => {
-          console.log('deserialize did fail err=%s', err)
-          done(err)
-        })
+      } else if (user.usertype == 'influencer') {
+        Influencer.findById(user.id)
+          .then(user => {
+            console.log('deserialize did ok user.id=%d', user.id)
+            done(null, user)
+          })
+          .catch(err => {
+            console.log('deserialize did fail err=%s', err)
+            done(err)
+          })
+      } else if (user.usertype == 'brand_account') {
+        Brand.findById(user.id)
+          .then(user => {
+            console.log('deserialize did ok user.id=%d', user.id)
+            done(null, user)
+          })
+          .catch(err => {
+            console.log('deserialize did fail err=%s', err)
+            done(err)
+          })
+      }
     }
   }
 )
@@ -144,22 +141,27 @@ passport.deserializeUser(
 
 auth.get('/whoami', (req, res) => {
   console.log("whoami backend req:", req.user.usertype);
-  let usertype = req.user.usertype;
-  if (usertype == 'regular_user') {
-    User.findOrCreate({
-      where:{ session_id : req.sessionID}
-    })
-    .then(returnedUser => res.send(returnedUser[0]))
-  } else if (usertype == 'influencer') {
-    Influencer.findOrCreate({
-      where:{ session_id : req.sessionID}
-    })
-    .then(returnedUser => res.send(returnedUser[0]))
-  } else if (usertype == 'brand_account') {
-    Brand.findOrCreate({
-      where:{ session_id : req.sessionID}
-    })
-    .then(returnedUser => res.send(returnedUser[0]))
+  if (req.user != null) {
+    let usertype = req.user.usertype;
+    if (usertype == 'regular_user') {
+      User.findOrCreate({
+        where:{ email : req.user.email}
+      })
+      .then(returnedUser => {
+        console.log("auth.js whoami: ", returnedUser[0]);
+        res.send(returnedUser[0])
+      })
+    } else if (usertype == 'influencer') {
+      Influencer.findOrCreate({
+        where:{ email : req.user.email}
+      })
+      .then(returnedUser => res.send(returnedUser[0]))
+    } else if (usertype == 'brand_account') {
+      Brand.findOrCreate({
+        where:{ email : req.user.email}
+      })
+      .then(returnedUser => res.send(returnedUser[0]))
+    }
   }
 })
 
@@ -229,7 +231,7 @@ auth.put('/brandlogin', (req, res, next)=>{
   }).then(user=>{
       if(!user) {
         res.sendState(401)
-      }else if (req.body.password != user.password_digest){
+      } else if (req.body.password != user.password_digest) {
         res.sendState(401)
       }
       else{
@@ -250,53 +252,29 @@ auth.put('/brandlogin', (req, res, next)=>{
 
 auth.put('/sociallogin', (req, res, next)=>{
   console.log("sociallogin auth:", req.body);
-  User.findOne({
-    where:{
+  User.findOrCreate({
+    where: {
       email: req.body.email
     }
-  }).then(user=>{
-    if (!user) {
-      User.findOrCreate({
-        where: {
-          session_id: req.sessionID
-        }
-      }).spread((user, created)=>{
-        console.log('user: ', user);
-        return user.update(req.body)
-      }).then(updated=>{
-        req.logIn(updated, err=>{
-          if(err) {
-            console.log('update error');
-            return next(err);
-          }
-          res.json(updated)
-        })
-      })
-    } else {
-      return user.update({
-        usertype: req.body.usertype,
-        email: req.body.email,
-        session_id: req.sessionID
-      })
-    }
+  }).spread((user, created)=>{
+    console.log('user: ', user);
+    return user.update(req.body)
   }).then(updated=>{
     req.logIn(updated, err=>{
-        if(err) return next(err);
-        res.json(updated)
-      })
+      if(err) return next(err)
+      res.json(updated)
+    })
   })
-  .catch(next)
-
 })
 
 auth.put('/regularsignup', (req, res, next)=>{
   console.log('body',req.body);
   User.findOrCreate({
     where: {
-      session_id: req.sessionID
+      email: req.body.email
     }
   }).spread((user, created)=>{
-    console.log('user: ', user)
+    console.log('user: ', user);
     return user.update(req.body)
   }).then(updated=>{
     req.logIn(updated, err=>{
@@ -310,7 +288,7 @@ auth.put('/influencersignup', (req, res, next)=>{
   console.log('body',req.body);
   Influencer.findOrCreate({
     where: {
-      session_id: req.sessionID
+      email: req.email
     }
   }).spread((user, created)=>{
     console.log('influencer: ', user)
@@ -327,7 +305,7 @@ auth.put('/brandsignup', (req, res, next)=>{
   console.log('body',req.body);
   Brand.findOrCreate({
     where: {
-      session_id: req.sessionID
+      email: req.email
     }
   }).spread((user, created)=>{
     console.log('brand: ', user)

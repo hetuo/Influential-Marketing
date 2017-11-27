@@ -4,21 +4,20 @@
 // so any other part of the application could call sequelize.model('User')
 // to get access to the User model.
 
-const User = require('APP/db/models/user');
-const Influencer = require('APP/db/models/influencer');
-const Message = require('APP/db/models/message')
-const Brand = require('APP/db/models/brand');
-const Product = require('APP/db/models/product');
-const Address = require('APP/db/models/address');
-const Order = require('APP/db/models/order');
-const OrderProduct = require('APP/db/models/order_product');
-const Category = require('APP/db/models/category');
-const Comment = require('APP/db/models/comment');
-const Product_Review = require('APP/db/models/product_review')
-const Cart_Line_Item = require('APP/db/models/cart_line_item')
-
-const Campaign = require('APP/db/models/campaign');
-const HireInfluencer = require('APP/db/models/hire_influencer');
+const User = require('./user');
+const Influencer = require('./influencer');
+const Message = require('./message')
+const Brand = require('./brand');
+const Product = require('./product');
+const Address = require('./address');
+const Order = require('./order');
+const OrderProduct = require('./order_product');
+const Category = require('./category');
+const Comment = require('./comment');
+const Product_Review = require('./product_review')
+const Cart_Line_Item = require('./cart_line_item')
+const Campaign = require('./campaign');
+const HireInfluencer = require('./hire_influencer');
 
 Address.belongsTo(User)
 Address.belongsTo(Brand)

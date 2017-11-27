@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
-const db = require('APP/db');
-const OrderProduct = require('APP/db/models/order_product');
+const db = require('..');
+const OrderProduct = require('./order_product');
 /*
  * DECIMAL?  DOUBLE?  FLOAT?  what to use??
  * http://net-informations.com/q/faq/float.html
@@ -24,7 +24,7 @@ const Order = db.define('order', {
 /* potential improvements
  * ========================
  * address validation
- * 
+ *
  */
 
 module.exports = Order;

@@ -25,7 +25,6 @@ export default function reducer (currentUser = null, action) {
 //        DISPATCHERS
 
 export const login = credentials => dispatch => {
-  console.('hetuo test')
   axios.post('/auth/login', credentials)
        .then(res => dispatch(set(res.data)))
        .catch(err => console.log('Login unsuccesful', err));

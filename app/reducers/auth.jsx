@@ -69,13 +69,11 @@ export const brandsignup = credential => dispatch =>
 
 export const socialLogin = credential => dispatch => {
   axios.put('/api/auth/sociallogin', credential)
-    .then(() => {dispatch(whoami(credential));browserHistory.push('/');})
-    //.catch(() => dispatch(whoami()));
-    .catch(failed => dispatch(invaildEmail(null)));
+    .then(() => {dispatch(whoami());browserHistory.push('/');})
+    .catch(failed => dispatch(unauthenticated(null)));
 }
 
 export const regularlogin = credential => dispatch => {
-  console.log("login: ", credential);
   axios.put('/api/auth/regularlogin', credential)
     .then(() => {dispatch(whoami(credential));browserHistory.push('/');})
     //.catch(() => dispatch(whoami()));
@@ -83,9 +81,9 @@ export const regularlogin = credential => dispatch => {
 }
 
 export const influencerlogin = credential => dispatch => {
-  console.log("login: ", credential);
+  console.log("influencerlogin: ", credential);
   axios.put('/api/auth/influencerlogin', credential)
-    .then(() => {dispatch(whoami());browserHistory.push('/');})
+    .then(() => {dispatch(whoami(credential));browserHistory.push('/');})
     //.catch(() => dispatch(whoami()));
     .catch(failed => dispatch(unauthenticated(null)));
 }
@@ -93,19 +91,18 @@ export const influencerlogin = credential => dispatch => {
 export const brandlogin = credential => dispatch => {
   console.log("login: ", credential);
   axios.put('/api/auth/brandlogin', credential)
-    .then(() => {dispatch(whoami());browserHistory.push('/');})
+    .then(() => {dispatch(whoami(credential));browserHistory.push('/');})
     //.catch(() => dispatch(whoami()));
     .catch(failed => dispatch(unauthenticated(null)));
 }
 
-export const logout = () =>
-  dispatch =>
+export const logout = () => dispatch => {
     axios.post('/api/auth/logout')
       .then(() => dispatch(whoami()))
       .catch(() => dispatch(whoami()));
+}
 
 export const whoami = credential => dispatch => {
-    console.log("whoami credential", credential);
     axios.get('/api/auth/whoami', credential)
       .then(response => {
         const user = response.data;

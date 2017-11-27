@@ -21,7 +21,6 @@ api
   .use('/comment', require('./routes/comment'))
   .use('/campaigns', require('./routes/campaigns'))
   .use('/hireInfluencer', require('./routes/hire_influencer'))
-
   .use('https://api.stripe.com', require('./routes/stripe'))
 
 // Send along any errors

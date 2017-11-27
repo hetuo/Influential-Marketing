@@ -56,7 +56,6 @@ class Login extends React.Component {
       usertype: this.state.usertype,
       socialtype: 'google',
     }
-    console.log('usertype:', this.state.usertype);
     this.props.socialLogin(credentials);
   }
 
@@ -68,14 +67,12 @@ class Login extends React.Component {
       usertype: this.state.usertype,
       socialtype: 'facebook',
     }
-    console.log('usertype:', this.state.usertype);
     this.props.socialLogin(credentials);
   }
 
   handleChange(event) {
     this.state.usertype = event.target.value;
     this.setState({usertype: event.target.value});
-    console.log("usertype:", this.state.usertype);
   }
 
   render() {

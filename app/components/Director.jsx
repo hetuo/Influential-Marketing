@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import {logout} from '../reducers/auth';
-import { Table } from 'react-bootstrap';
+import { Table, ButtonToolbar, Button } from 'react-bootstrap';
 
 export default class Director extends React.Component {
   // const { user, alert } = this.props;
@@ -20,6 +20,15 @@ export default class Director extends React.Component {
     this.setState({ auth: nextProps.auth });
   }
 
+  createMessageRoom() {
+    console.log("start create room");
+    const userInfo = {
+      name: 'tyle',
+      email: 'abc@qq.com',
+    }
+    this.props.message(user);
+  }
+
   handleOnSubmit(e) {
     e.preventDefault()
     console.log("update user information");
@@ -30,7 +39,6 @@ export default class Director extends React.Component {
       password: e.target.password.value,
     }
     console.log("director: ", this.props);
-    // this.props.updateProfile(this.props.user.name, profile);
   }
 
   render() {
@@ -82,10 +90,30 @@ export default class Director extends React.Component {
               <td>Table cell</td>
               <td>Table cell</td>
               <td>Table cell</td>
-              <td>Table cell</td>
+              <td>
+                <div className="homesection">
+                  <a title="Create" href="/create" id="create">
+            				<div id="createbutton">
+            					<div id="little">Messages</div>
+            				</div>
+            			</a>
+                </div>
+              </td>
             </tr>
           </tbody>
         </Table>
+        <div className="homesection">
+  			    <a title="Create" onClick={this.createMessageRoom} id="create">
+      				<div id="createbutton" >
+      					<div id="little">Messages</div>
+      				</div>
+            </a>
+        </div>
+        <div>
+          <ButtonToolbar>
+            <Button onClick={this.createMessageRoom} bsStyle="primary" bsSize="small">Small button</Button>
+          </ButtonToolbar>
+        </div>
         </section>
       </div>
     );

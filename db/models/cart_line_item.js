@@ -1,6 +1,6 @@
 'use strict'
 const Sequelize = require('sequelize');
-const db = require('APP/db');
+const db = require('..');
 const Product = db.Product;
 
 const Cart_Line_Item = db.define('cart_line_item', {
@@ -9,7 +9,7 @@ const Cart_Line_Item = db.define('cart_line_item', {
     allowNull: false,
     validate: { notEmpty: true }
   }
-  // Might need class / instance method to updateWhereUser()  
+  // Might need class / instance method to updateWhereUser()
 },{
 	classMethods:{
 		reassignUser(prevUserId, nextUserId){

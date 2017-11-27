@@ -27,8 +27,8 @@ class AppBar extends React.Component {
   }
 
   renderUsertype(auth){
-    if (auth.user && auth.user.email && auth.user.password_digest){
-      if (auth.user.usertype === 'influencer'){
+    if (auth.user && auth.user.email){
+      if (auth.user.usertype === 'influencer') {
         return (
           <NavDropdown eventKey={6} title={auth.user.name} id="users">
             <MenuItem href="/profile">Profile</MenuItem>
@@ -38,7 +38,8 @@ class AppBar extends React.Component {
             <MenuItem onClick={this.onClickLogout}>Logout</MenuItem>
           </NavDropdown>
         );
-      } else {
+      } else if (auth.user.usertype === 'brand_account') {
+        return (
         <NavDropdown eventKey={6} title={auth.user.name} id="users">
           <MenuItem href="/profile">Profile</MenuItem>
           <MenuItem href="/createcampaign">Create Campaign</MenuItem>
@@ -46,6 +47,16 @@ class AppBar extends React.Component {
           <MenuItem role="separator" className="divider"></MenuItem>
           <MenuItem onClick={this.onClickLogout}>Logout</MenuItem>
         </NavDropdown>
+        );
+      } else {
+          return (
+          <NavDropdown eventKey={6} title={auth.user.name} id="users">
+            <MenuItem href="/profile">Profile</MenuItem>
+            <MenuItem href="/address">Address Book</MenuItem>
+            <MenuItem role="separator" className="divider"></MenuItem>
+            <MenuItem onClick={this.onClickLogout}>Logout</MenuItem>
+          </NavDropdown>
+          );
       }
     } else {
       return (

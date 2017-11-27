@@ -2,12 +2,8 @@
 
 const bcrypt = require('bcrypt')
 const Sequelize = require('sequelize')
-const db = require('APP/db')
+const db = require('..')
 const _ = require('lodash');
-
-const Address = require('APP/db/models/address');
-const Cart_Line_Item = require('APP/db/models/cart_line_item');
-
 
 const User = db.define('users', {
   name: Sequelize.STRING,
@@ -68,7 +64,7 @@ const User = db.define('users', {
         }).then(users=>{
           member = _.find(users, (user)=>(user.email !== null))
           guest = _.find(users, (user)=>(user.email === null))
-          console.log('##### MEMBER & GUEST ####',member, guest)
+
           if(member && guest) {
             // if duplicate session_id exist in database
             // we will reassign associated user id from 'Address' & 'Cart'

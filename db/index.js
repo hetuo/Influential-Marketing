@@ -2,7 +2,7 @@
 const debug = require('debug')('sql')
 const chalk = require('chalk')
 const Sequelize = require('sequelize')
-const app = require('APP')
+const app = require('..')
 
 const name = (process.env.DATABASE_NAME || app.name) +
   (app.isTesting ? '_test' : '')
