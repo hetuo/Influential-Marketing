@@ -1,21 +1,25 @@
-import { CREATE_CAMPAIGN, create } from '../action-creators/CampaignActionCreator';
+import { RECEIVE_CAMPAIGNS, SET_CAMPAIGN, RECEIVE_INVITES } from '../action-creators/CampaignActionCreator';
 
 const campaignInitialState = {
-	campaign: ''
+	campaigns: [],
+	invites: [],
+	selectedCampaign: {}
 }
 
 export default (state = campaignInitialState, action) => {
 	const newState = Object.assign({}, state);
 
 	switch(action.type) {
-		case CREATE_CAMPAIGN:
-			newState.campaign = action.campaign;
+		case RECEIVE_CAMPAIGNS:
+			newState.campaigns = action.campaigns;
     //  newState.
 			break;
-		//case RECEIVE_REVIEWS:
-		//	newState.list = action.reviews;
-		//	break;
-
+		case SET_CAMPAIGN:
+			newState.selectedCampaign = action.campaign;
+			break;
+		case RECEIVE_INVITES:
+			newState.invites = action.invites;
+			break;
 
 		default:
 			return state;

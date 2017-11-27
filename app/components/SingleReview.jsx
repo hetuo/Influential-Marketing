@@ -35,12 +35,12 @@ export default class SingleReview extends React.Component{
     //let {name} = this.props.review.user;
     if (this.props.review.user){
       const user = {
-        name: this.props.review.user
+        name: this.props.review.user.name
       };
       return (
         <div>
         <ListItem
-          leftAvatar={<Avatar backgroundColor='#000000' size='40' style={{ top: "8px" }}>user.name.slice(0,1)</Avatar>}
+          leftAvatar={<Avatar backgroundColor='#000000' size='40' style={{ top: "8px" }}>{user.name.slice(0,1)}</Avatar>}
           primaryText={ this.props.review.title }
           secondaryText={
             <p>

@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
-
+import ReactTable from 'react-table';
+import matchSorter from 'match-sorter';
 import store from '../store';
+import CampaignList from './CampaignList';
 
 export default class ManageCampaign extends React.Component{
 
@@ -9,10 +11,15 @@ export default class ManageCampaign extends React.Component{
     super(props);
 
     this.state = {
-      auth: {}
+      auth: {},
+      campaigns: []
     };
 
     this.onCreateSubmit = this.onCreateSubmit.bind(this);
+    this.noCampaign = this.noCampaign.bind(this);
+    this.goToInvite = this.goToInvite.bind(this);
+    this.showCampaign = this.showCampaign.bind(this);
+    this.detail = this.detail.bind(this);
   }
 
   onCreateSubmit(e){
@@ -33,41 +40,65 @@ export default class ManageCampaign extends React.Component{
     browserHistory.push('/');
   }
 
-  render() {
+  detail(campaigns){
+    console.log('WTTTTTTTTTTTTTTf');
+    //return(<div><h1>WTF</h1></div>);
+    if (campaigns){
+      campaigns && campaigns.map((campaign) => {
+        if (campaign.hire_influencers){
+          console.log('going to show campaign info..', campaign);
+          this.showCampaign(campaign);
+        }else{
+          this.goToInvite(campaign);
+        }
+      });
+    }else{
+      this.noCampaign();
+    }
+  }
+
+  noCampaign(){
+    console.log('no campaign');
     return (
-      <div className="login-wrapper">
-        <ol className="breadcrumb">
-          <li><Link to="/">Home</Link></li>
-          <li className="active">createCampaign</li>
-        </ol>
-        <section className="container-fluid">
-          <div className="row">
-            <div className="col-xs-12 col-md-6 col-md-offset-3">
-              <form
-                className="login-form"
-                onSubmit={this.onCreateSubmit}>
-                <div className="form-group">
-                  <label>How many Influencers you want?</label>
-                  <input className="form-control" name="num" type="text" />
-                </div>
-                <div className="form-group">
-                  <label>How much you can pay for each Influencer?</label>
-                  <input className="form-control" name="money" type="text" />
-                </div>
-                <div className="form-group">
-                  <label>Compaign Title</label>
-                  <input className="form-control" name="title" type="text" />
-                </div>
-                <div className="form-group">
-                  <label>Compaign details</label>
-                  <input className="form-control" name="detail" type="text" />
-                </div>
-                <button type="submit" name="submit">Create Campaign</button>
-                </form>
-              </div>
-            </div>
-          </section>
+      <div>
+        <h1> You didn't create any campaign!</h1>
       </div>
     );
-  };
+  }
+
+  goToInvite(campaign){
+    return (
+      <form
+      className="login-form"
+      onSubmit={this.onCreateSubmit}>
+      <button type="submit" name="submit">Select Influencer</button>
+      </form>
+    );
+  }
+
+  showCampaign(campaign){
+    return (<div><h1>WTF</h1></div>);
+  }
+
+  render() {
+      const { campaigns } = this.props;
+      console.log(campaigns);
+      return (
+        <div>
+          <div className="login-wrapper">
+            <ol className="breadcrumb">
+              <li><Link to="/">Home</Link></li>
+              <li className="active">ManageCampaign</li>
+            </ol>
+          </div>
+          <div className='grid grid__gutters grid__1of2 grid__space-around animate-top'>
+            <div className='grid-cell animate-top'  style={{maxWidth: '700px', minWidth: '280px'}}>
+            {
+              campaigns ? (<CampaignList campaigns={ campaigns } />) : (this.noCampaign())
+            }
+            </div>
+          </div>
+        </div>
+      );
+  }
 }

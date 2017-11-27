@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, browserHistory } from 'react-router';
 import ReactTable from 'react-table';
 import matchSorter from 'match-sorter';
-
+import FlatButton from 'material-ui/FlatButton';
 import 'react-table/react-table.css'
 
 /*Object.assign(ReactTableDefaults, {
@@ -26,6 +26,25 @@ export default class Campaign extends React.Component{
     this.toggleRow = this.toggleRow.bind(this);
     this.addId = this.addId.bind(this);
     this.removeId = this.removeId.bind(this);
+    this.view = this.view.bind(this);
+    this.invite = this.invite.bind(this);
+  }
+
+  view = (original) => {
+    browserHistory.push(`/detail/${original.id}`);
+  }
+
+  invite = (original) => {
+    this.toggleRow(original.id);
+    const i = {
+      hirestate: 0,
+      payment_amount: this.props.campaign.campbudget,
+      paymentcurrency: 'usd',
+      campaign_id: this.props.campaign.id,
+      influencer_id: original.id,
+      brand_id: this.props.campaign.brand_id
+    };
+    this.props.inviteInfluencer(i);
   }
 
   addId(id){
@@ -47,19 +66,14 @@ export default class Campaign extends React.Component{
     const newSelected = Object.assign({}, this.state.selected);
     console.log("xxxx", this.state.selected[id]);
     if (this.state.selected[id] == undefined || this.state.selected[id] == false){
-      newSelected[id] = !this.state.selected[id];
+      newSelected[id] = true;
       this.setState(
         {selected: newSelected,
-        selectAll: 1}
+        selectAll: (this.state.selectAll + 1)}
       );
+      console.log("xxxx", this.state.selected[id]);
+      console.log("yyyy", this.state.selectAll);
       this.addId(id);
-    } else{
-      newSelected[id] = !this.state.selected[id];
-      this.setState(
-        {selected: newSelected,
-        selectAll: 1}
-      );
-      this.removeId(id);
     }
   }
 
@@ -84,12 +98,9 @@ export default class Campaign extends React.Component{
           <li><Link to="/">Home</Link></li>
           <li className="active">Campaign</li>
         </ol>
-        <div>
-          <form
-          className="login-form"
-          onSubmit={this.onCreateSubmit}>
-          <button type="submit" name="submit">Create Campaign</button>
-          </form>
+        <div className='grid grid__gutters grid__1of2 grid__space-around animate-top'>
+          <div className='grid-cell animate-top'  style={{maxWidth: '700px', minWidth: '280px'}}>
+          <h1>{"You can invite "+ (this.props.campaign.numinfluencers - this.state.selectAll) + " influencers"}</h1>
           <ReactTable
             data={influencers}
             filterable
@@ -100,35 +111,21 @@ export default class Campaign extends React.Component{
                 Header: "Info",
                 columns: [
                   {
-                    id: "checkbox",
-                    accessor: "",
-                    Cell: ({ original }) => {
-                      return (
-                        <input
-                          type="checkbox"
-                          className="checkbox"
-                          checked={this.state.selected[original.id] === true}
-                          onChange={() =>  this.toggleRow(original.id)}
-                        />
-                      );
-                    },
-                    sortable: false,
-                    width: 45
-                  },
-                  {
                     Header: "Id",
                     id: "id",
                     accessor: d => d.id,
                     filterMethod: (filter ,rows) =>
                       matchSorter(rows, filter.value, { keys: ["id"] }),
-                    filterAll: true
+                    filterAll: true,
+                    width: 45
                   },
                   {
                     Header: "Name",
                     accessor: "name",
                     filterMethod: (filter ,rows) =>
                       matchSorter(rows, filter.value, { keys: ["name"] }),
-                    filterAll: true
+                    filterAll: true,
+                    width: 100
                   },
                   {
                     Header: "Email",
@@ -142,25 +139,53 @@ export default class Campaign extends React.Component{
                     accessor: "gender",
                     filterMethod: (filter ,rows) =>
                       matchSorter(rows, filter.value, { keys: ["gender"] }),
-                    filterAll: true
+                    filterAll: true,
+                    width: 60
                   },
                   {
                     Header: "Zipcode",
                     accessor: "zipcode",
                     filterMethod: (filter ,rows) =>
                       matchSorter(rows, filter.value, { keys: ["zipcode"] }),
-                    filterAll: true
+                    filterAll: true,
+                    width: 60
                   },
                   {
+                    Header: "View",
                     id: 'click-me-button',
                     accessor: "",
                     Cell: ({ original }) => {
                       return (
-                        <Link to="/">View</Link>
+                        <FlatButton label="View" onClick={() => this.view(original)} />
                       );
                     },
                     sortable: false,
-                    width: 45
+                    width: 100
+                  },
+                  {
+                    Header: "Invite",
+                    id: 'click-me-button',
+                    accessor: "",
+                    Cell: ({ original }) => {
+                      if (this.state.selected[original.id] === undefined || this.state.selected[original.id] === false){
+                        if (this.state.selectAll === this.props.campaign.numinfluencers){
+                          return (
+                            <FlatButton label="Invite" disabled={true} />
+                          );
+                        }else{
+                          return (
+                            <FlatButton label="Invite" onClick={() => this.invite(original)} />
+                          );
+                        }
+
+                      }else{
+                        return (
+                          <FlatButton label="Invited" disabled={true} onClick={() => this.invite(original)} />
+                        );
+                      }
+                    },
+                    sortable: false,
+                    width: 100
                   }
                 ]
               }
@@ -169,6 +194,7 @@ export default class Campaign extends React.Component{
             className="-striped -highlight"
           />
           <br />
+        </div>
         </div>
       </div>
     );

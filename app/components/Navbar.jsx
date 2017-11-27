@@ -4,6 +4,9 @@ import { Link, browserHistory } from 'react-router';
 import { logout } from '../reducers/auth';
 import Categories from './Categories';
 import { Navbar, Nav, NavDropdown, NavItem, MenuItem } from 'react-bootstrap';
+import Badge from 'material-ui/Badge';
+import IconButton from 'material-ui/IconButton';
+import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
 
 /* -----------------    COMPONENT     ------------------ */
 
@@ -11,10 +14,12 @@ class AppBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      auth: {}
+      auth: {},
+      invites: []
     };
     this.onClickLogout = this.onClickLogout.bind(this);
     this.renderUsertype = this.renderUsertype.bind(this);
+    this.onClickNotification = this.onClickNotification.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -26,6 +31,10 @@ class AppBar extends React.Component {
     browserHistory.push('/');
   }
 
+  onClickNotification(){
+    browserHistory.push('/notifications');
+  }
+
   renderUsertype(auth){
     if (auth.user && auth.user.email){
       if (auth.user.usertype === 'influencer') {
@@ -34,6 +43,7 @@ class AppBar extends React.Component {
             <MenuItem href="/profile">Profile</MenuItem>
             <MenuItem href="/address">Address Book</MenuItem>
             <MenuItem href={"/review/" + auth.user.id}>Write Review</MenuItem>
+	    <MenuItem href="/invites">Invites: {this.props.invites.length}</MenuItem>
             <MenuItem role="separator" className="divider"></MenuItem>
             <MenuItem onClick={this.onClickLogout}>Logout</MenuItem>
           </NavDropdown>
@@ -105,7 +115,10 @@ class AppBar extends React.Component {
 
 /* -----------------    CONTAINER     ------------------ */
 
-const mapProps = ({ auth, categories }) => ({ auth, categories });
+const mapProps = ({ auth, campaign }) => ({
+   auth: auth,
+   invites: campaign.invites
+});
 
 
 const mapDispatch = dispatch => ({

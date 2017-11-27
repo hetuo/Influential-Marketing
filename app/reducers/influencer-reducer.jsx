@@ -13,7 +13,7 @@ export default (state = influencersInitialState, action) => {
 			newState.list = action.influencers;
 			break;
 		case RECEIVE_INFLUENCER:
-			newState.selectedInfluencer = action.reviews;
+			newState.selectedInfluencer = action.influencer;
 			break;
 
 

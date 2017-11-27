@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { Link, browserHistory } from 'react-router';
+import { getInvites } from '../action-creators/CampaignActionCreator';
 
 const initialState = {
   user: null,
@@ -108,6 +109,9 @@ export const whoami = credential => dispatch => {
         const user = response.data;
         console.log('whoamiuser: ', user);
         dispatch(authenticated(user));
+        if (user.usertype === "influencer"){
+          dispatch(getInvites(user.id));
+        }
       })
       .catch(failed => dispatch(authenticated(null)));
 }

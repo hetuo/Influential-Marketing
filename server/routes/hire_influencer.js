@@ -41,7 +41,7 @@ module.exports = express.Router()
 
   .get('/influencerid/:influencer_id', (req, res, next) => {
     HireInfluencer.findAll({
-      where: { influencer_id: req.params.influencer_id },
+      where: { influencer_id: req.params.influencer_id, hirestage: 0 },
       include: [ {
         model: Campaign,
         attributes: {

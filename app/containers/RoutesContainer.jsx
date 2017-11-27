@@ -8,6 +8,7 @@ import { fetchAllOrders } from '../action-creators/orderActionCreator';
 import { getCommentsById } from '../action-creators/CommentActionCreator';
 import { getInfluencers } from '../action-creators/InfluencerActionCreator';
 // import { retrieveLoggedInUser } from '../action-creators/auth';
+import { getInvites } from '../action-creators/CampaignActionCreator';
 import store from '../store';
 import { getProductsByInfluencerId } from '../action-creators/products';
 
@@ -15,7 +16,6 @@ const mapState = null;
 
 const mapDispatch = (dispatch, ownProps) => ({
   onAppEnter: () => {
-    // dispatch(retrieveLoggedInUser());
     dispatch(getCart());
     dispatch(getProducts());
     dispatch(loadRootCategories());

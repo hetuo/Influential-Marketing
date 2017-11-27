@@ -1,14 +1,12 @@
 import { connect } from 'react-redux';
 import Campaign from '../components/Campaign';
-import { addCampaign } from '../action-creators/CampaignActionCreator';
-
-
+import { inviteInfluencer } from '../action-creators/CampaignActionCreator';
 
 const mapState = ({ influencers, campaign }) => ({
 	influencers: influencers.list,
-	campaign: campaign.campaign
+	campaign: campaign.selectedCampaign
 });
 
-const mapDispatch = { addCampaign };
+const mapDispatch = { inviteInfluencer };
 
 export default connect(mapState, mapDispatch)(Campaign);
