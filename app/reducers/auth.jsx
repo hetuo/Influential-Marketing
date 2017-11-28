@@ -97,6 +97,14 @@ export const brandlogin = credential => dispatch => {
     .catch(failed => dispatch(unauthenticated(null)));
 }
 
+export const directorlogin = credential => dispatch => {
+  console.log("directorlogin: ", credential);
+  axios.put('/api/auth/directorlogin', credential)
+    .then(() => {dispatch(whoami(credential));browserHistory.push('/');})
+    //.catch(() => dispatch(whoami()));
+    .catch(failed => dispatch(unauthenticated(null)));
+}
+
 export const logout = () => dispatch => {
     axios.post('/api/auth/logout')
       .then(() => dispatch(whoami()))

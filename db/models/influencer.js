@@ -35,10 +35,10 @@ const Influencer = db.define('influencers', {
       type: Sequelize.BOOLEAN,
       defaultValue: false
     },
-    public-key: {
+    public_key: {
       type: Sequelize.STRING
     },
-    secret-key: {
+    secret_key: {
       type: Sequelize.STRING
     },
     Remark1: {

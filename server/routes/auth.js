@@ -100,6 +100,16 @@ passport.deserializeUser((user, done) => {
             console.log('deserialize did fail err=%s', err)
             done(err)
           })
+      } else if (user.usertype == 'director') {
+        Influencer.findById(user.id)
+          .then(user => {
+            console.log('deserialize did ok user.id=%d', user.id)
+            done(null, user)
+          })
+          .catch(err => {
+            console.log('deserialize did fail err=%s', err)
+            done(err)
+          })
       } else if (user.usertype == 'brand_account') {
         Brand.findById(user.id)
           .then(user => {
@@ -156,6 +166,11 @@ auth.get('/whoami', (req, res) => {
         where:{ email : req.user.email}
       })
       .then(returnedUser => res.send(returnedUser[0]))
+    } else if (usertype == 'director') {
+      Influencer.findOrCreate({
+        where:{ email : req.user.email}
+      })
+      .then(returnedUser => res.send(returnedUser[0]))
     } else if (usertype == 'brand_account') {
       Brand.findOrCreate({
         where:{ email : req.user.email}
@@ -203,7 +218,7 @@ auth.put('/influencerlogin', (req, res, next)=>{
   }).then(user=>{
       if(!user) {
         res.sendState(401)
-      }else if (req.body.password != user.password_digest){
+      }else if (req.body.password != user.password_digest || user.usertype != 'influencer'){
         res.sendState(401)
       }
       else{
@@ -232,6 +247,34 @@ auth.put('/brandlogin', (req, res, next)=>{
       if(!user) {
         res.sendState(401)
       } else if (req.body.password != user.password_digest) {
+        res.sendState(401)
+      }
+      else{
+        return user.update({
+          email: req.body.email,
+          password: req.body.password,
+          session_id: req.sessionID
+        })
+      }
+    }).then(updated=>{
+      req.logIn(updated, err=>{
+          if(err) return next(err);
+          res.json(updated)
+        })
+    })
+    .catch(next)
+})
+
+auth.put('/directorlogin', (req, res, next)=>{
+  console.log('sessionID',req.sessionID)
+  Influencer.findOne({
+    where:{
+      email:req.body.email
+    }
+  }).then(user=>{
+      if(!user) {
+        res.sendState(401)
+      } else if (req.body.password != user.password_digest || user.usertype != 'director') {
         res.sendState(401)
       }
       else{
