@@ -5,19 +5,35 @@ import ReactTable from 'react-table';
 import matchSorter from 'match-sorter';
 import FlatButton from 'material-ui/FlatButton';
 import { setSelectCampaign } from '../action-creators/CampaignActionCreator';
+import { getInfluencers } from '../action-creators/InfluencerActionCreator';
+import Pay from './Pay';
 
 class SingleCampaign extends React.Component{
 
   constructor(props){
     super(props);
       this.state = {
-        openComments: false
+        openComments: false,
+        influencers: [],
+        flag: 1
       };
     this.pay = this.pay.bind(this);
     this.view = this.view.bind(this);
     this.payFirst = this.payFirst.bind(this);
     this.renderCampaign = this.renderCampaign.bind(this);
     this.onCreateSubmit = this.onCreateSubmit.bind(this);
+    this.get = this.get.bind(this);
+  }
+
+  get = () => {
+    console.log('going to update influencer state');
+    if (this.state.flag === 1){
+      this.props.getInfluencers();
+      this.setState({
+        flag: 0
+      })
+    }
+
   }
 
   onCreateSubmit(e){
@@ -48,6 +64,7 @@ class SingleCampaign extends React.Component{
   renderCampaign(){
     //let {name} = this.props.review.user;
     if (this.props.campaign.hire_influencers.length != 0){
+      this.get();
       return (
           <div>
             <p>{"Title: " + this.props.campaign.camptitle}</p>
@@ -64,7 +81,7 @@ class SingleCampaign extends React.Component{
                     {
                       Header: "InfluencerId",
                       id: "Id",
-                      accessor: d => d.id,
+                      accessor: d => d.influencer_id,
                       filterMethod: (filter ,rows) =>
                         matchSorter(rows, filter.value, { keys: ["id"] }),
                       filterAll: true,
@@ -112,9 +129,22 @@ class SingleCampaign extends React.Component{
                       accessor: "",
                       Cell: ({ original }) => {
                         if (original.hirestage === 1){
-                          return (
+                          /*return (
                             <FlatButton label="Pay" onClick={() => this.pay(original)} />
-                          );
+                          );*/
+                          const influencer = this.props.influencers[original.influencer_id - 1];
+                        //  console.log('88888888888', influencer);
+                          if (influencer){
+                            return (
+                              <Pay
+                                name={'Payment from ' + this.props.campaign.campcreater}
+                                description={'Payment from ' + this.props.campaign.campcreater}
+                                amount={this.props.campaign.campbudget}
+                                pk={influencer.public_key}
+                                sk={influencer.secret_key}
+                              />
+                            )
+                          }
                         }else if (original.hirestage === 0) {
                           return (
                             <FlatButton label="Pay" disabled="true" onClick={() => this.payFirst(original)} />
@@ -165,8 +195,12 @@ class SingleCampaign extends React.Component{
   };
 };
 
-const mapState = null;
+const mapState = ({ influencers }) => ({
+	influencers: influencers.list
+});
 
-const mapDispatch = { setSelectCampaign };
+//const mapState = null;
+
+const mapDispatch = { setSelectCampaign, getInfluencers };
 
 export default connect(mapState, mapDispatch)(SingleCampaign);
