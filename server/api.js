@@ -20,8 +20,8 @@ api
   .use('/orderProduct', require('./routes/order-product'))
   .use('/comment', require('./routes/comment'))
   .use('/campaigns', require('./routes/campaigns'))
-  .use('/hireInfluencer', require('./routes/hire_influencer'))
-  .use('https://api.stripe.com', require('./routes/stripe'))
+  .use('/hireInfluencer', require('./routes/hire_influencer'))  
+  .use('/stripe', require('./routes/stripe'))
 
 // Send along any errors
 api.use((err, req, res, next) => {
