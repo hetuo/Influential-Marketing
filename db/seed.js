@@ -38,7 +38,7 @@ let data = {
            {name: 'brand6', email: 'brand6@brand.com', zipcode: '90017', password: '1234'},
            {name: 'brand7', email: 'brand7@brand.com', zipcode: '15106', password: '1234'},
            {name: 'brand8', email: 'brand8@brand.com', zipcode: '15106', password: '1234'},
-           {name: 'brand9', email: 'brand9@brand.com', zipcode: '15106', password: '1234'}
+           {name: 'brand', email: 'brand9@brand.com', usertype: 'brand_account', zipcode: '15106', password_digest: '123'}
         ],
 
 
@@ -51,8 +51,8 @@ let data = {
           {name: 'influencer6', email: 'influencer6@influencer.com', zipcode: '90017', gender: 'female',password: '1234'},
           {name: 'influencer7', email: 'influencer7@influencer.com', zipcode: '90017', gender: 'male', password: '1234'},
           {name: 'influencer8', email: 'influencer8@influencer.com', zipcode: '15106', gender: 'female',password: '1234'},
-          {name: 'influencer9', email: 'influencer9@influencer.com', zipcode: '15106', gender: 'male', password: '1234'},
-          {name: 'influencer10', email: 'influencer10@influencer.com', zipcode: '15106', gender: 'female', password: '1234'}
+          {name: 'influencer9', email: 'influencer9@in.com', usertype: 'influencer', geo: 'CA', zipcode: '15106', gender: 'male', password_digest: '123'},
+          {name: 'director01', email: 'director@dir.com', usertype: 'director', geo: 'CA', zipcode: '15106', gender: 'female', password_digest: '123'}
        ],
 
         productData: [

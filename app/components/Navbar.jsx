@@ -58,6 +58,15 @@ class AppBar extends React.Component {
           <MenuItem onClick={this.onClickLogout}>Logout</MenuItem>
         </NavDropdown>
         );
+      } else if (auth.user.usertype === 'director') {
+        return (
+        <NavDropdown eventKey={6} title={auth.user.name} id="users">
+          <MenuItem href="/profile">Profile</MenuItem>
+          <MenuItem href="/manageinflu">Manage Influencer</MenuItem>
+          <MenuItem href="/messager">Message Platform</MenuItem>
+          <MenuItem onClick={this.onClickLogout}>Logout</MenuItem>
+        </NavDropdown>
+          );
       } else {
           return (
           <NavDropdown eventKey={6} title={auth.user.name} id="users">

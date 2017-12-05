@@ -1,5 +1,5 @@
 import React from 'react';
-import { regularlogin, influencerlogin, brandlogin, socialLogin } from '../reducers/auth';
+import { regularlogin, influencerlogin, brandlogin, directorlogin, socialLogin } from '../reducers/auth';
 import { FacebookLogin } from 'react-facebook-login-component';
 import { GoogleLogin } from 'react-google-login-component';
 import { FacebookButton, FacebookCount } from "react-social";
@@ -43,6 +43,8 @@ class Login extends React.Component {
       this.props.influencerlogin(credentials);
     } else if (this.state.usertype == 'brand_account') {
       this.props.brandlogin(credentials);
+    } else if (this.state.usertype == 'director') {
+      this.props.directorlogin(credentials);
     }
   }
 
@@ -98,6 +100,7 @@ class Login extends React.Component {
                       <option value="regular_user">Regular User</option>
                       <option value="influencer">Influencer</option>
                       <option value="brand_account">Brand Account</option>
+                      <option value="director">Director</option>
                     </select>
                 </div>
                 <div className="form-group">
@@ -159,6 +162,7 @@ const mapState = ({ auth }) => ({
 const mapDispatch = {
   regularlogin,
   influencerlogin,
+  directorlogin,
   brandlogin,
   socialLogin,
 }
