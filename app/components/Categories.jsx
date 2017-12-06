@@ -12,7 +12,7 @@ export class Categories extends Component {
 
   render () {
     return (
-      <NavDropdown eventKey={1} title="SHOP" id="categories-dropdown">
+      <NavDropdown eventKey={1} title="USER TYPE" id="categories-dropdown">
         {this.props.categories.rootList.map(category => {
           return (
             <MenuItem key={category.id} onClick={(e) => (browserHistory.push(`/products/category/${category.name}`))}>

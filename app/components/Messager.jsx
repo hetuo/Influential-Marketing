@@ -17,15 +17,13 @@ class Messager extends React.Component {
       log: [],
       users: [],
       connectedUsers:{},
-      socket: io.connect(),
-      auth: {}
+      socket: io.connect()
     };
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
-    // this.setState({ auth: nextProps.auth });
-    console.log("messager:", this.state.auth);
+    this.setState({ auth: nextProps.auth });
   }
 
   createMessageRoom() {
@@ -35,18 +33,11 @@ class Messager extends React.Component {
       email: 'abc@qq.com',
     }
     this.props.message(userInfo);
-  }userList
+  }
 
   componentDidMount() {
-    let {auth} = this.state;
     let {socket} = this.state;
-    let chatRole = this.props.location.query.role;
-    let chatType = this.props.location.query.type;
-    console.log("state.auth:", auth, this.state, this.state.auth);
-    console.log("state.socket:", socket);
-    // if (this.state.auth.user != null) {
-      Client(socket, chatRole, chatType, "abc");
-    // }
+    Client(socket);
   }
 
   componentDidUpdate(prevProps, prevState){
@@ -61,10 +52,12 @@ class Messager extends React.Component {
       email: e.target.email.value,
       password: e.target.password.value,
     }
+    console.log("director: ", this.props);
   }
 
   render() {
-    console.log("render:", this.props.auth);
+    const { user, alert } = this.props;
+    // console.log("director.jsx: ", this.props);
     return (
       <div className="user-director">
         <ol className="breadcrumb">
@@ -119,20 +112,27 @@ Messager.propTypes = {
     socket: PropTypes.object
 };
 
-const mapProps = (state, ownProps)  => {
+function mapStateToProps(state, ownProps) {
   const {chatState} = state;
-  console.log("Message.jsx***", state.auth);
   return {
-    auth: chatState.auth,
     users: chatState.userList,
     log: chatState.log,
     socket: chatState.socket,
     message:chatState.props
   };
 }
- 
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(actions, dispatch)
+    };
+}
+
 const mapDispatch = dispatch => ({
-  actions: bindActionCreators(actions, dispatch)
+  logout: () => {
+    dispatch(logout());
+    browserHistory.push('/');
+  }
 });
 
-export default connect(mapProps, mapDispatch)(Messager);
+export default connect(mapStateToProps, mapDispatchToProps)(Messager);

@@ -22,13 +22,6 @@ let data = {
          {name: 'Iva Carson', email: 'nikok@ejrib.gov', password: '1234'}
         ],
 
-        // influencerData: [
-        //  {name: 'influencer1', email: 'influencer1@example.com', password: '1234'},
-        //  {name: 'influencer2', email: 'influencer2@example.com', password: '1234'},
-        //  {name: 'influencer3', email: 'influencer3@example.com', password: '1234'},
-        //  {name: 'influencer4', email: 'influencer4@example.com', password: '1234'}
-        // ],
-
         brandData: [
            {name: 'brand1', email: 'brand1@brand.com', zipcode: '10001', password: '1234'},
            {name: 'brand2', email: 'brand2@brand.com', zipcode: '10001', password: '1234'},
@@ -38,7 +31,7 @@ let data = {
            {name: 'brand6', email: 'brand6@brand.com', zipcode: '90017', password: '1234'},
            {name: 'brand7', email: 'brand7@brand.com', zipcode: '15106', password: '1234'},
            {name: 'brand8', email: 'brand8@brand.com', zipcode: '15106', password: '1234'},
-           {name: 'brand', email: 'brand9@brand.com', usertype: 'brand_account', zipcode: '15106', password_digest: '123'}
+           {name: 'brand', email: 'brand9@brand.com', usertype: 'brand_account', zipcode: '15106', password_digest: '123456'}
         ],
 
 
@@ -51,8 +44,8 @@ let data = {
           {name: 'influencer6', email: 'influencer6@influencer.com', zipcode: '90017', gender: 'female',password: '1234'},
           {name: 'influencer7', email: 'influencer7@influencer.com', zipcode: '90017', gender: 'male', password: '1234'},
           {name: 'influencer8', email: 'influencer8@influencer.com', zipcode: '15106', gender: 'female',password: '1234'},
-          {name: 'influencer9', email: 'influencer9@in.com', usertype: 'influencer', geo: 'CA', zipcode: '15106', gender: 'male', password_digest: '123', public_key: 'pk_test_dUpJ1puJKBLPgcFE7iaPdJoa', secret_key: 'sk_test_Y1mt48rrnpqB3QVpc2iZiG3t'},
-          {name: 'director01', email: 'director@dir.com', usertype: 'director', geo: 'CA', zipcode: '15106', gender: 'female', password_digest: '123'}
+          {name: 'influencer9', email: 'influencer9@in.com', usertype: 'influencer', geo: 'CA', zipcode: '15106', gender: 'male', password_digest: '123456', public_key: 'pk_test_dUpJ1puJKBLPgcFE7iaPdJoa', secret_key: 'sk_test_Y1mt48rrnpqB3QVpc2iZiG3t'},
+          {name: 'director01', email: 'zzhang115@dons.usfca.edu', usertype: 'director', geo: 'CA', zipcode: '15106', gender: 'female', password_digest: '123456'}
        ],
 
         productData: [
@@ -121,11 +114,11 @@ let data = {
         , price: 270.00, quantity: 15, image:'/images/products/KREWE-Conti-Zulu-Sunglasses-Front_large.jpg'}
       ],
       categoryData: [
-          {name: 'Mens'},
-          {name: 'Womens'},
-          {name: 'Mirrored'},
-          {name: 'Gold Hardware'},
-          {name: 'New Arrivals'}
+          {name: 'Regular User'},
+          {name: 'Influencer'},
+          {name: 'Brand Account'},
+          {name: 'Director'},
+          {name: 'Admin'}
       ],
       orderData: [
         {total: 10, user_id: 1, shipping_address_id: 1, billing_address_id: 1},

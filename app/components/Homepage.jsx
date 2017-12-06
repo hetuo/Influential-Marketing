@@ -17,10 +17,10 @@ const Home = ({ products }) => {
     { <section className="container-fluid promo-wrapper">
         <div className="row">
           <div className="col-xs-12 col-lg-6 our-story">
-            <Link href="/about"> <span>OUR STORY</span> </Link>
+            <Link href="/about"> <span>About</span> </Link>
           </div>
           <div className="col-xs-12 col-lg-6 new-arrival">
-            <Link href="/products/category/New%20Arrivals"> <span>SHOP ARRIVALS</span>	</Link>
+            <Link href="/products/category/New%20Arrivals"> <span>NEW RELEASES</span>	</Link>
           </div>
         </div>
       </section> }

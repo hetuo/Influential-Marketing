@@ -111,11 +111,10 @@ class Login extends React.Component {
                   <label>Password</label>
                   <input className="form-control" name="password" type="password" />
                 </div>
-                <button type="submit" className="btn btn-info" name="submit">Login</button>
+                <button type="submit" className="btn btn-default" name="submit">Login</button>
                 <Link href="/address"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;forget password?</span></Link>
               </form>
               <div>
-                <label className="control-label">Sign with</label>
                 <br/>
                 <GoogleLogin  socialId="723817412811-8q0570j4d9vo0htq66q8r7elj5h818oj.apps.googleusercontent.com"
                               className="google-login"

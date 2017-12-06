@@ -32,8 +32,8 @@ export default class Payment extends React.Component{
                   name={payment.payment.name}
                   description={payment.payment.description}
                   amount={payment.payment.amount}
-                  pk={payment.payment.pk}
-                  sk={payment.payment.sk}
+                  pk={payment.payment.public_key}
+                  sk={payment.payment.secret_key}
                 />
               </div>
             </div>

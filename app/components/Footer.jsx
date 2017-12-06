@@ -34,7 +34,7 @@ export default class Footer extends Component {
       <div className="footer container-fluid">
         <div className="row">
           <div className="col-xs-6 col-lg-4">
-            <h4><strong>SHOP</strong></h4>
+            <h4><strong>USER</strong></h4>
             <Categories />
           </div>
           <div className="col-xs-6 col-lg-4">
@@ -47,15 +47,12 @@ export default class Footer extends Component {
                 <Link><span>CONTACT</span></Link>
               </li>
               <li>
-                <Link><span>SHIPPING + RETURN</span></Link>
-              </li>
-              <li>
                 <Link><span>TERMS + CONDITION</span></Link>
               </li>
             </ul>
           </div>
           <div className="col-xs-12 col-lg-4">
-            <h4><strong>GET LASTED FROM ONLINE BLING</strong></h4>
+            <h4><strong>GET LASTED FROM INFLUENCER MARKETING</strong></h4>
 
             <form className="subscription-form" onSubmit={(e)=>(this.onFormSubmit(e))}>
               <div>
@@ -72,9 +69,6 @@ export default class Footer extends Component {
               <Link><i className="fa fa-pinterest-p" aria-hidden="true"></i></Link>
             </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col-xs-12 text-center">ONLINE BLING® is registered trademarks of Drake LLC</div>
         </div>
       </div>
     );

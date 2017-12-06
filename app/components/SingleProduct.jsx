@@ -97,7 +97,7 @@ export default class SingleProduct extends React.Component {
               <button type="submit" className="btn btn-success">Add Review</button>
                 <FacebookButton  className="btn btn-primary" url={ url } appId="193858637827812">
                   <FontAwesome  className="cs-fb-icon" name='facebook' />
-                  &nbsp;shares
+                  &nbsp;Shares
                 </FacebookButton>
             </div>
           </form>) : ''}

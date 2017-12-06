@@ -172,13 +172,6 @@ export default class Influencer extends React.Component {
           <br />
         </div>
         </div> 
-
-        <div>
-          <ButtonToolbar>
-            <Button onClick={this.createMessageRoom} bsStyle="primary" bsSize="small">Small button</Button>
-          </ButtonToolbar>
-        </div>
-
       </div>
     );
   }

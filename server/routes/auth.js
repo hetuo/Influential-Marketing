@@ -295,19 +295,49 @@ auth.put('/directorlogin', (req, res, next)=>{
 
 auth.put('/sociallogin', (req, res, next)=>{
   console.log("sociallogin auth:", req.body);
-  User.findOrCreate({
-    where: {
-      email: req.body.email
-    }
-  }).spread((user, created)=>{
-    console.log('user: ', user);
-    return user.update(req.body)
-  }).then(updated=>{
-    req.logIn(updated, err=>{
-      if(err) return next(err)
-      res.json(updated)
+  if (req.body.usertype == 'regular_user') {
+    User.findOrCreate({
+      where: {
+        email: req.body.email
+      }
+    }).spread((user, created)=>{
+      console.log('user: ', user);
+      return user.update(req.body)
+    }).then(updated=>{
+      req.logIn(updated, err=>{
+        if(err) return next(err)
+        res.json(updated)
+      })
     })
-  })
+  } else if (req.body.usertype == 'influencer' || req.body.usertype == 'director') {
+    Influencer.findOrCreate({
+      where: {
+        email: req.body.email
+      }
+    }).spread((user, created)=>{
+      console.log('user: ', user);
+      return user.update(req.body)
+    }).then(updated=>{
+      req.logIn(updated, err=>{
+        if(err) return next(err)
+        res.json(updated)
+      })
+    })
+  } else if (req.body.usertype == 'brand_account') {
+    Brand.findOrCreate({
+      where: {
+        email: req.body.email
+      }
+    }).spread((user, created)=>{
+      console.log('user: ', user);
+      return user.update(req.body)
+    }).then(updated=>{
+      req.logIn(updated, err=>{
+        if(err) return next(err)
+        res.json(updated)
+      })
+    })
+  }
 })
 
 auth.put('/regularsignup', (req, res, next)=>{
