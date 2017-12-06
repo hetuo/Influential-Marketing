@@ -23,6 +23,7 @@ import SingleReview from './components/SingleReview';
 import orderList from './containers/orderListContainer';
 import CreateCampaignContainer from './containers/CreateCampaignContainer'
 import CommentContainer from './containers/CommentContainer'
+import PaymentContainer from './containers/PaymentContainer'
 import CampaignContainer from './containers/CampaignContainer'
 import createReviewContainer from './containers/createReviewContainer'
 import DetailContainer from './containers/DetailContainer'
@@ -85,6 +86,7 @@ export default ({ onAppEnter, onProductEnter, onCartEnter, onOrderEnter, onCampa
       <Route path="/managecampaign/:userId" component={manageCampaignContainer} onEnter={onManageCampaign} />
       <Route path="/detail/:userId" component={DetailContainer} onEnter={onDetailEnter} />
       <Route path="/invites" component={ShowAllInvites} />
+      <Route path="/pay" component={PaymentContainer} />
       <Route path="*" component={Homepage} />
     </Route>
   </Router>

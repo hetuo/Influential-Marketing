@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import ReactTable from 'react-table';
 import matchSorter from 'match-sorter';
 import FlatButton from 'material-ui/FlatButton';
-import { setSelectCampaign } from '../action-creators/CampaignActionCreator';
+import { setSelectCampaign, updateCampaign } from '../action-creators/CampaignActionCreator';
 import { getInfluencers } from '../action-creators/InfluencerActionCreator';
+import { createPayment } from '../action-creators/PaymentActionCreator';
 import Pay from './Pay';
 
 class SingleCampaign extends React.Component{
@@ -49,13 +50,29 @@ class SingleCampaign extends React.Component{
       browserHistory.push(`/pay/${original.influencer_id}`)
   }
 
-  pay = (original) => {
+/*  pay = (original) => {
     const req = {
       hirestage: 2
     }
     this.props.updateCampaign(original.id, req);
     browserHistory.push(`/pay/${original.influencer_id}`)
-  }
+  }*/
+
+  pay = (name, description, amount, pk, sk, id) => {
+      const req = {
+        hirestage: 2
+      }
+      this.props.updateCampaign(id, req);
+      const payment = {
+        name: name,
+        description: description,
+        amount: amount,
+        pk: pk,
+        sk: sk
+      }
+      this.props.createPayment(payment);
+      browserHistory.push(`/pay`)
+    }
 
   view = (original) => {
     browserHistory.push(`/detail/${original.influencer_id}`)
@@ -135,6 +152,12 @@ class SingleCampaign extends React.Component{
                           const influencer = this.props.influencers[original.influencer_id - 1];
                         //  console.log('88888888888', influencer);
                           if (influencer){
+                            const name='Payment from ' + this.props.campaign.campcreater
+                            const description='Payment from ' + this.props.campaign.campcreater
+                            const amount=this.props.campaign.campbudget
+                            const pk=influencer.public_key
+                            const sk=influencer.secret_key
+                            const id=original.id
                             return (
                               <Pay
                                 name={'Payment from ' + this.props.campaign.campcreater}
@@ -142,7 +165,11 @@ class SingleCampaign extends React.Component{
                                 amount={this.props.campaign.campbudget}
                                 pk={influencer.public_key}
                                 sk={influencer.secret_key}
+                                id={original.id}
                               />
+                              /*<FlatButton label="Pay" onClick={
+                                  () => this.pay(name, description, amount, pk, sk, id)
+                              } />*/
                             )
                           }
                         }else if (original.hirestage === 0) {
@@ -151,7 +178,7 @@ class SingleCampaign extends React.Component{
                           );
                         }else{
                           return (
-                            <FlatButton label="Pay" disabled="true" onClick={() => this.pay(original)} />
+                            <FlatButton label="Pay" disabled="true" onClick={() => this.payFirst(original)} />
                           );
                         }
                       },
@@ -201,6 +228,6 @@ const mapState = ({ influencers }) => ({
 
 //const mapState = null;
 
-const mapDispatch = { setSelectCampaign, getInfluencers };
+const mapDispatch = { setSelectCampaign, getInfluencers, updateCampaign, createPayment };
 
 export default connect(mapState, mapDispatch)(SingleCampaign);

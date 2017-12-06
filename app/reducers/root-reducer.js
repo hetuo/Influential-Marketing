@@ -10,7 +10,8 @@ const rootReducer = combineReducers({
   influencers: require('./influencer-reducer').default,
   campaign: require('./campaign-reducer').default,
   chatState: require('./chatReducer').default,
-  image: require('./image-reducer').default
+  image: require('./image-reducer').default,
+  payment: require('./payment-reducer').default
 });
 
 export default rootReducer;
