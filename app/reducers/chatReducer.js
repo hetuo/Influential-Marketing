@@ -1,9 +1,9 @@
 "use strict";
 
-import * as types               from "../constants/actionTypes";
+import * as types           from "../constants/actionTypes";
 import {chatState}          from "../constants/initialState";
 
-export default function projectReducer(state = chatState, action) {
+export default function project_Reducer(state = chatState, action) {
   switch (action.type) {
     case types.SEND_MESSAGE_REQUEST:
       return Object.assign({}, state, {
@@ -11,7 +11,6 @@ export default function projectReducer(state = chatState, action) {
         socket: action.socket
       });
     case types.NEW_USER_CONNECTED:
-
       return Object.assign({}, state, {
         userName:action.newObject[Object.keys(action.newObject)[0]]
       });

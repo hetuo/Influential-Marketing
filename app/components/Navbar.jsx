@@ -43,7 +43,8 @@ class AppBar extends React.Component {
             <MenuItem href="/profile">Profile</MenuItem>
             <MenuItem href="/address">Address Book</MenuItem>
             <MenuItem href={"/review/" + auth.user.id}>Write Review</MenuItem>
-	    <MenuItem href="/invites">Invites: {this.props.invites.length}</MenuItem>
+            <MenuItem href="/invites">Invites: {this.props.invites.length}</MenuItem>
+            <MenuItem href="/messager?role=influencer&type=two">Message</MenuItem>
             <MenuItem role="separator" className="divider"></MenuItem>
             <MenuItem onClick={this.onClickLogout}>Logout</MenuItem>
           </NavDropdown>
@@ -62,8 +63,8 @@ class AppBar extends React.Component {
         return (
         <NavDropdown eventKey={6} title={auth.user.name} id="users">
           <MenuItem href="/profile">Profile</MenuItem>
-          <MenuItem href="/manageinflu">Manage Influencer</MenuItem>
-          <MenuItem href="/messager">Message Platform</MenuItem>
+          <MenuItem href="/influencer">Manage Influencer</MenuItem>
+          <MenuItem href={"/messager?role=director&type=group&name=" + auth.user.name}>Group Message</MenuItem>
           <MenuItem onClick={this.onClickLogout}>Logout</MenuItem>
         </NavDropdown>
           );
@@ -87,11 +88,11 @@ class AppBar extends React.Component {
     }
   }
 
-
-
   render(){
     const { auth } = this.props;
-    //console.log("WTF...... %s %s", auth.email, auth.password_digest);
+    if (this.props.auth.user != null) {
+      console.log("WTF...... %s %s", this.props.auth.user.name);
+    }
     return (
       <Navbar collapseOnSelect>
         <Navbar.Header>
@@ -101,11 +102,10 @@ class AppBar extends React.Component {
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          {/*<Nav>
-            <Categories/>
-            <NavItem eventKey={2} onClick={() => browserHistory.push("/about")}>ABOUT</NavItem>
+          {<Nav>
+            <NavItem eventKey={2} onClick={() => browserHistory.push("/about")}>HELP PORTAL</NavItem>
             <NavItem eventKey={3} onClick={() => browserHistory.push("/press")}>PRESS</NavItem>
-          </Nav>*/}
+          </Nav>}
           <Nav pullRight>
             {/*<NavItem eventKey={4} href="#">
               <i className="fa fa-search" aria-hidden="true"></i>
@@ -127,8 +127,7 @@ class AppBar extends React.Component {
 const mapProps = ({ auth, campaign }) => ({
    auth: auth,
    invites: campaign.invites
-});
-
+  });
 
 const mapDispatch = dispatch => ({
   logout: () => {

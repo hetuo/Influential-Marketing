@@ -51,7 +51,7 @@ let data = {
           {name: 'influencer6', email: 'influencer6@influencer.com', zipcode: '90017', gender: 'female',password: '1234'},
           {name: 'influencer7', email: 'influencer7@influencer.com', zipcode: '90017', gender: 'male', password: '1234'},
           {name: 'influencer8', email: 'influencer8@influencer.com', zipcode: '15106', gender: 'female',password: '1234'},
-          {name: 'influencer9', email: 'influencer9@in.com', usertype: 'influencer', geo: 'CA', zipcode: '15106', gender: 'male', password_digest: '123'},
+          {name: 'influencer9', email: 'influencer9@in.com', usertype: 'influencer', geo: 'CA', zipcode: '15106', gender: 'male', password_digest: '123', public_key: 'pk_test_dUpJ1puJKBLPgcFE7iaPdJoa', secret_key: 'sk_test_Y1mt48rrnpqB3QVpc2iZiG3t'},
           {name: 'director01', email: 'director@dir.com', usertype: 'director', geo: 'CA', zipcode: '15106', gender: 'female', password_digest: '123'}
        ],
 
@@ -148,10 +148,22 @@ let data = {
         {product_id: 6, category_id: 2}
       ],
       productReviewData: [
-        {title: 'This product is awesome', body: 'super dope product!!! something something something', stars: '5', product_id: 2, influencer_id: 2, image1: '/images/products/StLouis-MatteBlack-Website-Front_large.png'},
-        {title: 'This product is awesome', body: 'Beautiful Ring!! something something somethingsomething something ', stars: '4', product_id: 4, influencer_id: 4, image1: '/images/products/CL-10-OysterBlack-Front_285a8f7d-6c3a-4981-a556-942442bfffe6_large.png'},
-        {title: 'This product is awesome', body: 'aweful worst product ever something something somethingsomething', stars: '1', product_id: 3, influencer_id: 1, image1: '/images/products/Orleans-24KTitaniumCarnevale-Website-Front_1024x1024.png'},
-        {title: 'This product is awesome', body: 'Amazing! something somethingsomethingsomething something something something something something ', stars: '5', product_id: 5, influencer_id: 3, image1: '/images/products/Franklin-Champagne24K-Front-Website_large.png'}
+        {title: 'It was great! ', body: 'The pork belly is luscious, delicious, and melts in your mouth.... For the price and easy accessibility, it was great! ', stars: '5', product_id: 2, influencer_id: 2, image1: '/images/products/0.png'},
+        {title: 'Tried: Hakata DX ', body: 'Their bone broth is thick, rich, unctuous, and bursting with flavor It is not white like the stuff I had in Tokyo before but more orange...', stars: '4', product_id: 4, influencer_id: 4, image1: '/images/products/1.png'},
+        {title: 'One of the best ramen I have ever had! ', body: 'Tips: Get there 15 minutes before opening on weekends or if it fills up sign the waiting list on the door.', stars: '1', product_id: 3, influencer_id: 1, image1: '/images/products/2.png'},
+        {title: 'GREAT RAMEN', body: 'Amazing! TIP: If you like your egg soft boiled, take out the egg as soon as you can.. Mines was fully cooked when I remembered I had an egg', stars: '5', product_id: 5, influencer_id: 3, image1: '/images/products/3.png'},
+        {title: 'Pretty damn good!', body: 'This is my second visit to Marafuku. I thought about the ramen for months after visiting 2 months prior.', stars: '5', product_id: 2, influencer_id: 2, image1: '/images/products/4.png'},
+        {title: 'This place has AMAZING ramen.', body: 'Expect long lines, 1hr or more.  But also expect awesome food.  4.5stars.  Even if you have a large party ', stars: '4', product_id: 4, influencer_id: 4, image1: '/images/products/5.png'},
+        {title: 'The pork belly is luscious', body: 'I will definitely come back to try some of the other stuff.  I will come before I get hungry', stars: '1', product_id: 3, influencer_id: 1, image1: '/images/products/16.png'},
+        {title: 'Marufuku ramen was awesome.', body: 'Amazing! something somethingsomethingsomething something something something something something ', stars: '5', product_id: 5, influencer_id: 3, image1: '/images/products/7.png'},
+        {title: 'RAMEN WAS AWESOME!!!!!!!', body: 'super dope product!!! something something something', stars: '5', product_id: 2, influencer_id: 2, image1: '/images/products/8.png'},
+        {title: 'Id recommend going there', body: 'Beautiful Ring!! something something somethingsomething something ', stars: '4', product_id: 4, influencer_id: 4, image1: '/images/products/9.png'},
+        {title: 'Service was good. ', body: 'aweful worst product ever something something somethingsomething', stars: '1', product_id: 3, influencer_id: 1, image1: '/images/products/10.png'},
+        {title: 'Very popular grub in Japantown', body: 'Amazing! something somethingsomethingsomething something something something something something ', stars: '5', product_id: 5, influencer_id: 3, image1: '/images/products/11.png'},
+        {title: 'Service: polite and fast.', body: 'super dope product!!! something something something', stars: '5', product_id: 2, influencer_id: 2, image1: '/images/products/12.png'},
+        {title: 'Would definitely recommend this place', body: 'Beautiful Ring!! something something somethingsomething something ', stars: '4', product_id: 4, influencer_id: 4, image1: '/images/products/13.png'},
+        {title: 'Possibly the best ramen I ve ever had.', body: 'aweful worst product ever something something somethingsomething', stars: '1', product_id: 3, influencer_id: 1, image1: '/images/products/14.png'},
+        {title: 'Some of the best Paitan Ramen I have ever had!!', body: 'Amazing! something somethingsomethingsomething something something something ', stars: '5', product_id: 5, influencer_id: 3, image1: '/images/products/15.png'},
       ],
       addressData: [
         {address1: '150 main street', city: 'Buffalo', state: 'NY', country: 'USA', zipcode: '12345', user_id: 1},

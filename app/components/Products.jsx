@@ -32,10 +32,10 @@ export default ({ products, category, location }) => (
        <div className="row">
          {
            products && products.map(product => (
-             <div className="product-item col-xs-12 col-lg-4" key={ product.id }>
+             <div className="product-item col-xs-15 col-lg-4" key={ product.id }>
                <Link to={`/products/${product.id}`}>
                  <div className="image-wrapper">
-                   <img src={ product.image1 || 'http://placehold.it/350x150' } />
+                   <img src={ product.image1 || 'http://placehold.it/490x210' } />
                  </div>
                  <div className="product-info">
                    {/*<span><strong>{ product.name } | $</strong></span>

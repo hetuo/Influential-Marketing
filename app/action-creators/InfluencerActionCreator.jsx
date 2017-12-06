@@ -19,14 +19,14 @@ export const receiveInfluencer = influencer => {
 
 
 export const getInfluencers = () => dispatch =>{
-		console.log("tring to get review");
-	  axios.get(`/api/influencers/`)
+	console.log("tring to get review");
+	axios.get(`/api/influencers/`)
 	  .then(response => {
 	    console.log('RESPONSE', response);
 	    //receiveReviews or receiveReview ??
 	    dispatch(receiveInfluencers(response.data));
-	  })
-	  .catch(error => console.error("Could Not Retrieve influencers", error))}
+	})
+	.catch(error => console.error("Could Not Retrieve influencers", error))}
 
 export const getSingleInfluencer = (id) => dispatch =>{
 		console.log("tring to get review");

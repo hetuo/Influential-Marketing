@@ -21,7 +21,6 @@ class Signup extends React.Component {
     this.setState({usertype: event.target.value});
     this.setState({gender: event.target.value});
     console.log("usertype:", this.state.usertype, event.target);
-    // console.log("usertype:", this.state.usertype);
   }
 
   onSignupSubmit(e){
@@ -37,6 +36,8 @@ class Signup extends React.Component {
         gender: e.target.gender.value,
         geo: e.target.geo.value,
         zipcode: e.target.zipcode.value,
+        public_key: e.target.pk.value,
+        secret_key: e.target.sk.value,
       }
       if (this.state.usertype == 'regular_user') {
         this.props.regularsignup(credentials);
@@ -45,7 +46,6 @@ class Signup extends React.Component {
       } else if (this.state.usertype == 'brand_account') {
         this.props.brandsignup(credentials);
       }
-
       console.log('credentials', credentials);
       browserHistory.push('/');
     }
@@ -78,6 +78,20 @@ class Signup extends React.Component {
                   <label>Email</label>
                   <input className="form-control" name="email" type="email" />
                 </div>
+                {
+                  this.state.usertype == 'influencer' ? 
+                  (<div className="form-group">
+                    <label>Stripe Public Key</label>
+                    <input className="form-control" name="pk" type="text" />
+                  </div>) : (<div></div>)
+                }
+                {
+                  this.state.usertype == 'influencer' ? 
+                  (<div className="form-group">
+                    <label>Stripe Secret Key</label>
+                    <input className="form-control" name="sk" type="text" />
+                  </div>) : (<div></div>)
+                }
                 <div className="form-group">
                   <label>Name</label>
                   <input className="form-control" name="name" type="text" />

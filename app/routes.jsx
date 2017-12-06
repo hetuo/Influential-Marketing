@@ -9,7 +9,6 @@ import Homepage from './components/Homepage';
 import ProductsContainer from './containers/ProductsContainer';
 import ProductContainer from './containers/SingleProductContainer';
 import ProfileContainer from './containers/ProfileContainer';
-import DirectorContainer from './containers/DirectorContainer';
 import Cart from './containers/CartContainer';
 import Login from './components/Login';
 import ShowAllInvites from './components/ShowAllInvites'
@@ -28,6 +27,7 @@ import CampaignContainer from './containers/CampaignContainer'
 import createReviewContainer from './containers/createReviewContainer'
 import DetailContainer from './containers/DetailContainer'
 import manageCampaignContainer from './containers/ManageCampaignContainer'
+import InfluencerContainer from './containers/InfluencerContainer'
 import { getProductsByInfluencerId } from './action-creators/products'
 import { getCampaignsByUserId } from './action-creators/CampaignActionCreator'
 import { getProducts, getProductsByCategoryId } from './action-creators/products';
@@ -60,6 +60,11 @@ const onProductsEnter = function (nextRouterState){
   store.dispatch(loadSingleCategory(nextRouterState.params.categoryName));
 };
 
+const onInfluencerEnter = function (nextRouterState) {
+  console.log("routes.jsx, ", store.getState());
+  store.dispatch(getSingleInfluencer(nextRouterState.params.userId));
+};
+
 export default ({ onAppEnter, onProductEnter, onCartEnter, onOrderEnter, onCampaignEnter, onCommentsEnter }) => (
   <Router history={browserHistory}>
     <Route path="/" component={Root} onEnter={onAppEnter}>
@@ -71,7 +76,6 @@ export default ({ onAppEnter, onProductEnter, onCartEnter, onOrderEnter, onCampa
       <Route path="/products/:productId" component={ProductContainer} onEnter={onProductEnter} />
       <Route path="/products/category/:categoryName" component={ProductsContainer} onEnter={onProductCategoryEnter} />
       <Route path="/profile" component={ProfileContainer} />
-      <Route path="/director" component={DirectorContainer} />
       <Route path="/login" component={Login} />
       <Route path="/signup" component={Signup} />
       <Route path="/messager" component={Messager} />
@@ -84,6 +88,7 @@ export default ({ onAppEnter, onProductEnter, onCartEnter, onOrderEnter, onCampa
       <Route path="/order" component={orderList} onEnter={onOrderEnter} />
       <Route path="/review/:userId" component={createReviewContainer} onEnter={onReviewEnter} />
       <Route path="/managecampaign/:userId" component={manageCampaignContainer} onEnter={onManageCampaign} />
+      <Route path="/influencer" component={InfluencerContainer} onEnter={onCampaignEnter} />
       <Route path="/detail/:userId" component={DetailContainer} onEnter={onDetailEnter} />
       <Route path="/invites" component={ShowAllInvites} />
       <Route path="/pay" component={PaymentContainer} />

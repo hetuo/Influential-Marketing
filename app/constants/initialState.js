@@ -1,6 +1,7 @@
 "use strict";
 
 export const chatState = {
+  auth: {},
   userList:[],
   log:[],
   message:'',

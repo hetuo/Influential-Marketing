@@ -1,4 +1,4 @@
-export default function Client (socket) {
+export default function Client (socket, usertype, chattype, username) {
     // io (socket.io Global object is provided with script above)
   window.onload = function () {
 
@@ -27,7 +27,7 @@ export default function Client (socket) {
     // Change user name , IF NOT empty string or existing user name, emits name changed event
     change_name.addEventListener("click",function (event) {
       event.preventDefault();
-      userList= [];
+      userList = [];
       Array.prototype.forEach.call(user_list.childNodes,function (li) {
         userList.push(li.innerText);
       });
@@ -38,12 +38,11 @@ export default function Client (socket) {
         if(popUp){
           // no warning
           let temp = "temp";
-        }
-        else{
+        } else{
           popUp = document.createElement("div");
           popUp.classList.add("exist");
           popUp.id= "exist_popup";
-          popUp.style.backgroundColor ="#fff";
+          popUp.style.backgroundColor ="#ff";
           let popText = document.createTextNode("User name already exist");
           if(user_name.value === ""){
             popText = document.createTextNode("User name can't be empty");
@@ -54,7 +53,7 @@ export default function Client (socket) {
           let fade = setInterval(function() {
 
 
-            popUp.style.opacity =(parseFloat(window.getComputedStyle(popUp).opacity) -0.03 );
+            popUp.style.opacity =(parseFloat(window.getComputedStyle(popUp).opacity));
           }, 100);
           setTimeout(function() {
             if(popUp){
@@ -64,8 +63,7 @@ export default function Client (socket) {
           }, 2000); // <-- time in milliseconds
         }
         user_name.value = userName;
-      }
-      else {
+      } else {
         socket.emit('name changed',  {newName:user_name.value, socket_id: socket.id});
         userName = user_name.value;
         let popUp =document.getElementById("exist_popup");
@@ -81,6 +79,7 @@ export default function Client (socket) {
     function scrollDownUserList() {
       user_list.scrollTop = user_list.scrollHeight;
     }
+
     function scrollDownMessage() {
       message_container.scrollTop = message_container.scrollHeight;
     }
@@ -88,21 +87,28 @@ export default function Client (socket) {
     // Add sent message to message container
     function addToChat(data) {
       let li = document.createElement("li");
-      if(data.socket_id === socket.id){
-        li.classList.add("self_message");
-      }
-      let text = data.user + ' says: ' + data.msg;
-      let textNode = document.createTextNode(text);
-      li.appendChild(textNode); //add the text node to the newly created li.
-      message_container.appendChild(li);
-      scrollDownMessage();
+      let users = document.getElementById("user_list").childNodes;
+
+      // if ((chattype == 'group') || (chattype == 'two' && users.length <= 2)) {
+
+        if(data.socket_id === socket.id) {
+          li.classList.add("self_message");
+        }
+        // console.log("Client.jsx:", data);
+
+        let text = data.user + ' says: ' + data.msg;
+        let textNode = document.createTextNode(text);
+        li.appendChild(textNode); //add the text node to the newly created li.
+        message_container.appendChild(li);
+        scrollDownMessage();
+      // } else {
+        // console.log("You can't chat with director now!");
+      // }
     }
 
     // New message emitted addd to message container
     socket.addEventListener('chat message', function(data){
-
       addToChat(data);
-
     }, false);
 
     // New user connected
@@ -111,37 +117,46 @@ export default function Client (socket) {
       let li;
       let text;
       let textNode;
+      let users = document.getElementById("user_list").childNodes;
 
-      // User connected to current socket (current browser tab, current user)
-      if(socket.id === data.socket_id){
-        user_name.value = data.user;
-        userName =  data.user;
-        li = document.createElement("li");
-        li.classList.add("welcome");
-        text = "Welcome to the Message Platform " + data.user + "!";
-        textNode = document.createTextNode(text);
-        li.appendChild(textNode);
-        message_container.insertBefore(li, message_container.childNodes[0]);
+      // console.log("Client.jsx:", chattype);
+      // if ((chattype == 'group') || (chattype == 'two' && users.length <= 2)) {
+          // console.log("Client.jsx:", users.length);
+        // User connected to current socket (current browser tab, current user)
+        if(socket.id === data.socket_id){
+          user_name.value = data.user;
+          // userName =  data.user;
+          userName = username;
+          console.log("userName:", userName);
+          li = document.createElement("li");
+          li.classList.add("welcome");
+          text = "Welcome to the Message Platform " + data.user + "!";
+          textNode = document.createTextNode(text);
+          li.appendChild(textNode);
+          message_container.insertBefore(li, message_container.childNodes[0]);
 
-        let users = document.getElementById("user_list").childNodes;
+          let users = document.getElementById("user_list").childNodes;
 
-        Array.prototype.forEach.call(users,function (li) {
-          if(li.innerText === userName){
-            li.classList.add("self");
-          }
-        });
-        document.getElementById("user_span").innerText = userName;
-      }
-      else{
-        // Let other users know about the new user
-        li = document.createElement("li");
-        li.classList.add("joined");
-        text = data.user + " has joined the message platform!";
-        textNode = document.createTextNode(text);
-        li.appendChild(textNode);
-        message_container.appendChild(li);
-        scrollDownMessage();
-      }
+          Array.prototype.forEach.call(users,function (li) {
+            console.log("for:", li.innerText);
+            if(li.innerText === userName){
+              li.classList.add("self");
+            }
+          });
+          document.getElementById("user_span").innerText = userName;
+        } else {
+          // Let other users know about the new user
+          li = document.createElement("li");
+          li.classList.add("joined");
+          text = data.user + " has joined the message platform!";
+          textNode = document.createTextNode(text);
+          li.appendChild(textNode);
+          message_container.appendChild(li);
+          scrollDownMessage();
+        }
+      // } else {
+      //   console.log("You can't join chat now!");
+      // }
 
     }, false);
 
@@ -154,8 +169,7 @@ export default function Client (socket) {
 
       if(socket.id === data.socket_id){
         let temp = "temp";
-      }
-      else{
+      } else {
         // Let other users know which user has disconnected
         li = document.createElement("li");
         li.classList.add("left");
@@ -203,6 +217,7 @@ export default function Client (socket) {
       data.userList.forEach(function (user) {
         li = document.createElement("li");
         li.classList.add("user");
+        console.log("Client user:", user, "username:", userName); 
 
         // Current user
         if(userName === user){
