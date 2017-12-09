@@ -53,6 +53,16 @@ module.exports = express.Router()
     .catch(next)
   })
 
+  //.get('/revenue/:brand_id', forbidden('only admins can list revenues'), (req, res, next) => {
+  .get('/revenue/:brand_id', (req, res, next) => {
+    HireInfluencer.sum(
+      'payment_amount', {
+      where: { brand_id: req.params.brand_id, hirestage: 2  }
+    })
+    .then(sum => res.json(sum))
+    .catch(next)
+  })
+
   .post('/', (req, res, next)=>{
     console.log("hire_influencer's req.body", req.body)
 
