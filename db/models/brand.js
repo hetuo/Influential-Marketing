@@ -7,7 +7,7 @@ const _ = require('lodash');
 
 const Brand = db.define('brands', {
   name: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING
     // allowNull: false,
     // validate: { notEmpty: true }
   },
@@ -18,6 +18,10 @@ const Brand = db.define('brands', {
     validate: {
       isEmail: true,
     }
+  },
+
+  geo: {
+    type: Sequelize.STRING
   },
 
   zipcode: {

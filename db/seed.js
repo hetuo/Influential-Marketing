@@ -23,15 +23,15 @@ let data = {
         ],
 
         brandData: [
-           {name: 'brand1', email: 'brand1@brand.com', zipcode: '10001', password: '1234'},
-           {name: 'brand2', email: 'brand2@brand.com', zipcode: '10001', password: '1234'},
-           {name: 'brand3', email: 'brand3@brand.com', zipcode: '10001', password: '1234'},
-           {name: 'brand4', email: 'brand4@brand.com', zipcode: '90017', password: '1234'},
-           {name: 'brand5', email: 'brand5@brand.com', zipcode: '90017', password: '1234'},
-           {name: 'brand6', email: 'brand6@brand.com', zipcode: '90017', password: '1234'},
-           {name: 'brand7', email: 'brand7@brand.com', zipcode: '15106', password: '1234'},
-           {name: 'brand8', email: 'brand8@brand.com', zipcode: '15106', password: '1234'},
-           {name: 'brand', email: 'brand9@brand.com', usertype: 'brand_account', zipcode: '15106', password_digest: '123456'}
+           {name: 'brand1', category: 'food', email: 'brand1@brand.com', usertype: 'brand_account', geo: 'NY',zipcode: '10001', password_digest: '1234'},
+           {name: 'brand2', category: 'food', email: 'brand2@brand.com', usertype: 'brand_account', geo: 'NY',zipcode: '10001', password_digest: '1234'},
+           {name: 'brand3', category: 'beverage', email: 'brand3@brand.com', usertype: 'brand_account', geo: 'NY',zipcode: '10001', password_digest: '1234'},
+           {name: 'brand4', category: 'food', email: 'brand4@brand.com', usertype: 'brand_account', geo: 'CA',zipcode: '90017', password_digest: '1234'},
+           {name: 'brand5', category: 'food', email: 'brand5@brand.com', usertype: 'brand_account', geo: 'CA',zipcode: '90017', password_digest: '1234'},
+           {name: 'brand6', category: 'beverage', email: 'brand6@brand.com', usertype: 'brand_account', geo: 'CA',zipcode: '90017', password_digest: '1234'},
+           {name: 'brand7', category: 'food', email: 'brand7@brand.com', usertype: 'brand_account', geo: 'PA',zipcode: '15106', password_digest: '1234'},
+           {name: 'brand8', category: 'food', email: 'brand8@brand.com', usertype: 'brand_account', geo: 'PA', zipcode: '15106', password_digest: '1234'},
+           {name: 'brand9', category: 'beverage', email: 'brand9@brand.com', usertype: 'brand_account', geo: 'PA', zipcode: '15106', password_digest: '1234'}
         ],
 
 
