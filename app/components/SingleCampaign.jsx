@@ -67,8 +67,8 @@ class SingleCampaign extends React.Component{
         name: name,
         description: description,
         amount: amount,
-        pk: pk,
-        sk: sk
+        pk: 'pk_test_dUpJ1puJKBLPgcFE7iaPdJoa',
+        sk: 'sk_test_Y1mt48rrnpqB3QVpc2iZiG3t'
       }
       this.props.createPayment(payment);
       browserHistory.push(`/pay`)
@@ -155,16 +155,18 @@ class SingleCampaign extends React.Component{
                             const name='Payment from ' + this.props.campaign.campcreater
                             const description='Payment from ' + this.props.campaign.campcreater
                             const amount=this.props.campaign.campbudget
-                            const pk=influencer.public_key
-                            const sk=influencer.secret_key
+                            const pk='pk_test_dUpJ1puJKBLPgcFE7iaPdJoa'
+                            const sk='sk_test_Y1mt48rrnpqB3QVpc2iZiG3t'
                             const id=original.id
                             return (
                               <Pay
                                 name={'Payment from ' + this.props.campaign.campcreater}
                                 description={'Payment from ' + this.props.campaign.campcreater}
                                 amount={this.props.campaign.campbudget}
-                                pk={influencer.public_key}
-                                sk={influencer.secret_key}
+                                //pk={influencer.public_key}
+                                //sk={influencer.secret_key}
+                                pk={pk}
+                                sk={sk}
                                 id={original.id}
                               />
                               /*<FlatButton label="Pay" onClick={
