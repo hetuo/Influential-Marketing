@@ -99,7 +99,7 @@ export default class Campaign extends React.Component{
           <li className="active">Campaign</li>
         </ol>
         <div className='grid grid__gutters grid__1of2 grid__space-around animate-top'>
-          <div className='grid-cell animate-top'  style={{maxWidth: '700px', minWidth: '280px'}}>
+          <div className='grid-cell animate-top'  style={{maxWidth: '910px', minWidth: '280px'}}>
           <h1>{"You can invite "+ (this.props.campaign.numinfluencers - this.state.selectAll) + " influencers"}</h1>
           <ReactTable
             data={influencers}
@@ -108,7 +108,7 @@ export default class Campaign extends React.Component{
               String(row[filter.id]) === filter.value}
             columns={[
               {
-                Header: "Info",
+                Header: "Campaign Info",
                 columns: [
                   {
                     Header: "Id",
@@ -117,7 +117,7 @@ export default class Campaign extends React.Component{
                     filterMethod: (filter ,rows) =>
                       matchSorter(rows, filter.value, { keys: ["id"] }),
                     filterAll: true,
-                    width: 45
+                    width: 100
                   },
                   {
                     Header: "Name",
@@ -125,14 +125,15 @@ export default class Campaign extends React.Component{
                     filterMethod: (filter ,rows) =>
                       matchSorter(rows, filter.value, { keys: ["name"] }),
                     filterAll: true,
-                    width: 100
+                    width: 150
                   },
                   {
                     Header: "Email",
                     accessor: "email",
                     filterMethod: (filter ,rows) =>
                       matchSorter(rows, filter.value, { keys: ["email"] }),
-                    filterAll: true
+                    filterAll: true,
+                    width: 250 
                   },
                   {
                     Header: "Gender",
@@ -140,7 +141,7 @@ export default class Campaign extends React.Component{
                     filterMethod: (filter ,rows) =>
                       matchSorter(rows, filter.value, { keys: ["gender"] }),
                     filterAll: true,
-                    width: 60
+                    width: 100
                   },
                   {
                     Header: "Zipcode",
@@ -148,7 +149,7 @@ export default class Campaign extends React.Component{
                     filterMethod: (filter ,rows) =>
                       matchSorter(rows, filter.value, { keys: ["zipcode"] }),
                     filterAll: true,
-                    width: 60
+                    width: 100
                   },
                   {
                     Header: "View",

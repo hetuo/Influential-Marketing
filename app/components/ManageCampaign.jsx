@@ -41,8 +41,6 @@ export default class ManageCampaign extends React.Component{
   }
 
   detail(campaigns){
-    console.log('WTTTTTTTTTTTTTTf');
-    //return(<div><h1>WTF</h1></div>);
     if (campaigns){
       campaigns && campaigns.map((campaign) => {
         if (campaign.hire_influencers){
@@ -92,7 +90,7 @@ export default class ManageCampaign extends React.Component{
             </ol>
           </div>
           <div className='grid grid__gutters grid__1of2 grid__space-around animate-top'>
-            <div className='grid-cell animate-top'  style={{maxWidth: '700px', minWidth: '280px'}}>
+            <div className='grid-cell animate-top'  style={{maxWidth: '910px', minWidth: '280px'}}>
             {
               campaigns ? (<CampaignList campaigns={ campaigns } />) : (this.noCampaign())
             }

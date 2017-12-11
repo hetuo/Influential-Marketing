@@ -9,7 +9,6 @@ import Homepage from './components/Homepage';
 import ProductsContainer from './containers/ProductsContainer';
 import ProductContainer from './containers/SingleProductContainer';
 import ProfileContainer from './containers/ProfileContainer';
-import Cart from './containers/CartContainer';
 import Login from './components/Login';
 import ShowAllInvites from './components/ShowAllInvites'
 import Signup from './components/Signup';
@@ -65,14 +64,13 @@ const onInfluencerEnter = function (nextRouterState) {
   store.dispatch(getSingleInfluencer(nextRouterState.params.userId));
 };
 
-export default ({ onAppEnter, onProductEnter, onCartEnter, onOrderEnter, onCampaignEnter, onCommentsEnter }) => (
+export default ({ onAppEnter, onProductEnter, onOrderEnter, onCampaignEnter, onCommentsEnter }) => (
   <Router history={browserHistory}>
     <Route path="/" component={Root} onEnter={onAppEnter}>
     <IndexRoute component={Homepage} onEnter={onAppEnter} />
       <Route path="/about" component={About} />
       <Route path="/checkout" component={Checkout} />
       <Route path="/products" component={ProductsContainer} onEnter={onProductsEnter} />
-      <Route path="/cart" component={Cart} onEnter={onCartEnter} />
       <Route path="/products/:productId" component={ProductContainer} onEnter={onProductEnter} />
       <Route path="/products/category/:categoryName" component={ProductsContainer} onEnter={onProductCategoryEnter} />
       <Route path="/profile" component={ProfileContainer} />

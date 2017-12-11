@@ -1,7 +1,14 @@
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
-
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 import store from '../store';
+
+const styles = {
+  customWidth: {
+    width: 450,
+  },
+};
 
 export default class CreateCampaign extends React.Component{
 
@@ -18,18 +25,18 @@ export default class CreateCampaign extends React.Component{
   onCreateSubmit(e){
     e.preventDefault();
     const Campaign = {
-      camptitle: e.target.title.value,
-      campdetails: e.target.detail.value,
+      camptitle: this.state.title,
+      campdetails: this.state.detail,
       campzipcode: this.props.auth.user.zipcode,
       campcreater: this.props.auth.user.name,
-      numinfluencers: e.target.num.value,
-      campbudget: e.target.money.value,
+      numinfluencers: this.state.num,
+      campbudget: this.state.money,
       brand_id: this.props.auth.user.id
       //brand_id: '1'
     };
     this.props.createCampaign(Campaign);
-    e.target.num.value = '';
-    e.target.money.value = '';
+    // e.target.num.value = '';
+    // e.target.money.value = '';
     browserHistory.push('/');
   }
 
@@ -46,23 +53,47 @@ export default class CreateCampaign extends React.Component{
               <form
                 className="login-form"
                 onSubmit={this.onCreateSubmit}>
-                <div className="form-group">
-                  <label>How many Influencers you want?</label>
-                  <input className="form-control" name="num" type="text" />
-                </div>
-                <div className="form-group">
-                  <label>How much you can pay for each Influencer?</label>
-                  <input className="form-control" name="money" type="text" />
-                </div>
-                <div className="form-group">
-                  <label>Compaign Title</label>
-                  <input className="form-control" name="title" type="text" />
-                </div>
-                <div className="form-group">
-                  <label>Compaign details</label>
-                  <input className="form-control" name="detail" type="text" />
-                </div>
-                <button type="submit" name="submit">Create Campaign</button>
+                <TextField
+                  hintText="like 10"
+                  floatingLabelText="How many Influencers you want?"
+                  name="num"
+                  onChange={(event, value) => this.setState({ num: value })}
+                  type="text"
+                  style={styles.customWidth}
+                /><br />
+                <TextField
+                  hintText="like $100"
+                  floatingLabelText="How much can you pay for each Influencer?"
+                  name="money"
+                  onChange={(event, value) => this.setState({ money: value })}
+                  type="text"
+                  style={styles.customWidth}
+                /><br />
+                <TextField
+                  hintText=""
+                  floatingLabelText="Campaign Title"
+                  name="title"
+                  onChange={(event, value) => this.setState({ title: value })}
+                  type="text"
+                  style={styles.customWidth}
+                /><br />
+                <TextField
+                  hintText=""
+                  floatingLabelText="Campaign Details"
+                  name="detail"
+                  onChange={(event, value) => this.setState({ detail: value })}
+                  type="text"
+                  style={styles.customWidth}
+                /><br />
+
+                <RaisedButton
+                  type="submit"
+                  label="Create Campaign"
+                  labelStyle={{ fontSize: '16px', lineHeight: '48px' }}
+                  style={{ boxShadow: 'none', height: '48px', width: '50%' }}
+                  primary={true}
+                  onTouchTap={this.handleFormValidation}
+                /><br /><br />
                 </form>
               </div>
             </div>

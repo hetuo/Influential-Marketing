@@ -71,9 +71,9 @@ app.use(require('express-session') ({
 
   io.on('connection', function(socket) {
     if (userCount == 0) {
-      connectedUsers[socket.id]=("Director" + userCount);
+      connectedUsers[socket.id]=("Director");
     } else {
-      connectedUsers[socket.id]=("Influencer" + userCount);
+      connectedUsers[socket.id]=("Influencer");
     }
     userCount++;
 

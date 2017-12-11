@@ -6,8 +6,15 @@ import ProductHeader from './ProductHeader';
 import newReviewForm from './newReviewForm';
 import { FacebookButton, FacebookCount } from "react-social";
 //import reviewAction from 'APP/app/action-creators/reviewActionCreator';
+import TextField from 'material-ui/TextField';
 import { Link } from 'react-router';
 var FontAwesome = require('react-fontawesome');
+
+const styles = {
+  customWidth: {
+    width: 450,
+  },
+};
 
 export default class SingleProduct extends React.Component {
   constructor(props){
@@ -40,17 +47,17 @@ export default class SingleProduct extends React.Component {
     e.preventDefault()
     this.setState({ submitted: true });
     const review = {
-      title: e.target.title.value,
+      title: this.state.title,
       stars: e.target.stars.value,
-      body: e.target.body.value,
+      body: this.state.body,
       product_review_id: this.props.product.id,
       user_id: this.props.auth.user.id
     };
     console.log("review: ", review);
     this.props.addReview(review);
     e.target.stars.value = '';
-    e.target.body.value = '';
-    e.target.title.value = '';
+    this.state.body = '';
+    this.state.title = '';
   }
 
   onChangeQty(e){
@@ -91,10 +98,28 @@ export default class SingleProduct extends React.Component {
           {auth.user ? (
           <form className="row" onSubmit={(e) => (this.onAddReviewSubmit(e))}>
             <div className="form-group col-xs-12 col-md-8" >
-              <input name="title" style={{width: '400px'}} type="text" placeholder="Subject" className="form-control" />
-              <textarea name="body" style={{width: '400px'}} placeholder="Write a review"  className="form-control" />
-              <StarRatingComponent name="stars" starCount={5} />
-              <button type="submit" className="btn btn-success">Add Review</button>
+                <TextField
+                  hintText=""
+                  floatingLabelText="Subject"
+                  name="title"
+                  onChange={(event, value) => this.setState({ title: value })}
+                  type="text"
+                  multiLine={true}
+                  rows={1}
+                  style={styles.customWidth}
+                /><br />
+                <TextField
+                  hintText="Say something..."
+                  floatingLabelText="Write Review"
+                  name="body"
+                  onChange={(event, value) => this.setState({ body: value })}
+                  multiLine={true}
+                  rows={3}
+                  rowsMax={5}
+                  style={styles.customWidth}
+                /><br />
+              <StarRatingComponent name="stars" starCount={5} />&nbsp;&nbsp;&nbsp;
+              <button type="submit" className="btn btn-success">Add Review</button> &nbsp;&nbsp;&nbsp;
                 <FacebookButton  className="btn btn-primary" url={ url } appId="193858637827812">
                   <FontAwesome  className="cs-fb-icon" name='facebook' />
                   &nbsp;Shares

@@ -7,6 +7,14 @@ import FlatButton from 'material-ui/FlatButton';
 import { setSelectCampaign, updateCampaign } from '../action-creators/CampaignActionCreator';
 import { getInfluencers } from '../action-creators/InfluencerActionCreator';
 import { createPayment } from '../action-creators/PaymentActionCreator';
+import IconMenu from 'material-ui/IconMenu';
+import IconButton from 'material-ui/IconButton';
+import FontIcon from 'material-ui/FontIcon';
+import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
+import MenuItem from 'material-ui/MenuItem';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import RaisedButton from 'material-ui/RaisedButton';
+import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import Pay from './Pay';
 
 class SingleCampaign extends React.Component{
@@ -84,8 +92,30 @@ class SingleCampaign extends React.Component{
       this.get();
       return (
           <div>
-            <p>{"Title: " + this.props.campaign.camptitle}</p>
-            <p>{"Detail: " + this.props.campaign.campdetails}</p>
+        <Toolbar>
+        <ToolbarGroup firstChild={true}>
+          <DropDownMenu value={this.state.value} onChange={this.handleChange}>
+            <MenuItem value={1} primaryText="All Broadcasts" />
+            <MenuItem value={2} primaryText="All Voice" />
+            <MenuItem value={3} primaryText="All Text" />
+            <MenuItem value={4} primaryText="Complete Voice" />
+            <MenuItem value={5} primaryText="Complete Text" />
+            <MenuItem value={6} primaryText="Active Voice" />
+            <MenuItem value={7} primaryText="Active Text" />
+          </DropDownMenu>
+        </ToolbarGroup>
+        <ToolbarGroup>
+          <ToolbarTitle text={"Title: " + this.props.campaign.camptitle} />
+          <FontIcon className="muidocs-icon-custom-sort" />
+          <ToolbarSeparator />
+        </ToolbarGroup><br />
+
+        <ToolbarGroup>
+          <ToolbarTitle text={"Detail: " + this.props.campaign.campdetails} />
+          <FontIcon className="muidocs-icon-custom-sort" />
+        </ToolbarGroup>
+      </Toolbar>
+
             <ReactTable
               data={this.props.campaign.hire_influencers}
               filterable
@@ -93,7 +123,7 @@ class SingleCampaign extends React.Component{
                 String(row[filter.id]) === filter.value}
               columns={[
                 {
-                  Header: "Info",
+                  Header: "Campaign Info",
                   columns: [
                     {
                       Header: "InfluencerId",
@@ -102,14 +132,15 @@ class SingleCampaign extends React.Component{
                       filterMethod: (filter ,rows) =>
                         matchSorter(rows, filter.value, { keys: ["id"] }),
                       filterAll: true,
-                      width: 45
+                      width: 100 
                     },
                     {
                       Header: "Budget",
                       accessor: "payment_amount",
                       filterMethod: (filter ,rows) =>
                         matchSorter(rows, filter.value, { keys: ["name"] }),
-                      filterAll: true
+                      filterAll: true,
+                      width: 100 
                     },
                     {
                       Header: "Status",
@@ -117,6 +148,7 @@ class SingleCampaign extends React.Component{
                       filterMethod: (filter ,rows) =>
                         matchSorter(rows, filter.value, { keys: ["email"] }),
                       filterAll: true,
+                      width: 150, 
                       Cell: ({ original }) => {
                         return (
                           <span>
