@@ -1,47 +1,150 @@
-import React, { Component } from 'react';
+import React from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router';
+import FontIcon from 'material-ui/FontIcon';
 
-export default class About extends Component {
-  render() {
-    return (
-      <div className="about">
-        <ol className="breadcrumb">
-          <li><Link to="/">Home</Link></li>
-          <li className="active">About</li>
-        </ol>
-        <section className="container-fluid">
-          <div className="row">
-            <div className="col-xs-12 col-md-8 col-md-offset-2">
-              <div className="container-fluid">
-                <div className="row">
-                  <div className="col-xs-12 col-md-6">
-                    <img src="https://cdn.shopify.com/s/files/1/0236/9929/files/FlagshipPage_77a3707e-1360-4cf4-b667-50f1408c0780.png?16534521691931141188" alt="New York Office" />
-                    <h3>New York</h3>
-                    <h5>5 Hanover Street | Financial District</h5>
-                    <h5>504-407-2925</h5>
-                    <h5>Monday - Wednesday: 10AM - 7PM</h5>
-                    <h5>Thursday - Sunday: 10AM - 8PM</h5>
-                  </div>
-                  <div className="col-xs-12 col-md-6">
-                    <img src="https://cdn.shopify.com/s/files/1/0236/9929/files/Savannah.png?67863585231748543455" alt="San Francisco" />
-                    <h3>San Francisco</h3>
-                    <h5>809 Royal Street | Historic District</h5>
-                    <h5>912-495-5676</h5>
-                    <h5>Monday - Wednesday: 10AM - 7PM</h5>
-                    <h5>Thursday - Sunday: 10AM - 8PM</h5>
-                  </div>
-                  <div className="col-xs-12">
-                    <h3>About Online Bling</h3>
-                    <h5>
-                      KREWE's first flagship opened August 30, 2015 at 809 Royal Street, in the New Orleans French Quarter. The store is housed in a building dating to the late 19th century, with the historic Jackson Square and St. Louis Cathedral located around the corner. The store includes a small plant gallery, espresso bar, and adjoining courtyard seating. At the heart of the space is the Sun Room, which showcases KREWE's signature modern iconic eyewear. Frames can be individually fitted for optimum comfort and style in the custom fitting area. KREWEs flagship is about a mix of the old and the new, the iconic and the modern. It re-envisions the traditional New Orleans retail experience while celebrating the individual style of the city and its visitors.
-                    </h5>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-    );
+import { northwesternPurple, northwesternPurple10 } from '../colors';
+
+const style = {
+  hero: {
+    backgroundImage: `url(${'/images/Cover1.jpg'})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundAttachment: 'fixed',
+    minHeight: '600px',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover'
+  },
+  heroText: {
+    position: 'absolute',
+    top: '0px',
+    left: '0px',
+    height: '600px',
+    width: '100%',
+    textAlign: 'center',
+    color: 'white',
+    paddingTop: '280px'
+  },
+  heroTitle: {
+    fontSize: '50px'
+  },
+  sectionOdd: {
+    padding: '50px'
+  },
+  sectionEven: {
+    padding: '50px',
+    backgroundColor: northwesternPurple10
+  },
+  purpleHeader: {
+    color: northwesternPurple,
+    marginBottom: '50px'
+  },
+  centeredPurpleHeader: {
+    color: northwesternPurple,
+    marginBottom: '50px',
+    textAlign: 'center'
+  },
+  divideTwo: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    flexWrap: 'wrap'
+  },
+  studentImage: {
+    width: '1200px'
+  },
+  screenshot: {
+    width: '1200px'
+  },
+  screenshot2: {
+    width: '700px'
+  },
+  blurbs: {
+    marginLeft: '50px',
+    marginRight: '50px',
+    marginBottom: '50px'
+  },
+  compare: {
+    width: '300px'
+  },
+  compareItem: {
+    textAlign: 'center',
+    marginTop: '30px',
+    marginBottom: '50px'
+  },
+  compareTitle: {
+    marginTop: '20px',
+    marginBottom: '20px'
+  },
+  regalLogo: {
+    width: '250px'
+  },
+  logos: {
+    width: '128px',
+    height: '128px'
+  },
+  learnMoreButton: {
+    display: 'block',
+    margin: 'auto',
+    width: '120px'
+  },
+  learnMoreButtonWrapper: {
+    padding: '20px'
   }
-}
+};
+
+const About = () => (
+  <div>
+    <div style={style.hero}></div>
+    <div style={style.heroText}>
+      <h1 style={style.heroTitle}>Influencer. Marketing.</h1>
+      <h2>Help Portal</h2>
+    </div>
+
+    <div style={style.sectionOdd}>
+      <h1 style={style.centeredPurpleHeader}>
+        Influencer <span style={{ fontStyle: 'italic' }}></span>
+      </h1>
+      <div style={style.divideTwo}>
+        <div style={style.blurbs}>
+          <h4>As an influencer  in  our   platform,   your influence  comes   from  the   quality   of  your reviews,   not   from  the   quantity  of  followers  
+                      you have  on  social  medias.</h4>
+          <h4>Great reviews are genuine, authentic, and are 
+                      valuable  both  to  the potential consumers and 
+                      to  the ultimate  development of  the company,  
+                      no  matter  they  are praise  or  complaints. </h4>
+          <h4>And to  save  the precious  time  of  potential readers,  
+                      we   encourage   you   to  make  your  review  as 
+                      concise as  possible  and worth every word.</h4>
+        </div>
+        <img src={'/images/index.png'} alt="Student with a laptop" style={style.studentImage} />
+      </div>
+    </div>
+
+    <div style={style.sectionEven}>
+      <h1 style={style.centeredPurpleHeader}>
+        Marketers & <span style={{ fontStyle: 'italic' }}>Brand Account</span>
+      </h1>
+        <div style={style.divideTwo}>
+        <div style={style.blurbs}>
+          <h4>Please  be  reassured that  marketers in  our 
+                      platform   know  that  fake  and   misleading 
+                      reviews  might   help  increase  company's  
+                      revenue  in  the   short   term
+          </h4>
+          <h4>The   negative WOM  starting  from  misled  and   angry  
+                      consumers  will  hurt  the   reputation  and  
+                      revenue of  the company in  the long  run.  
+          </h4>
+          <h4>They  
+                      need   influencers   for   their   independent
+                      expertise, knowledge, insights  and access  to  
+                      potential buyers  who trust them  because they  
+                      write what  can be trusted.</h4>
+        </div>
+        <img src={'/images/index2.png'} alt="Student with a laptop" style={style.screenshot} />
+      </div>
+    </div>
+  </div>
+);
+
+export default About;

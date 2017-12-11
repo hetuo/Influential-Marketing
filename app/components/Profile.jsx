@@ -5,6 +5,8 @@ import { removeItem, updateQuantity } from '../action-creators/cart'
 import {logout} from '../reducers/auth'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 
 const styles = {
   customWidth: {
@@ -19,7 +21,8 @@ export default class Profile extends React.Component {
     super(props);
     this.state = {
       auth: {},
-      profiles: []
+      profiles: [],
+      open: false,
     };
     this.handleOnSubmit = this.handleOnSubmit.bind(this);
   }
@@ -28,17 +31,24 @@ export default class Profile extends React.Component {
     this.setState({ auth: nextProps.auth});
   }
 
-  handleOnSubmit(e) {
-    e.preventDefault()
-    console.log("update user information");
+  handleOpen = () => {
+    this.setState({open: true});
+  };
 
+  handleClose = () => {
+    this.setState({open: false});
+  };
+
+  handleOnSubmit = () => {
     const profile = {
       name: this.props.user.name,
-      email: e.target.email.value,
-      password: e.target.password.value,
+      email: this.state.email,
+      password: this.state.password,
     }
-    console.log("profile: ", this.props);
+    console.log("update user information");
     this.props.updateProfile(this.props.user.name, profile);
+    console.log("update user information");
+    this.handleClose();
   }
 
   render() {
@@ -46,6 +56,20 @@ export default class Profile extends React.Component {
     // let user = this.props.user;
     const { user, alert } = this.props;
     console.log("profile.jsx: ", this.props);
+    const actions = [
+      <FlatButton
+        label="Cancel"
+        primary={true}
+        onClick={this.handleClose}
+      />,
+      <FlatButton
+        label="Submit"
+        primary={true}
+        keyboardFocused={true}
+        onClick={this.handleOnSubmit}
+      />,
+    ];
+
     return (
       <div className="user-profile">
         <ol className="breadcrumb">
@@ -56,7 +80,6 @@ export default class Profile extends React.Component {
           <div className="row">
             { user && user.email && user.password_digest ?
             (<div className="col-xs-12 col-md-6 col-md-offset-3">
-            <form onSubmit={(e) => (this.handleOnSubmit(e))}>
                 <TextField
                   hintText={user.usertype}
                   floatingLabelText="User Type"
@@ -93,15 +116,21 @@ export default class Profile extends React.Component {
                   style={styles.customWidth}
                 /><br />                
 
-              <RaisedButton
-                  type="submit"
-                  label="Update"
-                  labelStyle={{ fontSize: '16px', lineHeight: '48px' }}
-                  style={{ boxShadow: 'none', height: '48px', width: '30%' }}
-                  primary={true}
-                  onTouchTap={this.handleFormValidation}
-              /><br /><br />
-            </form>
+                <div>
+                  <RaisedButton label="Update" 
+                    labelStyle={{ fontSize: '16px', lineHeight: '48px' }}
+                    style={{ boxShadow: 'none', height: '48px', width: '30%' }}
+                    onClick={this.handleOpen} />
+                  <Dialog
+                    title="Update"
+                    actions={actions}
+                    modal={false}
+                    open={this.state.open}
+                    onRequestClose={this.handleClose}
+                  >
+                    Are you sure to modify you email or password?
+                  </Dialog>
+                </div>
            </div>): null}
           </div>
         </section>
