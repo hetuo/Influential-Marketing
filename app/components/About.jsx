@@ -96,7 +96,7 @@ const About = () => (
   <div>
     <div style={style.hero}></div>
     <div style={style.heroText}>
-      <h1 style={style.heroTitle}>Influencer. Marketing.</h1>
+      <h1 style={style.heroTitle}>Influential.</h1>
       <h2>Help Portal</h2>
     </div>
 
@@ -106,15 +106,15 @@ const About = () => (
       </h1>
       <div style={style.divideTwo}>
         <div style={style.blurbs}>
-          <h4>As an influencer  in  our   platform,   your influence  comes   from  the   quality   of  your reviews,   not   from  the   quantity  of  followers  
-                      you have  on  social  medias.</h4>
-          <h4>Great reviews are genuine, authentic, and are 
-                      valuable  both  to  the potential consumers and 
-                      to  the ultimate  development of  the company,  
-                      no  matter  they  are praise  or  complaints. </h4>
-          <h4>And to  save  the precious  time  of  potential readers,  
-                      we   encourage   you   to  make  your  review  as 
-                      concise as  possible  and worth every word.</h4>
+          <h1>As an influencer  in  our   platform,   your influence  comes   from  the   quality   of  your reviews,   not   from  the   quantity  of  followers
+                      you have  on  social  medias.</h1>
+          <h1>Great reviews are original, genuine, authentic, and are
+                      valuable  both  to  the potential consumers and
+                      to  the ultimate  development of  the company,
+                      no  matter  they  are praise  or  complaints. </h1>
+          <h1>And to  save  the precious  time  of  potential readers,
+                      we   encourage   you   to  make  your  review  as
+                      concise as  possible  and worth every word.</h1>
         </div>
         <img src={'/images/index.png'} alt="Student with a laptop" style={style.studentImage} />
       </div>
@@ -126,20 +126,20 @@ const About = () => (
       </h1>
         <div style={style.divideTwo}>
         <div style={style.blurbs}>
-          <h4>Please  be  reassured that  marketers in  our 
-                      platform   know  that  fake  and   misleading 
-                      reviews  might   help  increase  company's  
+          <h1>Marketers in  our
+                      platform   know  that  fake  and   misleading
+                      reviews  might   help  increase  company's
                       revenue  in  the   short   term
-          </h4>
-          <h4>The   negative WOM  starting  from  misled  and   angry  
-                      consumers  will  hurt  the   reputation  and  
-                      revenue of  the company in  the long  run.  
-          </h4>
-          <h4>They  
+          </h1>
+          <h1>The   negative WOM  starting  from  misled  and   angry
+                      consumers  will  hurt  the   reputation  and
+                      revenue of  the company in  the long  run.
+          </h1>
+          <h1>They
                       need   influencers   for   their   independent
-                      expertise, knowledge, insights  and access  to  
-                      potential buyers  who trust them  because they  
-                      write what  can be trusted.</h4>
+                      expertise, knowledge, insights  and access  to
+                      potential buyers  who trust them  because they
+                      write what  can be trusted.</h1>
         </div>
         <img src={'/images/index2.png'} alt="Student with a laptop" style={style.screenshot} />
       </div>
