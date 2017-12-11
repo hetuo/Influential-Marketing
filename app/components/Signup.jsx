@@ -4,6 +4,16 @@ import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import classnames from 'classnames';
 import map from 'lodash/map'; // TODO: replace with pure JS
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+
+const styles = {
+  customWidth: {
+    width: 450,
+  },
+};
 
 class Signup extends React.Component {
   constructor(props) {
@@ -14,13 +24,21 @@ class Signup extends React.Component {
     };
     this.onSignupSubmit = this.onSignupSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleChange2 = this.handleChange2.bind(this);
   }
 
-  handleChange(event) {
-    this.state.usertype = event.target.value;
-    this.setState({usertype: event.target.value});
-    this.setState({gender: event.target.value});
-    console.log("usertype:", this.state.usertype, event.target);
+  handleChange(event, index, value) {
+    this.state.usertype = value;
+    // this.state.usertype = event.target.value;
+    console.log("login:", this.state.usertype);
+    this.setState({usertype: value});
+  }
+
+  handleChange2(event, index, value) {
+    this.state.gender = value;
+    // this.state.usertype = event.target.value;
+    console.log("login:", this.state.gender);
+    this.setState({gender: value});
   }
 
   onSignupSubmit(e){
@@ -29,16 +47,17 @@ class Signup extends React.Component {
       window.alert('password not match');
     } else {
       const credentials = {
-        email: e.target.email.value,
+        email: this.state.email,
         usertype: this.state.usertype,
-        password: e.target.password.value,
-        name: e.target.name.value,
-        gender: e.target.gender.value,
-        geo: e.target.geo.value,
-        zipcode: e.target.zipcode.value,
-        public_key: e.target.pk.value,
-        secret_key: e.target.sk.value,
+        password: this.state.password,
+        name: this.state.name,
+        gender: this.state.gender,
+        geo: this.state.geo,
+        zipcode: this.state.zipcode,
+        public_key: 'pk_test_dUpJ1puJKBLPgcFE7iaPdJoa',
+        secret_key: 'sk_test_Y1mt48rrnpqB3QVpc2iZiG3t',
       }
+      console.log("signusertype: ", this.state.usertype);
       if (this.state.usertype == 'regular_user') {
         this.props.regularsignup(credentials);
       } else if (this.state.usertype == 'influencer') {
@@ -66,60 +85,93 @@ class Signup extends React.Component {
                 <div className={`alert ${alert.type}`}>{alert.message}</div>
               }
               <form className="login-form" onSubmit={this.onSignupSubmit}>
-                <div className="form-group">
-                  <label className="control-label">Choose your account type:</label>
-                    <select className="form-control" name="usertype" value={ this.state.usertype } onChange={ this.handleChange }>
-                      <option value="regular_user">Regular User</option>
-                      <option value="influencer">Influencer</option>
-                      <option value="brand_account">Brand Account</option>
-                    </select>
-                </div>
-                <div className="form-group">
-                  <label>Email</label>
-                  <input className="form-control" name="email" type="email" />
-                </div>
-                {
-                  this.state.usertype == 'influencer' ? 
-                  (<div className="form-group">
-                    <label>Stripe Public Key</label>
-                    <input className="form-control" name="pk" type="text" />
-                  </div>) : (<div></div>)
-                }
-                {
-                  this.state.usertype == 'influencer' ? 
-                  (<div className="form-group">
-                    <label>Stripe Secret Key</label>
-                    <input className="form-control" name="sk" type="text" />
-                  </div>) : (<div></div>)
-                }
-                <div className="form-group">
-                  <label>Name</label>
-                  <input className="form-control" name="name" type="text" />
-                </div>
-                <div className="form-group">
-                  <label>Gender</label>
-                  <select className="form-control" name="gender">
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label>State</label>
-                  <input className="form-control" name="geo" type="text" />
-                </div>
-                <div className="form-group">
-                  <label>ZipCode</label>
-                  <input className="form-control" name="zipcode" type="text" />
-                </div>
-                <div className="form-group">
-                  <label>Password</label>
-                  <input className="form-control" name="password" type="password" placeholder="type your password" />
-                </div>
-                <div className="form-group">
-                  <label>Password Confirmation</label>
-                  <input className="form-control" name="passwordConfirm" type="password" placeholder="re-type your password" />
-                </div>
-                <button type="submit" name="submit">Register</button>
+                <label className="control-label">Choose your account type:</label><br />
+                <SelectField
+                  name="usertype"
+                  value={this.state.usertype}
+                  onChange={this.handleChange}
+                  style={styles.customWidth}
+                  floatingLabelText=""
+                  >
+                  <MenuItem value={"regular_user"} primaryText="Regular User" />
+                  <MenuItem value={"influencer"} primaryText="Influencer" />
+                  <MenuItem value={"brand_account"} primaryText="Brand Account" />
+                  <MenuItem value={"director"} primaryText="Director" />
+                </SelectField><br />
+
+                <SelectField
+                  name="gender"
+                  value={this.state.gender}
+                  onChange={this.handleChange2}
+                  style={styles.customWidth}
+                  floatingLabelText=""
+                  >
+                  <MenuItem value={"male"} primaryText="Male" />
+                  <MenuItem value={"female"} primaryText="Female" />
+                </SelectField><br />
+
+                  <TextField
+                  hintText="Your email"
+                  floatingLabelText="Email"
+                  name="email"
+                  onChange={(event, value) => this.setState({ email: value })}
+                  type="email"
+                  style={styles.customWidth}
+                  /><br /> 
+
+                  <TextField
+                  hintText="Your name"
+                  floatingLabelText="Name"
+                  name="name"
+                  onChange={(event, value) => this.setState({ name: value })}
+                  type="text"
+                  style={styles.customWidth}
+                  /><br /> 
+
+
+
+                  <TextField
+                  hintText=""
+                  floatingLabelText="State"
+                  name="geo"
+                  onChange={(event, value) => this.setState({ geo: value })}
+                  type="text"
+                  style={styles.customWidth}
+                  /><br />  
+
+                  <TextField
+                  hintText=""
+                  floatingLabelText="ZipCode"
+                  name="zipcode"
+                  onChange={(event, value) => this.setState({ zipcode: value })}
+                  type="text"
+                  style={styles.customWidth}
+                  /><br />                 
+
+                  <TextField
+                    hintText="Your password"
+                    floatingLabelText="Password"
+                    name="password"
+                    onChange={(event, value) => this.setState({ password: value })}
+                    type="password"
+                    style={styles.customWidth}
+                  /><br />
+                  <TextField
+                    hintText="Re-type your password"
+                    floatingLabelText="Re-type Password"
+                    name="passwordConfirm"
+                    onChange={(event, value) => this.setState({ passwordConfirm: value })}
+                    type="password"
+                    style={styles.customWidth}
+                  /><br />             
+                  <RaisedButton
+                  type="submit"
+                  label="Signup"
+                  labelStyle={{ fontSize: '16px', lineHeight: '48px' }}
+                  style={{ boxShadow: 'none', height: '48px', width: '30%' }}
+                  primary={true}
+                  onTouchTap={this.handleFormValidation}
+                /><br /><br />
                 </form>
               </div>
             </div>

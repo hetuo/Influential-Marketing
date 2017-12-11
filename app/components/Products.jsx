@@ -1,17 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router';
 import {GridList, GridTile} from 'material-ui/GridList';
+import IconButton from 'material-ui/IconButton';
+import Subheader from 'material-ui/Subheader';
+import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
 const styles = {
-    root: {
-        margin: '-2px',
-    },
-    gridList: {
-        width: '100%',
-        margin: 0,
-    },
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+  },
+  gridList: {
+    width: 1000,
+    height: 750,
+    overflowY: 'auto',
+  },
 };
 
+const tilesData = [
+  {
+    img: '/images/ourstory.jpg',
+    title: 'Breakfast',
+    author: 'jill111',
+  },
+  {
+    img: '/images/newarrival.jpg',
+    title: 'Tasty burger',
+    author: 'pashminu',
+  },
+];
 
 export default ({ products, category, location }) => (
   <div className="product-grid">
@@ -28,25 +46,36 @@ export default ({ products, category, location }) => (
       </ol>)
     }
 
-    <section className="product-grid container-fluid">
-       <div className="row">
-         {
-           products && products.map(product => (
-             <div className="product-item col-xs-15 col-lg-4" key={ product.id }>
-               <Link to={`/products/${product.id}`}>
-                 <div className="image-wrapper">
-                   <img src={ product.image1 || 'http://placehold.it/490x210' } />
-                 </div>
-                 <div className="product-info">
-                   {/*<span><strong>{ product.name } | $</strong></span>
-                 <span>{ product.price }</span>*/}
-                   <span><strong>{ product.title }</strong></span>
-                 </div>
-               </Link>
-             </div>
-           ))
-         }
-       </div>
- </section>
+  <div style={styles.root}>
+    <GridList
+      cellHeight={280}
+      style={styles.gridList}
+    >
+      {tilesData.map((tile) => (
+        <GridTile
+          key={tile.img}
+          title={tile.title}
+          subtitle={<span>by <b>{tile.author}</b></span>}
+          actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
+        >
+          <img src={tile.img} />
+        </GridTile>
+      ))}
+
+      {products && products.map(product => (
+          <GridTile
+            key={product.image1}
+            title={product.title}
+            subtitle={<span>by <b>influencer{product.influencer_id}</b></span>}
+            actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
+          >
+          <a href={`/products/${product.id}`}>
+            <img border="0" src={product.image1}/>
+          </a>
+          </GridTile>
+         ))
+      } 
+    </GridList>
+  </div>
   </div>
 );

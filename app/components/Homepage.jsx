@@ -2,6 +2,8 @@ import { connect } from 'react-redux';
 import React from 'react';
 import { Link } from 'react-router';
 import Products from './Products';
+import ReactDOM from 'react-dom';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const Home = ({ products }) => {
   return (
@@ -12,8 +14,10 @@ const Home = ({ products }) => {
         </div>
       </div>
 
+    <MuiThemeProvider>
       <Products products={products} />
-
+    </MuiThemeProvider>
+    
     { <section className="container-fluid promo-wrapper">
         <div className="row">
           <div className="col-xs-12 col-lg-6 our-story">

@@ -6,7 +6,15 @@ import Categories from './Categories';
 import { Navbar, Nav, NavDropdown, NavItem, MenuItem } from 'react-bootstrap';
 import Badge from 'material-ui/Badge';
 import IconButton from 'material-ui/IconButton';
+import MobileTearSheet from './MobileTearSheet';
 import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
+import {List, ListItem} from 'material-ui/List';
+import ContentInbox from 'material-ui/svg-icons/content/inbox';
+import ActionGrade from 'material-ui/svg-icons/action/grade';
+import ContentSend from 'material-ui/svg-icons/content/send';
+import ContentDrafts from 'material-ui/svg-icons/content/drafts';
+import Divider from 'material-ui/Divider';
+import ActionInfo from 'material-ui/svg-icons/action/info';
 
 /* -----------------    COMPONENT     ------------------ */
 
@@ -94,7 +102,10 @@ class AppBar extends React.Component {
       console.log("WTF...... %s %s", this.props.auth.user.name);
     }
     return (
+
       <Navbar collapseOnSelect>
+
+
         <Navbar.Header>
           <Navbar.Brand>
             <Link to="/">Influencer Marketing</Link>
@@ -104,7 +115,6 @@ class AppBar extends React.Component {
         <Navbar.Collapse>
           {<Nav>
             <NavItem eventKey={2} onClick={() => browserHistory.push("/about")}>HELP PORTAL</NavItem>
-            <NavItem eventKey={3} onClick={() => browserHistory.push("/press")}>PRESS</NavItem>
           </Nav>}
           <Nav pullRight>
             {/*<NavItem eventKey={4} href="#">

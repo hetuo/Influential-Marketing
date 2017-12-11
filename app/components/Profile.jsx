@@ -3,6 +3,14 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { removeItem, updateQuantity } from '../action-creators/cart'
 import {logout} from '../reducers/auth'
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+
+const styles = {
+  customWidth: {
+    width: 450,
+  },
+};
 
 export default class Profile extends React.Component {
   // const { user, alert } = this.props;
@@ -49,19 +57,50 @@ export default class Profile extends React.Component {
             { user && user.email && user.password_digest ?
             (<div className="col-xs-12 col-md-6 col-md-offset-3">
             <form onSubmit={(e) => (this.handleOnSubmit(e))}>
-              <div className="form-group">
-                <label>Name</label>
-                <input type="text" name="name" placeholder={user.name} className="form-control" />
-              </div>
-              <div className="form-group">
-                <label>Email</label>
-                <input type="email" name="email" placeholder={user.email} className="form-control" />
-              </div>
-              <div className="form-group">
-                <label>Password</label>
-                <input type="password" name="password" placeholder="******" className="form-control" />
-              </div>
-              <button type="submit">Update</button>
+                <TextField
+                  hintText={user.usertype}
+                  floatingLabelText="User Type"
+                  name="usertype"
+                  onChange={(event, value) => this.setState({ usertype: value })}
+                  type="text"
+                  style={styles.customWidth}
+                /><br />
+
+                <TextField
+                  hintText={user.name}
+                  floatingLabelText="Name"
+                  name="name"
+                  onChange={(event, value) => this.setState({ name: value })}
+                  type="text"
+                  style={styles.customWidth}
+                /><br />
+
+                <TextField
+                  hintText={user.email}
+                  floatingLabelText="Email"
+                  name="email"
+                  onChange={(event, value) => this.setState({ email: value })}
+                  type="text"
+                  style={styles.customWidth}
+                /><br />
+
+                <TextField
+                  hintText={user.password}
+                  floatingLabelText="Password"
+                  name="password"
+                  onChange={(event, value) => this.setState({ password: value })}
+                  type="password"
+                  style={styles.customWidth}
+                /><br />                
+
+              <RaisedButton
+                  type="submit"
+                  label="Update"
+                  labelStyle={{ fontSize: '16px', lineHeight: '48px' }}
+                  style={{ boxShadow: 'none', height: '48px', width: '30%' }}
+                  primary={true}
+                  onTouchTap={this.handleFormValidation}
+              /><br /><br />
             </form>
            </div>): null}
           </div>

@@ -41,7 +41,7 @@ class ShowAllInvites extends React.Component{
           <li className="active">Invites</li>
         </ol>
         <div className='grid grid__gutters grid__1of2 grid__space-around animate-top'>
-          <div className='grid-cell animate-top'  style={{maxWidth: '700px', minWidth: '280px'}}>
+          <div className='grid-cell animate-top'  style={{maxWidth: '1050px', minWidth: '280px'}}>
           <ReactTable
             data={this.props.invites}
             filterable
@@ -49,7 +49,7 @@ class ShowAllInvites extends React.Component{
               String(row[filter.id]) === filter.value}
             columns={[
               {
-                Header: "Info",
+                Header: "Invitation Info",
                 columns: [
                   {
                     Header: "Brand",
@@ -58,7 +58,7 @@ class ShowAllInvites extends React.Component{
                     filterMethod: (filter ,rows) =>
                       matchSorter(rows, filter.value, { keys: ["brand_id"] }),
                     filterAll: true,
-                    width: 100
+                    width: 150
                   },
                   {
                     Header: "Payment",
@@ -66,7 +66,7 @@ class ShowAllInvites extends React.Component{
                     filterMethod: (filter ,rows) =>
                       matchSorter(rows, filter.value, { keys: ["payment_amount"] }),
                     filterAll: true,
-                    width: 100
+                    width: 150
                   },
                   {
                     Header: "Title",
@@ -74,7 +74,8 @@ class ShowAllInvites extends React.Component{
                     accessor: d => d.campaign.camptitle,
                     filterMethod: (filter ,rows) =>
                       matchSorter(rows, filter.value, { keys: ["camptitle"] }),
-                    filterAll: true
+                    filterAll: true,
+                    width: 250
                   },
                   {
                     /*Header: "Detail",
@@ -86,6 +87,7 @@ class ShowAllInvites extends React.Component{
                     Header: "Detail",
                     id: 'click-me-button',
                     accessor: "",
+                    width: 350,
                     Cell: ({ original }) => {
                       return (
                         <FlatButton label="Click to Show All" onClick={() => this.show(original)} />
@@ -103,7 +105,7 @@ class ShowAllInvites extends React.Component{
                       );
                     },
                     sortable: false,
-                    width: 100
+                    width: 150
                   }
                 ]
               }

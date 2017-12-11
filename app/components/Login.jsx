@@ -7,10 +7,20 @@ import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router'
 import classnames from 'classnames';
 import map from 'lodash/map';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 var FontAwesome = require('react-fontawesome');
 
 // google clientId: 723817412811-8q0570j4d9vo0htq66q8r7elj5h818oj.apps.googleusercontent.com
 // google clientSecret: 03n9OHyMqZVCYDowxirC4OL2
+
+const styles = {
+  customWidth: {
+    width: 450,
+  },
+};
 
 class Login extends React.Component {
   constructor(props) {
@@ -31,8 +41,8 @@ class Login extends React.Component {
   onLoginSubmit(e){
     e.preventDefault();
     const credentials = {
-      email: e.target.email.value,
-      password: e.target.password.value,
+      email: this.state.email,
+      password: this.state.password,
       usertype: this.state.usertype,
     }
     console.log('credentials', credentials);
@@ -72,9 +82,11 @@ class Login extends React.Component {
     this.props.socialLogin(credentials);
   }
 
-  handleChange(event) {
-    this.state.usertype = event.target.value;
-    this.setState({usertype: event.target.value});
+  handleChange(event, index, value) {
+    this.state.usertype = value;
+    // this.state.usertype = event.target.value;
+    console.log("login:", this.state.usertype);
+    this.setState({usertype: value});
   }
 
   render() {
@@ -87,6 +99,7 @@ class Login extends React.Component {
           <li><Link to="/">Home</Link></li>
           <li className="active">Login</li>
         </ol>
+
         <section className="container-fluid">
           <div className="row">
             <div className="col-xs-12 col-md-6 col-md-offset-3">
@@ -94,28 +107,47 @@ class Login extends React.Component {
                 <div className={`alert ${alert.type}`}>{alert.message}</div>
               }
               <form className="login-form" onSubmit={this.onLoginSubmit} >
-                <div className="form-group">
-                  <label className="control-label">Choose your account type:</label>
-                    <select className="form-control" name="usertype" value={ this.state.usertype } onChange={ this.handleChange }>
-                      <option value="regular_user">Regular User</option>
-                      <option value="influencer">Influencer</option>
-                      <option value="brand_account">Brand Account</option>
-                      <option value="director">Director</option>
-                    </select>
-                </div>
-                <div className="form-group">
-                  <label>Email</label>
-                  <input className="form-control" name="email" type="email" />
-                </div>
-                <div className="form-group">
-                  <label>Password</label>
-                  <input className="form-control" name="password" type="password" />
-                </div>
-                <button type="submit" className="btn btn-default" name="submit">Login</button>
-                <Link href="/address"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;forget password?</span></Link>
+                <label className="control-label">Choose your account type:</label><br />
+                <SelectField
+                  name="usertype"
+                  value={this.state.usertype}
+                  onChange={this.handleChange}
+                  style={styles.customWidth}
+                  floatingLabelText=""
+                  >
+                  <MenuItem value={"regular_user"} primaryText="Regular User" />
+                  <MenuItem value={"influencer"} primaryText="Influencer" />
+                  <MenuItem value={"brand_account"} primaryText="Brand Account" />
+                  <MenuItem value={"director"} primaryText="Director" />
+                </SelectField><br />
+                <TextField
+                  hintText="Your email"
+                  floatingLabelText="Email"
+                  name="email"
+                  onChange={(event, value) => this.setState({ email: value })}
+                  type="email"
+                  style={styles.customWidth}
+                /><br />
+                <TextField
+                  hintText="Your password"
+                  floatingLabelText="Password"
+                  name="password"
+                  onChange={(event, value) => this.setState({ password: value })}
+                  type="password"
+                  style={styles.customWidth}
+                /><br />
+                <RaisedButton
+                  type="submit"
+                  label="Login"
+                  labelStyle={{ fontSize: '16px', lineHeight: '48px' }}
+                  style={{ boxShadow: 'none', height: '48px', width: '30%' }}
+                  primary={true}
+                  onTouchTap={this.handleFormValidation}
+                /><br /><br />
+                <li>
+                    <Link to="password-reset">Forgot password?</Link>
+                </li>
               </form>
-              <div>
-                <br/>
                 <GoogleLogin  socialId="723817412811-8q0570j4d9vo0htq66q8r7elj5h818oj.apps.googleusercontent.com"
                               className="google-login"
                               scope="profile"
@@ -123,7 +155,6 @@ class Login extends React.Component {
                               responseHandler={this.responseGoogle}
                               buttonText="Login With Google"
                 />
-                <br/><br/>
                 <FacebookLogin
                                socialId="193858637827812"
                                language="en_US"
@@ -131,19 +162,13 @@ class Login extends React.Component {
                                responseHandler={this.responseFacebook}
                                xfbml={true}
                                fields="id,email,name"
+                               style={{ backgroundColor: '425bb4',width:200, height:40 }}
                                version="v2.5"
-                             className="btn btn-primary"
-                               icon="fa-facebook"
+                               className="btn btn-primary"
                                buttonText="Login With Facebook"
-                 />
-              </div>
-              <div className="social-button-group">
-              <br/>
-                <FacebookButton  className="btn btn-primary" url={ url } appId="193858637827812">
-                  <FontAwesome  className="cs-fb-icon" name='facebook' />
-                  &nbsp;shares
-                </FacebookButton>
-              </div>
+                 >
+                <FontAwesome  className="cs-fb-icon" name='facebook' />
+                </FacebookLogin>
             </div>
           </div>
         </section>
