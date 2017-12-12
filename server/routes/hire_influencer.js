@@ -3,7 +3,7 @@ const express = require('express');
 const router = module.exports = express.Router();
 const HireInfluencer = require('APP/db/models/hire_influencer');
 const Campaign = require('APP/db/models/campaign');
-
+const Brand = require('APP/db/models/brand');
 
 module.exports = express.Router()
 
@@ -62,6 +62,39 @@ module.exports = express.Router()
     .then(sum => res.json(sum))
     .catch(next)
   })
+
+
+//.get('/revenue/category/:category', forbidden('only admins can list revenues'), (req, res, next) => {
+  .get('/revenue/category/:category', (req, res, next) => {
+    HireInfluencer.sum(
+      'payment_amount', {
+      where: { hirestage: 2  },
+      include: [ {
+        model: Brand,
+        attributes: [],
+        where: { category: req.params.category }
+      }]
+    })
+    .then(sum => res.json(sum))
+    .catch(next)
+  })
+
+  //.get('/revenue/geo/:geo', forbidden('only admins can list revenues'), (req, res, next) => {
+    .get('/revenue/geo/:geo', (req, res, next) => {
+      HireInfluencer.sum(
+        'payment_amount', {
+        where: { hirestage: 2  },
+        include: [ {
+          model: Brand,
+          attributes: [],
+          where: { geo: req.params.geo }
+        }]
+      })
+      .then(sum => res.json(sum))
+      .catch(next)
+    })
+
+
 
   .post('/', (req, res, next)=>{
     console.log("hire_influencer's req.body", req.body)
